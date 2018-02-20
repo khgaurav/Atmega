@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<CONTROLLER NAME="Arduino Mega" FAMILY="ARDUINO" DESC="Arduino Mega with ATmega2560">
+    <PERIPHERAL NAME="cpu" TYPE="CPU" DESC="Arduino Processor" ELEMENT="U1">
+        <INTERFACE OBJECT="CPU" EXTERNAL="Cpu"/>
+        <DRIVER FILE="Cpu/Cpu.xml"/>
+    </PERIPHERAL>            	   
+      
+    <PERIPHERAL NAME="timer1" TYPE="TIMER1" DESC="Timer One" ELEMENT="U1" >
+        <INTERFACE OBJECT="TimerOne" EXTERNAL="Timer1"/>
+        <DRIVER FILE="TimerOne/TimerOne.xml"/>
+    </PERIPHERAL>            	   
+
+    <PERIPHERAL NAME="timer3" TYPE="TIMER3" DESC="Timer Three" ELEMENT="U1" >
+        <INTERFACE OBJECT="TimerThree" EXTERNAL="Timer3"/>
+        <DRIVER FILE="TimerThree/TimerThree.xml"/>
+    </PERIPHERAL>            	   
+</CONTROLLER>
+	
+  

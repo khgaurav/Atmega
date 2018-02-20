@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!-- Driver Descriptor for Arduino 16-channel pwm servo -->
+<DRIVER HEADER="pwmServoDriver.h">
+   <REQUIRE HEADER="Adafruit_PWMServoDriver.h"/>
+   <REQUIRE HEADER="Wire.h"/>
+
+   <!-- PWM Servo Controller methods -->
+   <METHOD NAME="resetPWM" DESC="Reset PWM controller."/>
+   <METHOD NAME="setPWMFreq" DESC="Set PWM frequency.">
+      <PARAMETER NAME="freq" TYPE="FLOAT" DEFAULT="0"  DESC="Frequency (Hz)"/>
+   </METHOD>
+   <METHOD NAME="setPWM" DESC="Set PWM on/of values.">
+      <PARAMETER NAME="outn" TYPE="INTEGER" DEFAULT="0"  DESC="Output number"/>
+      <PARAMETER NAME="on"   TYPE="INTEGER" DEFAULT="0"  DESC="On Value (0-4095)"/>
+      <PARAMETER NAME="off"  TYPE="INTEGER" DEFAULT="0"  DESC="Off Value (0-4095"/>
+   </METHOD>
+   <METHOD NAME="setPin" DESC="Set Pin.">
+      <PARAMETER NAME="outn" TYPE="INTEGER" DEFAULT="0"  DESC="Output number"/>
+      <PARAMETER NAME="val"  TYPE="INTEGER" DEFAULT="0"  DESC="Value (0-4095)"/>
+      <PARAMETER NAME="inv"  TYPE="BOOLEAN" DEFAULT="0"  DESC="Invert"/>
+   </METHOD>
+</DRIVER>

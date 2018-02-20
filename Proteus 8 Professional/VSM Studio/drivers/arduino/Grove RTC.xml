@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<CLIP CATEGORY="Grove" FILE="Grove/Grove RTC.pdsclip" FAMILY="ARDUINO" DESC="Grove RTC Module" >
+   <PERIPHERAL TYPE="Grove RTC"   ELEMENT="RTC1" >     
+     <!-- Hardware Interface -->
+     <INTERFACE OBJECT="GroveRTC">
+       <SETUP NAME="begin">
+       </SETUP>
+     </INTERFACE>
+   
+     <!-- Firmware Driver -->
+     <DRIVER HEADER="grove_rtc.h">
+       <REQUIRE HEADER="ds1307.h"/>
+       <REQUIRE HEADER="Wire.h"/>
+       
+       <!-- Methods -->
+       <METHOD NAME="startClock" DESC="Set the Real Time Clock to start counting."> 
+       </METHOD>
+       <METHOD NAME="stopClock" DESC="Set the Real Time Clock to stop counting."> 
+       </METHOD>
+       <METHOD NAME="readTime" DESC="Read Time and date from I2C RTC.">
+       </METHOD>
+       <METHOD NAME="writeTime" DESC="Write Time and date to I2C RTC.">
+       </METHOD>
+       
+       <!-- Set Hour, Minute, Second, Year, Month, Day of month and Day of week -->
+       <METHOD NAME="setHour" DESC="Assign Hour.">
+         <PARAMETER NAME="hour" TYPE="INTEGER" DEFAULT="0" DESC="Hour (0-23)."/>
+       </METHOD>
+       <METHOD NAME="setMinute" DESC="Assign Minute.">
+         <PARAMETER NAME="minute" TYPE="INTEGER" DEFAULT="0" DESC="Minute (0-59)."/>
+       </METHOD>
+       <METHOD NAME="setSecond" DESC="Assign Second.">
+         <PARAMETER NAME="second" TYPE="INTEGER" DEFAULT="0" DESC="Minute (0-59)."/>
+       </METHOD>
+       <METHOD NAME="setYear" DESC="Assign Year.">
+         <PARAMETER NAME="year" TYPE="INTEGER" DEFAULT="2000" DESC="Year (2000-2099)."/>
+       </METHOD>
+       <METHOD NAME="setMonth" DESC="Assign Month.">
+         <PARAMETER NAME="month" TYPE="INTEGER" DEFAULT="0" DESC="Month (1-12)."/>
+       </METHOD>
+       <METHOD NAME="setDayOfMonth" DESC="Assign Day of Month.">
+         <PARAMETER NAME="day" TYPE="INTEGER" DEFAULT="1" DESC="Minute (1-31)."/>
+       </METHOD>
+       <METHOD NAME="setDayOfWeek" DESC="Assign Day of Week.">
+         <PARAMETER NAME="dow" TYPE="INTEGER" DEFAULT="1" DESC="Day of week (1-7)."/> 
+       </METHOD>
+
+        <!-- Get Hour, Minute, Second, Year, Month, Day of month and Day of week -->
+       <METHOD NAME="getHour" DESC="Return Hour.">
+          <RETURN NAME="hour" TYPE="INTEGER"/>
+       </METHOD>
+       <METHOD NAME="getMinute" DESC="Return Minute.">
+          <RETURN NAME="minute" TYPE="INTEGER"/>
+       </METHOD>
+       <METHOD NAME="getSecond" DESC="Return Second.">
+          <RETURN NAME="second" TYPE="INTEGER"/>
+       </METHOD>
+       <METHOD NAME="getYear" DESC="Return Year.">
+          <RETURN NAME="year" TYPE="INTEGER"/>
+       </METHOD>
+       <METHOD NAME="getMonth" DESC="Return Month.">
+          <RETURN NAME="month" TYPE="INTEGER"/>
+       </METHOD>
+       <METHOD NAME="getDayOfMonth" DESC="Return Day of Month.">
+          <RETURN NAME="day" TYPE="INTEGER"/>
+       </METHOD>
+       <METHOD NAME="getDayOfWeek" DESC="Return Day of Week.">
+          <RETURN NAME="dow" TYPE="INTEGER"/>
+       </METHOD>
+
+     </DRIVER>
+   </PERIPHERAL>
+</CLIP>

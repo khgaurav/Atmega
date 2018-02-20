@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<CONTROLLER NAME="Arduino Leonardo" FAMILY="ARDUINO" DESC="Arduino Leonardo ATmega32U4">
+    <PERIPHERAL NAME="cpu" TYPE="CPU" DESC="Arduino Processor" ELEMENT="U1">
+        <INTERFACE OBJECT="CPU" EXTERNAL="Cpu"/>
+        <DRIVER FILE="Cpu/Cpu.xml"/>
+    </PERIPHERAL>            	   
+      
+    <PERIPHERAL NAME="timer1" TYPE="TIMER1" DESC="Timer One" ELEMENT="U1" >
+        <INTERFACE OBJECT="TimerOne" EXTERNAL="Timer1"/>
+        <DRIVER FILE="TimerOne/TimerOne.xml"/>
+    </PERIPHERAL>            	   
+</CONTROLLER>
+	
+  

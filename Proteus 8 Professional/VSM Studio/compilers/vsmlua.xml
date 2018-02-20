@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<COMPILER NAME="LUA 5.2 (Proteus)" CHART="Visual Designer for PP1" ID="LUA" VERSION="1.0" URL="" AVAILABILITY="Internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/compiler.xsd">
+  
+  <!-- Compiler / Syntax Checker -->
+  <TOOL NAME="LUAC" FILE="luac.exe">
+    <!-- usage:     LUAC &lt;source&gt; ] -->
+    <OPTION NAME="/INCLUDES:" DESC="/INCLUDES:path1;path2;path3" PARAM="STRING" MULTIPLE="1">
+      <ALIAS NAME="/INC:"/>
+    </OPTION>
+  </TOOL>
+
+  <!-- Available controllers for this compiler -->
+  <FAMILY NAME="PP1" DRIVERS="PP1">
+    <PROPERTY NAME="PROGRAMMER" VALUE="LUS"/>
+    <CONTROLLER NAME="PP1-16"></CONTROLLER>
+  </FAMILY>
+  
+  <!-- Compiler Detection -->
+  <DETECT PATH="%BIN_DIR%" SUF="luac.exe" DATE="2013-01-01">
+    <CHECK ARG="-v" STR="Lua 5.2.2"/>
+  </DETECT>
+
+  <!-- File Types -->
+  <FILE NAME="chart" DESC="Flowchart" CATEGORY="Flowchart" PHANTOM="1" ICON="project_chart.png"/>
+  <FILE NAME="lua" DESC="LUA Source" CATEGORY="Source" SOURCE="1" ICON="project_lua.png" SYNTAX="LUA.SYN"/>
+  <FILE NAME="lbc" DESC="LUA Bytecode" CATEGORY="Firmware" FIRMWARE="1"/>
+  <FILE NAME="png" DESC="Bitmap" CATEGORY="Resource" RESOURCE="1"/>
+  <FILE NAME="mp3" DESC="Audio" CATEGORY="Resource" RESOURCE="1"/>
+  <FILE NAME="html" DESC="HTML" CATEGORY="Resource" RESOURCE="1"/>
+  <FILE NAME="lrc" DESC="LUA Data" CATEGORY="Resource" RESOURCE="1"/>
+  <FILE NAME="bin" DESC="Binary Data" CATEGORY="Resource" RESOURCE="1"/>
+
+  <!-- Flowchart Preprocessor-->
+  <PROCESS TOOL="FLOWCHART" NAME="Flowchart Compiler" PREPROCESS="1">
+    <FILE OUTPUT="LUA">
+      <FILE INPUT="CHART"/>
+    </FILE>  
+  </PROCESS>
+
+  <!-- Compiler -->
+  <PROCESS TOOL="LUAC" NAME="Compiler" CMDLINE="$(LUAC) -o %OUTFILE_QUOTED% %INFILES_QUOTED%  $(LUACFLAGS) %OPTIONS% ">
+    <FILE OUTPUT="LBC">
+      <FILE INPUT="LUA"/>
+    </FILE>
+    <MESSAGE VALUE="^.+: (.+):(\d+).+$">
+      <FIELD NAME="FILENAME" POSITION="1"/>
+      <FIELD NAME="LINE" POSITION="2" OFFSET="-1"/>
+    </MESSAGE>
+  </PROCESS>
+ 
+  <!-- Compilation Targets -->
+  <TARGET NAME="Debug">
+    <FILE OUTPUT="lbc"/>
+  </TARGET>
+  <TARGET NAME="Release">
+    <FILE OUTPUT="lbc"/>
+    <POSTPROCESS CMDLINE="cp &quot;%OUTFILE%&quot; &quot;%SOLUTION_ABS_DIR%/%PROJECT_NAME%.%OUTFILE_TYPE%&quot;"/>
+  </TARGET>
+  <SOURCE NAME="main.lua" FROM="main.lua" OPEN="1"/>
+</COMPILER>

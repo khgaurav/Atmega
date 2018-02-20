@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<CLIP CATEGORY="Breakout Peripherals" FILE="Arduino/Arduino Real Time Clock Breakout Board.pdsclip" DESC="Arduino Real Time Clock Breakout Board" FAMILY="ARDUINO">
+   <PERIPHERAL TYPE="Real Time Clock" ELEMENT="RTC1">
+      <INTERFACE OBJECT="RealTimeClock">
+         <PORT NAME="I2C"/>
+         <!-- SOUT pin -->
+         <PIN NAME="SOUT" TYPE="DIGITAL">
+            <TERMINAL ELEMENT="IO8"/>
+         </PIN>
+         <SETUP NAME="begin"/>
+      </INTERFACE>
+      <DRIVER FILE="RealTimeClock/RealTimeClock.xml"/>     
+   </PERIPHERAL>
+</CLIP>

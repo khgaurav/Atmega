@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PROGRAMMER NAME="Linux Uploader" ID="LUS" PATH="RTP" VERSION="1.0" AVAILABILITY="Internal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../schema/programmer.xsd">
+  <TOOL NAME="LUS" FILE="pp1rtp.exe">
+    <OPTION NAME="-H " DESC="&lt;host&gt;             Connect to device with name or ip &lt;host&gt;." PARAM="STRING"/>
+    <OPTION NAME="-N " DESC="&lt;username&gt;         User name is &lt;username&gt;." PARAM="STRING"/>
+    <OPTION NAME="-P " DESC="&lt;password&gt;         Password is &lt;password&gt;." PARAM="STRING"/>
+    <OPTION NAME="-U " DESC="&lt;remote&gt; &lt;local&gt;   Upload file &lt;local&gt; to &lt;remote&gt; path." PARAM="STRING" MULTIPLE="1"/>
+    <OPTION NAME="-D " DESC="&lt;remote&gt; &lt;local&gt;   Download file from &lt;remote&gt; path to &lt;local&gt;." PARAM="STRING" MULTIPLE="1"/>
+    <OPTION NAME="-X " DESC="&lt;file&gt;             Execute remote file." PARAM="STRING" MULTIPLE="1"/>
+    <OPTION NAME="-C " DESC="&lt;path&gt;             Change working directory." PARAM="STRING" MULTIPLE="1"/>
+    <OPTION NAME="-G" DESC="Check board configuration, apply fixes if required."/>
+    <OPTION NAME="-T" DESC="Enable trace output." ADVANCED="1"/>
+    <OPTION NAME="-Q" DESC="Quiet (no messages)." ADVANCED="1"/>
+  </TOOL>
+  <FAMILY NAME="PP1">
+    <CONTROLLER NAME="PP1-16"/>
+  </FAMILY>
+  <INTERFACE NAME="SSH">
+    <OPTION NAME="-H " VALUE="%HOST%"/>
+    <OPTION NAME="-N " VALUE="%USERNAME%"/>
+    <OPTION NAME="-P " VALUE="%PASSWORD%"/>
+    <PROPERTY NAME="HOST" DESC="Host" VALUE="192.168.7.2"/>
+    <PROPERTY NAME="USERNAME" DESC="User Name" VALUE="debian"/>
+    <PROPERTY NAME="PASSWORD" DESC="Password" VALUE="temppwd"/>
+  </INTERFACE>
+  <FILE TYPE="lbc" DESC="Lua Bytecode"/>
+  <PROCESS TOOL="LUS" NAME="Upload Program and Resources"  ID="PROGRAM" CMDLINE="%OPTIONS% -G -U vsmlua %PROGRAMMER_PATH%/vsmlua -X &quot;sudo chmod 777 vsmlua&quot; -U ./ %INFILE_PATH%/*.* -X &quot;sudo ./vsmlua %INFILE_NAME%&quot;"/>
+</PROGRAMMER>

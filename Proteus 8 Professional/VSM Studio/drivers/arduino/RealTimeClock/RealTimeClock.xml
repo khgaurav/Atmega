@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!-- Firmware Driver -->
+<DRIVER HEADER="realtimeclock.h">
+   <REQUIRE HEADER="RTClib.h"/>
+   <REQUIRE HEADER="Wire.h"/>
+   
+   <!-- RTC enumeration -->
+   <ENUMERATION NAME="SQWFREQ">
+      <CONSTANT NAME="OFF"       VALUE="0x00"/>
+      <CONSTANT NAME="ON"        VALUE="0x80"/>
+      <CONSTANT NAME="F1_1Hz"    VALUE="0x10"/>
+      <CONSTANT NAME="F2_4096Hz" VALUE="0x11"/>
+      <CONSTANT NAME="F3_8192Hz" VALUE="0x12"/>
+      <CONSTANT NAME="F4_32KHz"  VALUE="0x13"/>
+   </ENUMERATION>
+
+   <!-- DATATIME enumeration -->
+   <ENUMERATION NAME="DATETIME">
+      <CONSTANT NAME="YEAR"   VALUE="0"/>
+      <CONSTANT NAME="MONTH"  VALUE="1"/>
+      <CONSTANT NAME="DAY"    VALUE="2"/>
+      <CONSTANT NAME="HOUR"   VALUE="3"/>
+      <CONSTANT NAME="MINUTE" VALUE="4"/>
+      <CONSTANT NAME="SECOND" VALUE="5"/>
+   </ENUMERATION>
+   
+   <!-- RTC methods -->
+   <METHOD NAME="readTime"  DESC="Get the time from the RTC.">
+      <RETURN NAME="time" TYPE="STRING" DESC="Time as a string"/>
+   </METHOD>
+   <METHOD NAME="readDate"  DESC="Get the date from the RTC.">
+      <RETURN NAME="date" TYPE="STRING" DESC="Date as a string"/>
+   </METHOD>
+   <METHOD NAME="now"  DESC="Get time/date from the RTC.">
+      <PARAMETER NAME="par" TYPE="DATETIME" DEFAULT="YEAR" DESC=""/>
+      <RETURN NAME="value" TYPE="INTEGER" DESC="Time/Date"/>
+   </METHOD>
+   <METHOD NAME="squareWave"  DESC="Set the Square Wave frequency to SOUT pin.">
+      <PARAMETER NAME="sqw" TYPE="SQWFREQ" DEFAULT="F1_1Hz" DESC="OFF and 4 frequency values"/>
+   </METHOD>
+   <METHOD NAME="adjustTime"  DESC="Adjust Time of Real Time Clock.">
+      <PARAMETER NAME="hh" TYPE="INTEGER" DEFAULT="12" DESC="Hour 0-23"/>
+      <PARAMETER NAME="mm" TYPE="INTEGER" DEFAULT="0"  DESC="minutes 0-59"/>
+      <PARAMETER NAME="ss" TYPE="INTEGER" DEFAULT="0"  DESC="seconds 0-59"/>
+   </METHOD>
+   <METHOD NAME="adjustDate"  DESC="Adjust Date of Real Time Clock.">
+      <PARAMETER NAME="year"  TYPE="INTEGER" DEFAULT="15" DESC="year 0-99"/>
+      <PARAMETER NAME="month" TYPE="INTEGER" DEFAULT="1"  DESC="month 1-12"/>
+      <PARAMETER NAME="day"   TYPE="INTEGER" DEFAULT="1"  DESC="day 1-7"/>
+   </METHOD>
+   <METHOD NAME="writeNvram"  DESC="Write data to NV Ram of RTC clock.">
+      <PARAMETER NAME="addr" TYPE="INTEGER" DEFAULT="0" DESC="Address where write data to"/>
+      <PARAMETER NAME="data" TYPE="INTEGER" DEFAULT="0" DESC="Data to write"/>
+   </METHOD>
+   <METHOD NAME="readNvram"  DESC="Read from NV Ram of RTC clock.">
+      <RETURN NAME="data"    TYPE="INTEGER" DESC="Data read from NV Ram"/>
+      <PARAMETER NAME="addr" TYPE="INTEGER" DEFAULT="0" DESC="Address from 0 to 56"/>
+   </METHOD>
+</DRIVER>
