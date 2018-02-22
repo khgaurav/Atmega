@@ -1,6 +1,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
-#define FOSC 1000000// Clock Speed
+#define FOSC 1000000
 #define BAUD 9600
 #define ubbr_value FOSC/16/BAUD-1
 
@@ -29,7 +29,7 @@ int main(void)
    UBRRL = (unsigned char) ubbr_value;
    UCSRB = (1 << TXEN);
    UCSRC = (1 << URSEL)| (3 << UCSZ0);
-   
+
   ADMUX |= 1<< REFS0;
   ADCSRA |= 1<< ADPS2;
   ADCSRA |= 1<< ADEN;
