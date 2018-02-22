@@ -323,15 +323,15 @@
  269               		.file 2 "/usr/lib/avr/include/stdint.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/cc6vynwd.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/cc6vynwd.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/cc6vynwd.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/cc6vynwd.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/cc6vynwd.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/cc6vynwd.s:12     .text:0000000000000000 Receive
-     /tmp/cc6vynwd.s:34     .text:0000000000000008 Transmit
-     /tmp/cc6vynwd.s:55     .text:0000000000000010 map
-     /tmp/cc6vynwd.s:185    .text.startup:0000000000000000 main
+     /tmp/ccAbJoAc.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccAbJoAc.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccAbJoAc.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccAbJoAc.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccAbJoAc.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccAbJoAc.s:12     .text:0000000000000000 Receive
+     /tmp/ccAbJoAc.s:34     .text:0000000000000008 Transmit
+     /tmp/ccAbJoAc.s:55     .text:0000000000000010 map
+     /tmp/ccAbJoAc.s:185    .text.startup:0000000000000000 main
 
 UNDEFINED SYMBOLS
 __mulsi3
