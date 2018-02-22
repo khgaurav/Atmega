@@ -13,7 +13,7 @@
   14               		.file 1 "main.c"
    1:main.c        **** #include <avr/io.h>
    2:main.c        **** #include <util/delay.h>
-   3:main.c        **** #define FOSC 1000000// Clock Speed
+   3:main.c        **** #define FOSC 1000000
    4:main.c        **** #define BAUD 9600
    5:main.c        **** #define ubbr_value FOSC/16/BAUD-1
    6:main.c        **** 
@@ -241,91 +241,97 @@
  213               	.LBB2:
   36:main.c        **** 	while (1)
   37:main.c        **** 	{
-  38:main.c        ****     ADCSRA |= 1<< ADSC;
-  39:main.c        **** 		while (ADCSRA & (1<< ADSC));
-  40:main.c        **** 		uint8_t x1 = ADCL;
-  41:main.c        ****     Transmit(x1);
-  42:main.c        ****     Transmit(ADCH);
-  43:main.c        **** 
+  38:main.c        **** 		Transmit(0x11);
+  39:main.c        ****     ADCSRA |= 1<< ADSC;
+  40:main.c        **** 		while (ADCSRA & (1<< ADSC));
+  41:main.c        **** 		uint8_t x1 = ADCL;
+  42:main.c        ****     Transmit(x1);
+  43:main.c        ****     Transmit(ADCH);
   44:main.c        **** 
-  45:main.c        **** 		ADMUX ^= (1<<MUX0);
- 214               		.loc 1 45 0
+  45:main.c        **** 
+  46:main.c        **** 		ADMUX ^= (1<<MUX0);
+ 214               		.loc 1 46 0
  215 0018 C1E0      		ldi r28,lo8(1)
  216               	.L13:
-  38:main.c        **** 		while (ADCSRA & (1<< ADSC));
+  38:main.c        ****     ADCSRA |= 1<< ADSC;
  217               		.loc 1 38 0
- 218 001a 369A      		sbi 0x6,6
- 219               	.L11:
-  39:main.c        **** 		uint8_t x1 = ADCL;
- 220               		.loc 1 39 0 discriminator 1
- 221 001c 3699      		sbic 0x6,6
- 222 001e 00C0      		rjmp .L11
-  40:main.c        ****     Transmit(x1);
- 223               		.loc 1 40 0
- 224 0020 84B1      		in r24,0x4
- 225               	.LVL7:
-  41:main.c        ****     Transmit(ADCH);
- 226               		.loc 1 41 0
- 227 0022 0E94 0000 		call Transmit
- 228               	.LVL8:
-  42:main.c        **** 
- 229               		.loc 1 42 0
- 230 0026 85B1      		in r24,0x5
+ 218 001a 81E1      		ldi r24,lo8(17)
+ 219 001c 0E94 0000 		call Transmit
+ 220               	.LVL7:
+  39:main.c        **** 		while (ADCSRA & (1<< ADSC));
+ 221               		.loc 1 39 0
+ 222 0020 369A      		sbi 0x6,6
+ 223               	.L11:
+  40:main.c        **** 		uint8_t x1 = ADCL;
+ 224               		.loc 1 40 0 discriminator 1
+ 225 0022 3699      		sbic 0x6,6
+ 226 0024 00C0      		rjmp .L11
+  41:main.c        ****     Transmit(x1);
+ 227               		.loc 1 41 0
+ 228 0026 84B1      		in r24,0x4
+ 229               	.LVL8:
+  42:main.c        ****     Transmit(ADCH);
+ 230               		.loc 1 42 0
  231 0028 0E94 0000 		call Transmit
  232               	.LVL9:
- 233               		.loc 1 45 0
- 234 002c 87B1      		in r24,0x7
- 235 002e 8C27      		eor r24,r28
- 236 0030 87B9      		out 0x7,r24
-  46:main.c        **** 		ADCSRA |= 1<< ADSC;
+  43:main.c        **** 
+ 233               		.loc 1 43 0
+ 234 002c 85B1      		in r24,0x5
+ 235 002e 0E94 0000 		call Transmit
+ 236               	.LVL10:
  237               		.loc 1 46 0
- 238 0032 369A      		sbi 0x6,6
- 239               	.L12:
-  47:main.c        **** 		while (ADCSRA & (1<< ADSC));
- 240               		.loc 1 47 0 discriminator 1
- 241 0034 3699      		sbic 0x6,6
- 242 0036 00C0      		rjmp .L12
-  48:main.c        **** 		uint8_t y1 = ADCL;
- 243               		.loc 1 48 0
- 244 0038 84B1      		in r24,0x4
- 245               	.LVL10:
-  49:main.c        ****     Transmit(y1);
- 246               		.loc 1 49 0
- 247 003a 0E94 0000 		call Transmit
- 248               	.LVL11:
-  50:main.c        ****     Transmit(ADCH);
- 249               		.loc 1 50 0
- 250 003e 85B1      		in r24,0x5
+ 238 0032 87B1      		in r24,0x7
+ 239 0034 8C27      		eor r24,r28
+ 240 0036 87B9      		out 0x7,r24
+  47:main.c        **** 		ADCSRA |= 1<< ADSC;
+ 241               		.loc 1 47 0
+ 242 0038 369A      		sbi 0x6,6
+ 243               	.L12:
+  48:main.c        **** 		while (ADCSRA & (1<< ADSC));
+ 244               		.loc 1 48 0 discriminator 1
+ 245 003a 3699      		sbic 0x6,6
+ 246 003c 00C0      		rjmp .L12
+  49:main.c        **** 		uint8_t y1 = ADCL;
+ 247               		.loc 1 49 0
+ 248 003e 84B1      		in r24,0x4
+ 249               	.LVL11:
+  50:main.c        ****     Transmit(y1);
+ 250               		.loc 1 50 0
  251 0040 0E94 0000 		call Transmit
  252               	.LVL12:
-  51:main.c        **** 		ADMUX ^= (1<<MUX0);
+  51:main.c        ****     Transmit(ADCH);
  253               		.loc 1 51 0
- 254 0044 87B1      		in r24,0x7
- 255 0046 8C27      		eor r24,r28
- 256 0048 87B9      		out 0x7,r24
- 257               	.LBE2:
-  52:main.c        **** 
+ 254 0044 85B1      		in r24,0x5
+ 255 0046 0E94 0000 		call Transmit
+ 256               	.LVL13:
+  52:main.c        **** 		ADMUX ^= (1<<MUX0);
+ 257               		.loc 1 52 0
+ 258 004a 87B1      		in r24,0x7
+ 259 004c 8C27      		eor r24,r28
+ 260 004e 87B9      		out 0x7,r24
+ 261               	.LBE2:
   53:main.c        **** 
   54:main.c        **** 
-  55:main.c        ****   }
- 258               		.loc 1 55 0
- 259 004a 00C0      		rjmp .L13
- 260               		.cfi_endproc
- 261               	.LFE9:
- 263               		.text
- 264               	.Letext0:
- 265               		.file 2 "/usr/lib/avr/include/stdint.h"
+  55:main.c        **** 
+  56:main.c        ****   }
+ 262               		.loc 1 56 0
+ 263 0050 00C0      		rjmp .L13
+ 264               		.cfi_endproc
+ 265               	.LFE9:
+ 267               		.text
+ 268               	.Letext0:
+ 269               		.file 2 "/usr/lib/avr/include/stdint.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/ccaENAQk.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccaENAQk.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccaENAQk.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccaENAQk.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccaENAQk.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccaENAQk.s:12     .text:0000000000000000 Receive
-     /tmp/ccaENAQk.s:34     .text:0000000000000008 Transmit
-     /tmp/ccaENAQk.s:55     .text:0000000000000010 map
-     /tmp/ccaENAQk.s:185    .text.startup:0000000000000000 main
+     /tmp/cc6vynwd.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/cc6vynwd.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/cc6vynwd.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/cc6vynwd.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/cc6vynwd.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/cc6vynwd.s:12     .text:0000000000000000 Receive
+     /tmp/cc6vynwd.s:34     .text:0000000000000008 Transmit
+     /tmp/cc6vynwd.s:55     .text:0000000000000010 map
+     /tmp/cc6vynwd.s:185    .text.startup:0000000000000000 main
 
 UNDEFINED SYMBOLS
 __mulsi3

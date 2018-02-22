@@ -37,7 +37,9 @@ PORTD &= ~(1<< PIND2);
 
 	while (1)
 	{
-    int x1= Receive();
+		if(Receive()!=0x11)
+		continue;
+		int x1= Receive();
     uint16_t x = (Receive())<<8 | x1;
     int y1=Receive();
     uint16_t y=(Receive())<<8 | y1;
