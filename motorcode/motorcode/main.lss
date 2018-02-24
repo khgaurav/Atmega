@@ -13,19 +13,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   4 .debug_aranges 00000028  00000000  00000000  00000b50  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   00000900  00000000  00000000  00000b78  2**0
+  5 .debug_info   00000907  00000000  00000000  00000b78  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000670  00000000  00000000  00001478  2**0
+  6 .debug_abbrev 00000670  00000000  00000000  0000147f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000001c2  00000000  00000000  00001ae8  2**0
+  7 .debug_line   000001c2  00000000  00000000  00001aef  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000174  00000000  00000000  00001cac  2**2
+  8 .debug_frame  00000174  00000000  00000000  00001cb4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000448  00000000  00000000  00001e20  2**0
+  9 .debug_str    00000448  00000000  00000000  00001e28  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    000006c8  00000000  00000000  00002268  2**0
+ 10 .debug_loc    000006c8  00000000  00000000  00002270  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000018  00000000  00000000  00002930  2**0
+ 11 .debug_ranges 00000018  00000000  00000000  00002938  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -163,8 +163,8 @@ long double map(long double x, long double in_min, long double in_max, long doub
  122:	4f 90       	pop	r4
  124:	08 95       	ret
 
-00000126 <_Z22ellipticalSquareToDisceeReS_>:
-void ellipticalSquareToDisc(long double x, long double y, long double& u, long double& v)
+00000126 <_Z22ellipticalSquareToDiscddRdS_>:
+void ellipticalSquareToDisc(double x, double y, double& u, double& v)
 {
  126:	4f 92       	push	r4
  128:	5f 92       	push	r5
@@ -251,9 +251,9 @@ void ellipticalSquareToDisc(long double x, long double y, long double& u, long d
  1d8:	4f 90       	pop	r4
  1da:	08 95       	ret
 
-000001dc <_Z22ellipticalDiscToSquareeeReS_>:
+000001dc <_Z22ellipticalDiscToSquareddRdS_>:
 
-void ellipticalDiscToSquare(long double u, long double v, long double& x, long double& y)
+void ellipticalDiscToSquare(double u, double v, double& x, double& y)
 {
  1dc:	4f 92       	push	r4
  1de:	5f 92       	push	r5
@@ -285,13 +285,13 @@ void ellipticalDiscToSquare(long double u, long double v, long double& x, long d
  212:	3a 01       	movw	r6, r20
  214:	fe 86       	std	Y+14, r15	; 0x0e
  216:	ed 86       	std	Y+13, r14	; 0x0d
-    long double u2 = u * u;
+    double u2 = u * u;
  218:	9b 01       	movw	r18, r22
  21a:	ac 01       	movw	r20, r24
  21c:	0e 94 7d 04 	call	0x8fa	; 0x8fa <__mulsf3>
  220:	6b 01       	movw	r12, r22
  222:	7c 01       	movw	r14, r24
-    long double v2 = v * v;
+    double v2 = v * v;
  224:	a3 01       	movw	r20, r6
  226:	92 01       	movw	r18, r4
  228:	c3 01       	movw	r24, r6
@@ -301,8 +301,8 @@ void ellipticalDiscToSquare(long double u, long double v, long double& x, long d
  232:	7a 83       	std	Y+2, r23	; 0x02
  234:	8b 83       	std	Y+3, r24	; 0x03
  236:	9c 83       	std	Y+4, r25	; 0x04
-    long double twosqrt2 = 2.0 * sqrt(2.0);
-    long double subtermx = 2.0 + u2 - v2;
+    double twosqrt2 = 2.0 * sqrt(2.0);
+    double subtermx = 2.0 + u2 - v2;
  238:	20 e0       	ldi	r18, 0x00	; 0
  23a:	30 e0       	ldi	r19, 0x00	; 0
  23c:	40 e0       	ldi	r20, 0x00	; 0
@@ -319,7 +319,7 @@ void ellipticalDiscToSquare(long double u, long double v, long double& x, long d
  256:	7e 83       	std	Y+6, r23	; 0x06
  258:	8f 83       	std	Y+7, r24	; 0x07
  25a:	98 87       	std	Y+8, r25	; 0x08
-    long double subtermy = 2.0 - u2 + v2;
+    double subtermy = 2.0 - u2 + v2;
  25c:	a7 01       	movw	r20, r14
  25e:	96 01       	movw	r18, r12
  260:	60 e0       	ldi	r22, 0x00	; 0
@@ -334,7 +334,7 @@ void ellipticalDiscToSquare(long double u, long double v, long double& x, long d
  274:	0e 94 db 02 	call	0x5b6	; 0x5b6 <__addsf3>
  278:	6b 01       	movw	r12, r22
  27a:	7c 01       	movw	r14, r24
-    long double termx1 = subtermx + u * twosqrt2;
+    double termx1 = subtermx + u * twosqrt2;
  27c:	23 ef       	ldi	r18, 0xF3	; 243
  27e:	34 e0       	ldi	r19, 0x04	; 4
  280:	45 e3       	ldi	r20, 0x35	; 53
@@ -344,8 +344,8 @@ void ellipticalDiscToSquare(long double u, long double v, long double& x, long d
  288:	0e 94 7d 04 	call	0x8fa	; 0x8fa <__mulsf3>
  28c:	4b 01       	movw	r8, r22
  28e:	5c 01       	movw	r10, r24
-    long double termx2 = subtermx - u * twosqrt2;
-    long double termy1 = subtermy + v * twosqrt2;
+    double termx2 = subtermx - u * twosqrt2;
+    double termy1 = subtermy + v * twosqrt2;
  290:	23 ef       	ldi	r18, 0xF3	; 243
  292:	34 e0       	ldi	r19, 0x04	; 4
  294:	45 e3       	ldi	r20, 0x35	; 53
@@ -357,7 +357,7 @@ void ellipticalDiscToSquare(long double u, long double v, long double& x, long d
  2a2:	7a 83       	std	Y+2, r23	; 0x02
  2a4:	8b 83       	std	Y+3, r24	; 0x03
  2a6:	9c 83       	std	Y+4, r25	; 0x04
-    long double termy2 = subtermy - v * twosqrt2;
+    double termy2 = subtermy - v * twosqrt2;
     x = 0.5 * sqrt(termx1) - 0.5 * sqrt(termx2);
  2a8:	a5 01       	movw	r20, r10
  2aa:	94 01       	movw	r18, r8
@@ -458,7 +458,7 @@ void ellipticalDiscToSquare(long double u, long double v, long double& x, long d
  382:	82 83       	std	Z+2, r24	; 0x02
  384:	93 83       	std	Z+3, r25	; 0x03
 
-}
+}int main (void)
  386:	2e 96       	adiw	r28, 0x0e	; 14
  388:	0f b6       	in	r0, 0x3f	; 63
  38a:	f8 94       	cli
@@ -484,7 +484,6 @@ void ellipticalDiscToSquare(long double u, long double v, long double& x, long d
  3b2:	08 95       	ret
 
 000003b4 <main>:
-int main (void)
 {
  3b4:	cf 93       	push	r28
  3b6:	df 93       	push	r29
@@ -563,12 +562,12 @@ int main (void)
  40c:	97 b1       	in	r25, 0x07	; 7
  40e:	93 25       	eor	r25, r3
  410:	97 b9       	out	0x07, r25	; 7
-		long double x1 = x2 - 512;
-		long double y1 = 512 - y2;
-		x1=map(x1,-512,512,-1,1);
-		y1=map(y1,-512,512,-1,1);
-		long double xans,yans;
-		ellipticalSquareToDisc(x1, y1, xans, yans);
+		double x1 = x2 - 512;
+    double y1 = 512 - y2;
+    x1=map(x1,-512,512,-1,1);
+    y1=map(y1,-512,512,-1,1);
+    double xans,yans;
+    ellipticalSquareToDisc(x1, y1, xans, yans);
  412:	90 e0       	ldi	r25, 0x00	; 0
  414:	92 2b       	or	r25, r18
  416:	60 e0       	ldi	r22, 0x00	; 0
@@ -581,8 +580,8 @@ int main (void)
  426:	20 e0       	ldi	r18, 0x00	; 0
  428:	30 e0       	ldi	r19, 0x00	; 0
  42a:	40 e0       	ldi	r20, 0x00	; 0
- 42c:	54 e4       	ldi	r21, 0x44	; 68
- 42e:	0e 94 db 02 	call	0x5b6	; 0x5b6 <__addsf3>
+ 42c:	54 ec       	ldi	r21, 0xC4	; 196
+ 42e:	0e 94 da 02 	call	0x5b4	; 0x5b4 <__subsf3>
  432:	9b 01       	movw	r18, r22
  434:	ac 01       	movw	r20, r24
  436:	0e 94 db 02 	call	0x5b6	; 0x5b6 <__addsf3>
@@ -606,8 +605,8 @@ int main (void)
  462:	20 e0       	ldi	r18, 0x00	; 0
  464:	30 e0       	ldi	r19, 0x00	; 0
  466:	40 e0       	ldi	r20, 0x00	; 0
- 468:	54 e4       	ldi	r21, 0x44	; 68
- 46a:	0e 94 db 02 	call	0x5b6	; 0x5b6 <__addsf3>
+ 468:	54 ec       	ldi	r21, 0xC4	; 196
+ 46a:	0e 94 da 02 	call	0x5b4	; 0x5b4 <__subsf3>
  46e:	9b 01       	movw	r18, r22
  470:	ac 01       	movw	r20, r24
  472:	0e 94 db 02 	call	0x5b6	; 0x5b6 <__addsf3>
@@ -630,11 +629,11 @@ int main (void)
  49a:	1f 4f       	sbci	r17, 0xFF	; 255
  49c:	a3 01       	movw	r20, r6
  49e:	92 01       	movw	r18, r4
- 4a0:	0e 94 93 00 	call	0x126	; 0x126 <_Z22ellipticalSquareToDisceeReS_>
+ 4a0:	0e 94 93 00 	call	0x126	; 0x126 <_Z22ellipticalSquareToDiscddRdS_>
 
 
 
-		long double x = (xans * 0.707) + (yans * 0.707);
+    double x = (xans * 0.707) + (yans * 0.707);
  4a4:	cd 80       	ldd	r12, Y+5	; 0x05
  4a6:	de 80       	ldd	r13, Y+6	; 0x06
  4a8:	ef 80       	ldd	r14, Y+7	; 0x07
@@ -650,8 +649,8 @@ int main (void)
  4bc:	0e 94 7d 04 	call	0x8fa	; 0x8fa <__mulsf3>
  4c0:	2b 01       	movw	r4, r22
  4c2:	3c 01       	movw	r6, r24
-		long double y = (-xans * 0.707) + (yans * 0.707);
-		ellipticalDiscToSquare(x,y,xans,yans);
+    double y = (-xans * 0.707) + (yans * 0.707);
+    ellipticalDiscToSquare(x,y,xans,yans);
  4c4:	c7 01       	movw	r24, r14
  4c6:	b6 01       	movw	r22, r12
  4c8:	90 58       	subi	r25, 0x80	; 128
@@ -681,17 +680,17 @@ int main (void)
  500:	79 01       	movw	r14, r18
  502:	a5 01       	movw	r20, r10
  504:	94 01       	movw	r18, r8
- 506:	0e 94 ee 00 	call	0x1dc	; 0x1dc <_Z22ellipticalDiscToSquareeeReS_>
-		int x3=map(xans,-0.991273,0.991273,-255,255);
+ 506:	0e 94 ee 00 	call	0x1dc	; 0x1dc <_Z22ellipticalDiscToSquareddRdS_>
+    int x3=map(xans,-0.991273,0.991273,-255,255);
  50a:	21 e1       	ldi	r18, 0x11	; 17
  50c:	34 ec       	ldi	r19, 0xC4	; 196
  50e:	4d e7       	ldi	r20, 0x7D	; 125
- 510:	5f e3       	ldi	r21, 0x3F	; 63
+ 510:	5f eb       	ldi	r21, 0xBF	; 191
  512:	6d 81       	ldd	r22, Y+5	; 0x05
  514:	7e 81       	ldd	r23, Y+6	; 0x06
  516:	8f 81       	ldd	r24, Y+7	; 0x07
  518:	98 85       	ldd	r25, Y+8	; 0x08
- 51a:	0e 94 db 02 	call	0x5b6	; 0x5b6 <__addsf3>
+ 51a:	0e 94 da 02 	call	0x5b4	; 0x5b4 <__subsf3>
  51e:	20 e0       	ldi	r18, 0x00	; 0
  520:	30 e0       	ldi	r19, 0x00	; 0
  522:	4f ef       	ldi	r20, 0xFF	; 255
@@ -711,16 +710,16 @@ int main (void)
  546:	16 2f       	mov	r17, r22
  548:	e6 2e       	mov	r14, r22
  54a:	f7 2e       	mov	r15, r23
-		int y3=map(yans,-0.991273,0.991273,-255,255);
+    int y3=map(yans,-0.991273,0.991273,-255,255);
  54c:	21 e1       	ldi	r18, 0x11	; 17
  54e:	34 ec       	ldi	r19, 0xC4	; 196
  550:	4d e7       	ldi	r20, 0x7D	; 125
- 552:	5f e3       	ldi	r21, 0x3F	; 63
+ 552:	5f eb       	ldi	r21, 0xBF	; 191
  554:	69 81       	ldd	r22, Y+1	; 0x01
  556:	7a 81       	ldd	r23, Y+2	; 0x02
  558:	8b 81       	ldd	r24, Y+3	; 0x03
  55a:	9c 81       	ldd	r25, Y+4	; 0x04
- 55c:	0e 94 db 02 	call	0x5b6	; 0x5b6 <__addsf3>
+ 55c:	0e 94 da 02 	call	0x5b4	; 0x5b4 <__subsf3>
  560:	20 e0       	ldi	r18, 0x00	; 0
  562:	30 e0       	ldi	r19, 0x00	; 0
  564:	4f ef       	ldi	r20, 0xFF	; 255

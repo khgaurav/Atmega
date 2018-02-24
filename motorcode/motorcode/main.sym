@@ -36,8 +36,8 @@
 00000068 W __vector_8
 00000068 W __vector_9
 0000006c T _Z3mapeeeee
-00000126 T _Z22ellipticalSquareToDisceeReS_
-000001dc T _Z22ellipticalDiscToSquareeeReS_
+00000126 T _Z22ellipticalSquareToDiscddRdS_
+000001dc T _Z22ellipticalDiscToSquareddRdS_
 000003b4 T main
 00000400 A __LOCK_REGION_LENGTH__
 00000400 A __SIGNATURE_REGION_LENGTH__

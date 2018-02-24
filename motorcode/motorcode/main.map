@@ -240,8 +240,8 @@ END GROUP
                 0x0000000000000068                __vector_20
  .text          0x000000000000006c      0x348 main.o
                 0x000000000000006c                _Z3mapeeeee
-                0x0000000000000126                _Z22ellipticalSquareToDisceeReS_
-                0x00000000000001dc                _Z22ellipticalDiscToSquareeeReS_
+                0x0000000000000126                _Z22ellipticalSquareToDiscddRdS_
+                0x00000000000001dc                _Z22ellipticalDiscToSquareddRdS_
  .text          0x00000000000003b4        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(addsf3.o)
  .text          0x00000000000003b4        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(addsf3x.o)
  .text          0x00000000000003b4        0x0 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(divsf3.o)
@@ -512,10 +512,10 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000      0x900
+.debug_info     0x0000000000000000      0x907
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x52e /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega16.o
- .debug_info    0x000000000000052e      0x3d2 main.o
+ .debug_info    0x000000000000052e      0x3d9 main.o
 
 .debug_abbrev   0x0000000000000000      0x670
  *(.debug_abbrev)
@@ -535,7 +535,7 @@ END GROUP
  *(.debug_str)
  .debug_str     0x0000000000000000      0x1af /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega16.o
  .debug_str     0x00000000000001af      0x299 main.o
-                                        0x2cd (size before relaxing)
+                                        0x2d4 (size before relaxing)
 
 .debug_loc      0x0000000000000000      0x6c8
  *(.debug_loc)
@@ -571,8 +571,8 @@ LOAD linker stubs
 Cross Reference Table
 
 Symbol                                            File
-_Z22ellipticalDiscToSquareeeReS_                  main.o
-_Z22ellipticalSquareToDisceeReS_                  main.o
+_Z22ellipticalDiscToSquareddRdS_                  main.o
+_Z22ellipticalSquareToDiscddRdS_                  main.o
 _Z3mapeeeee                                       main.o
 __FUSE_REGION_LENGTH__                            /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega16.o
 __addsf3                                          /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/libm.a(addsf3.o)

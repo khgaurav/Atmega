@@ -178,10 +178,10 @@
  170 00b8 0895      		ret
  171               		.cfi_endproc
  172               	.LFE2:
- 174               	.global	_Z22ellipticalSquareToDisceeReS_
- 176               	_Z22ellipticalSquareToDisceeReS_:
+ 174               	.global	_Z22ellipticalSquareToDiscddRdS_
+ 176               	_Z22ellipticalSquareToDiscddRdS_:
  177               	.LFB3:
-  10:main.cpp      **** void ellipticalSquareToDisc(long double x, long double y, long double& u, long double& v)
+  10:main.cpp      **** void ellipticalSquareToDisc(double x, double y, double& u, double& v)
   11:main.cpp      **** {
  178               		.loc 1 11 0
  179               		.cfi_startproc
@@ -331,11 +331,11 @@
  320 016e 0895      		ret
  321               		.cfi_endproc
  322               	.LFE3:
- 324               	.global	_Z22ellipticalDiscToSquareeeReS_
- 326               	_Z22ellipticalDiscToSquareeeReS_:
+ 324               	.global	_Z22ellipticalDiscToSquareddRdS_
+ 326               	_Z22ellipticalDiscToSquareddRdS_:
  327               	.LFB4:
   15:main.cpp      **** 
-  16:main.cpp      **** void ellipticalDiscToSquare(long double u, long double v, long double& x, long double& y)
+  16:main.cpp      **** void ellipticalDiscToSquare(double u, double v, double& x, double& y)
   17:main.cpp      **** {
  328               		.loc 1 17 0
  329               		.cfi_startproc
@@ -426,7 +426,7 @@
  414 01a6 3A01      		movw r6,r20
  415 01a8 FE86      		std Y+14,r15
  416 01aa ED86      		std Y+13,r14
-  18:main.cpp      ****     long double u2 = u * u;
+  18:main.cpp      ****     double u2 = u * u;
  417               		.loc 1 18 0
  418 01ac 9B01      		movw r18,r22
  419 01ae AC01      		movw r20,r24
@@ -436,7 +436,7 @@
  423 01b4 6B01      		movw r12,r22
  424 01b6 7C01      		movw r14,r24
  425               	.LVL29:
-  19:main.cpp      ****     long double v2 = v * v;
+  19:main.cpp      ****     double v2 = v * v;
  426               		.loc 1 19 0
  427 01b8 A301      		movw r20,r6
  428 01ba 9201      		movw r18,r4
@@ -449,8 +449,8 @@
  435 01c8 8B83      		std Y+3,r24
  436 01ca 9C83      		std Y+4,r25
  437               	.LVL31:
-  20:main.cpp      ****     long double twosqrt2 = 2.0 * sqrt(2.0);
-  21:main.cpp      ****     long double subtermx = 2.0 + u2 - v2;
+  20:main.cpp      ****     double twosqrt2 = 2.0 * sqrt(2.0);
+  21:main.cpp      ****     double subtermx = 2.0 + u2 - v2;
  438               		.loc 1 21 0
  439 01cc 20E0      		ldi r18,0
  440 01ce 30E0      		ldi r19,0
@@ -472,7 +472,7 @@
  456 01ec 8F83      		std Y+7,r24
  457 01ee 9887      		std Y+8,r25
  458               	.LVL35:
-  22:main.cpp      ****     long double subtermy = 2.0 - u2 + v2;
+  22:main.cpp      ****     double subtermy = 2.0 - u2 + v2;
  459               		.loc 1 22 0
  460 01f0 A701      		movw r20,r14
  461 01f2 9601      		movw r18,r12
@@ -492,7 +492,7 @@
  475 020c 6B01      		movw r12,r22
  476 020e 7C01      		movw r14,r24
  477               	.LVL39:
-  23:main.cpp      ****     long double termx1 = subtermx + u * twosqrt2;
+  23:main.cpp      ****     double termx1 = subtermx + u * twosqrt2;
  478               		.loc 1 23 0
  479 0210 23EF      		ldi r18,lo8(-13)
  480 0212 34E0      		ldi r19,lo8(4)
@@ -505,8 +505,8 @@
  487 0220 4B01      		movw r8,r22
  488 0222 5C01      		movw r10,r24
  489               	.LVL41:
-  24:main.cpp      ****     long double termx2 = subtermx - u * twosqrt2;
-  25:main.cpp      ****     long double termy1 = subtermy + v * twosqrt2;
+  24:main.cpp      ****     double termx2 = subtermx - u * twosqrt2;
+  25:main.cpp      ****     double termy1 = subtermy + v * twosqrt2;
  490               		.loc 1 25 0
  491 0224 23EF      		ldi r18,lo8(-13)
  492 0226 34E0      		ldi r19,lo8(4)
@@ -521,7 +521,7 @@
  501 0238 8B83      		std Y+3,r24
  502 023a 9C83      		std Y+4,r25
  503               	.LVL43:
-  26:main.cpp      ****     long double termy2 = subtermy - v * twosqrt2;
+  26:main.cpp      ****     double termy2 = subtermy - v * twosqrt2;
   27:main.cpp      ****     x = 0.5 * sqrt(termx1) - 0.5 * sqrt(termx2);
  504               		.loc 1 27 0
  505 023c A501      		movw r20,r10
@@ -643,7 +643,7 @@
  620 0318 9383      		std Z+3,r25
  621               	/* epilogue start */
   29:main.cpp      **** 
-  30:main.cpp      **** }
+  30:main.cpp      **** }int main (void)
  622               		.loc 1 30 0
  623 031a 2E96      		adiw r28,14
  624 031c 0FB6      		in __tmp_reg__,__SREG__
@@ -678,9 +678,8 @@
  654               	.global	main
  656               	main:
  657               	.LFB5:
-  31:main.cpp      **** int main (void)
-  32:main.cpp      **** {
- 658               		.loc 1 32 0
+  31:main.cpp      **** {
+ 658               		.loc 1 31 0
  659               		.cfi_startproc
  660 0000 CF93      		push r28
  661               	.LCFI46:
@@ -706,105 +705,105 @@
  681               	/* frame size = 8 */
  682               	/* stack size = 10 */
  683               	.L__stack_usage = 10
-  33:main.cpp      ****     TCCR0 |= 1<<WGM00 | 1<< WGM01  | 1<< COM01 |1 <<CS00;
- 684               		.loc 1 33 0
+  32:main.cpp      ****     TCCR0 |= 1<<WGM00 | 1<< WGM01  | 1<< COM01 |1 <<CS00;
+ 684               		.loc 1 32 0
  685 0014 83B7      		in r24,0x33
  686 0016 8966      		ori r24,lo8(105)
  687 0018 83BF      		out 0x33,r24
-  34:main.cpp      **** 	DDRB |= 1<< PB3 | 1<<PINB0 | 1<<PINB1;
- 688               		.loc 1 34 0
+  33:main.cpp      **** 	DDRB |= 1<< PB3 | 1<<PINB0 | 1<<PINB1;
+ 688               		.loc 1 33 0
  689 001a 87B3      		in r24,0x17
  690 001c 8B60      		ori r24,lo8(11)
  691 001e 87BB      		out 0x17,r24
-  35:main.cpp      **** 	TCCR2 |= 1<<WGM20 | 1<< WGM21 | 1<< COM21 |1 <<CS20;
- 692               		.loc 1 35 0
+  34:main.cpp      **** 	TCCR2 |= 1<<WGM20 | 1<< WGM21 | 1<< COM21 |1 <<CS20;
+ 692               		.loc 1 34 0
  693 0020 85B5      		in r24,0x25
  694 0022 8966      		ori r24,lo8(105)
  695 0024 85BD      		out 0x25,r24
-  36:main.cpp      **** 	DDRD |= 1<< PB7 | 1<< PB2;
- 696               		.loc 1 36 0
+  35:main.cpp      **** 	DDRD |= 1<< PB7 | 1<< PB2;
+ 696               		.loc 1 35 0
  697 0026 81B3      		in r24,0x11
  698 0028 8468      		ori r24,lo8(-124)
  699 002a 81BB      		out 0x11,r24
-  37:main.cpp      **** 	PORTB &= ~(1<< PINB0);
- 700               		.loc 1 37 0
+  36:main.cpp      **** 	PORTB &= ~(1<< PINB0);
+ 700               		.loc 1 36 0
  701 002c C098      		cbi 0x18,0
-  38:main.cpp      **** 	PORTD &= ~(1<< PIND2);
- 702               		.loc 1 38 0
+  37:main.cpp      **** 	PORTD &= ~(1<< PIND2);
+ 702               		.loc 1 37 0
  703 002e 9298      		cbi 0x12,2
-  39:main.cpp      **** 	ADMUX |= 1<< REFS0;
- 704               		.loc 1 39 0
+  38:main.cpp      **** 	ADMUX |= 1<< REFS0;
+ 704               		.loc 1 38 0
  705 0030 3E9A      		sbi 0x7,6
-  40:main.cpp      **** 	ADCSRA |= 1<< ADPS2;
- 706               		.loc 1 40 0
+  39:main.cpp      **** 	ADCSRA |= 1<< ADPS2;
+ 706               		.loc 1 39 0
  707 0032 329A      		sbi 0x6,2
-  41:main.cpp      **** 	ADCSRA |= 1<< ADEN;
- 708               		.loc 1 41 0
+  40:main.cpp      **** 	ADCSRA |= 1<< ADEN;
+ 708               		.loc 1 40 0
  709 0034 379A      		sbi 0x6,7
  710               	.LBB11:
-  42:main.cpp      **** 	while (1)
-  43:main.cpp      ****     {
-  44:main.cpp      **** 		ADCSRA |= 1<< ADSC;
-  45:main.cpp      **** 		while (ADCSRA & (1<< ADSC));
-  46:main.cpp      **** 		uint8_t c1 = ADCL;
-  47:main.cpp      **** 		uint16_t x2 = ADCH<<8 | c1;
-  48:main.cpp      **** 		ADMUX ^= (1<<MUX0);
- 711               		.loc 1 48 0
+  41:main.cpp      **** 	while (1)
+  42:main.cpp      ****     {
+  43:main.cpp      **** 		ADCSRA |= 1<< ADSC;
+  44:main.cpp      **** 		while (ADCSRA & (1<< ADSC));
+  45:main.cpp      **** 		uint8_t c1 = ADCL;
+  46:main.cpp      **** 		uint16_t x2 = ADCH<<8 | c1;
+  47:main.cpp      **** 		ADMUX ^= (1<<MUX0);
+ 711               		.loc 1 47 0
  712 0036 3324      		clr r3
  713 0038 3394      		inc r3
  714               	.L11:
-  44:main.cpp      **** 		while (ADCSRA & (1<< ADSC));
- 715               		.loc 1 44 0
+  43:main.cpp      **** 		while (ADCSRA & (1<< ADSC));
+ 715               		.loc 1 43 0
  716 003a 369A      		sbi 0x6,6
  717               	.L5:
-  45:main.cpp      **** 		uint8_t c1 = ADCL;
- 718               		.loc 1 45 0
+  44:main.cpp      **** 		uint8_t c1 = ADCL;
+ 718               		.loc 1 44 0
  719 003c 3699      		sbic 0x6,6
  720 003e 00C0      		rjmp .L5
-  46:main.cpp      **** 		uint16_t x2 = ADCH<<8 | c1;
- 721               		.loc 1 46 0
+  45:main.cpp      **** 		uint16_t x2 = ADCH<<8 | c1;
+ 721               		.loc 1 45 0
  722 0040 E4B0      		in r14,0x4
  723               	.LVL64:
-  47:main.cpp      **** 		ADMUX ^= (1<<MUX0);
- 724               		.loc 1 47 0
+  46:main.cpp      **** 		ADMUX ^= (1<<MUX0);
+ 724               		.loc 1 46 0
  725 0042 85B1      		in r24,0x5
  726 0044 F12C      		mov r15,__zero_reg__
  727 0046 F82A      		or r15,r24
  728               	.LVL65:
- 729               		.loc 1 48 0
+ 729               		.loc 1 47 0
  730 0048 87B1      		in r24,0x7
  731 004a 8325      		eor r24,r3
  732 004c 87B9      		out 0x7,r24
-  49:main.cpp      **** 		ADCSRA |= 1<< ADSC;
- 733               		.loc 1 49 0
+  48:main.cpp      **** 		ADCSRA |= 1<< ADSC;
+ 733               		.loc 1 48 0
  734 004e 369A      		sbi 0x6,6
  735               	.L6:
-  50:main.cpp      **** 		while (ADCSRA & (1<< ADSC));
- 736               		.loc 1 50 0
+  49:main.cpp      **** 		while (ADCSRA & (1<< ADSC));
+ 736               		.loc 1 49 0
  737 0050 3699      		sbic 0x6,6
  738 0052 00C0      		rjmp .L6
-  51:main.cpp      **** 		c1 = ADCL;
- 739               		.loc 1 51 0
+  50:main.cpp      **** 		c1 = ADCL;
+ 739               		.loc 1 50 0
  740 0054 84B1      		in r24,0x4
  741               	.LVL66:
-  52:main.cpp      **** 		uint16_t y2=ADCH<<8 | c1;
- 742               		.loc 1 52 0
+  51:main.cpp      **** 		uint16_t y2=ADCH<<8 | c1;
+ 742               		.loc 1 51 0
  743 0056 25B1      		in r18,0x5
  744               	.LVL67:
-  53:main.cpp      **** 		ADMUX ^= (1<<MUX0);
- 745               		.loc 1 53 0
+  52:main.cpp      **** 		ADMUX ^= (1<<MUX0);
+ 745               		.loc 1 52 0
  746 0058 97B1      		in r25,0x7
  747 005a 9325      		eor r25,r3
  748 005c 97B9      		out 0x7,r25
+  53:main.cpp      **** 
   54:main.cpp      **** 
-  55:main.cpp      **** 
-  56:main.cpp      **** 		long double x1 = x2 - 512;
-  57:main.cpp      **** 		long double y1 = 512 - y2;
-  58:main.cpp      **** 		x1=map(x1,-512,512,-1,1);
-  59:main.cpp      **** 		y1=map(y1,-512,512,-1,1);
-  60:main.cpp      **** 		long double xans,yans;
-  61:main.cpp      **** 		ellipticalSquareToDisc(x1, y1, xans, yans);
- 749               		.loc 1 61 0
+  55:main.cpp      **** 		double x1 = x2 - 512;
+  56:main.cpp      ****     double y1 = 512 - y2;
+  57:main.cpp      ****     x1=map(x1,-512,512,-1,1);
+  58:main.cpp      ****     y1=map(y1,-512,512,-1,1);
+  59:main.cpp      ****     double xans,yans;
+  60:main.cpp      ****     ellipticalSquareToDisc(x1, y1, xans, yans);
+ 749               		.loc 1 60 0
  750 005e 90E0      		ldi r25,0
  751 0060 922B      		or r25,r18
  752 0062 60E0      		ldi r22,0
@@ -819,8 +818,8 @@
  761 0072 20E0      		ldi r18,0
  762 0074 30E0      		ldi r19,0
  763 0076 40E0      		ldi r20,0
- 764 0078 54E4      		ldi r21,lo8(68)
- 765 007a 0E94 0000 		call __addsf3
+ 764 0078 54EC      		ldi r21,lo8(-60)
+ 765 007a 0E94 0000 		call __subsf3
  766               	.LVL70:
  767 007e 9B01      		movw r18,r22
  768 0080 AC01      		movw r20,r24
@@ -849,8 +848,8 @@
  791 00ae 20E0      		ldi r18,0
  792 00b0 30E0      		ldi r19,0
  793 00b2 40E0      		ldi r20,0
- 794 00b4 54E4      		ldi r21,lo8(68)
- 795 00b6 0E94 0000 		call __addsf3
+ 794 00b4 54EC      		ldi r21,lo8(-60)
+ 795 00b6 0E94 0000 		call __subsf3
  796               	.LVL75:
  797 00ba 9B01      		movw r18,r22
  798 00bc AC01      		movw r20,r24
@@ -878,13 +877,13 @@
  820 00e6 1F4F      		sbci r17,-1
  821 00e8 A301      		movw r20,r6
  822 00ea 9201      		movw r18,r4
- 823 00ec 0E94 0000 		call _Z22ellipticalSquareToDisceeReS_
+ 823 00ec 0E94 0000 		call _Z22ellipticalSquareToDiscddRdS_
  824               	.LVL80:
+  61:main.cpp      **** 
   62:main.cpp      **** 
   63:main.cpp      **** 
-  64:main.cpp      **** 
-  65:main.cpp      **** 		long double x = (xans * 0.707) + (yans * 0.707);
- 825               		.loc 1 65 0
+  64:main.cpp      ****     double x = (xans * 0.707) + (yans * 0.707);
+ 825               		.loc 1 64 0
  826 00f0 CD80      		ldd r12,Y+5
  827 00f2 DE80      		ldd r13,Y+6
  828 00f4 EF80      		ldd r14,Y+7
@@ -902,9 +901,9 @@
  840 010c 2B01      		movw r4,r22
  841 010e 3C01      		movw r6,r24
  842               	.LVL82:
-  66:main.cpp      **** 		long double y = (-xans * 0.707) + (yans * 0.707);
-  67:main.cpp      **** 		ellipticalDiscToSquare(x,y,xans,yans);
- 843               		.loc 1 67 0
+  65:main.cpp      ****     double y = (-xans * 0.707) + (yans * 0.707);
+  66:main.cpp      ****     ellipticalDiscToSquare(x,y,xans,yans);
+ 843               		.loc 1 66 0
  844 0110 C701      		movw r24,r14
  845 0112 B601      		movw r22,r12
  846 0114 9058      		subi r25,0x80
@@ -938,19 +937,19 @@
  874 014c 7901      		movw r14,r18
  875 014e A501      		movw r20,r10
  876 0150 9401      		movw r18,r8
- 877 0152 0E94 0000 		call _Z22ellipticalDiscToSquareeeReS_
+ 877 0152 0E94 0000 		call _Z22ellipticalDiscToSquareddRdS_
  878               	.LVL87:
-  68:main.cpp      **** 		int x3=map(xans,-0.991273,0.991273,-255,255);
- 879               		.loc 1 68 0
+  67:main.cpp      ****     int x3=map(xans,-0.991273,0.991273,-255,255);
+ 879               		.loc 1 67 0
  880 0156 21E1      		ldi r18,lo8(17)
  881 0158 34EC      		ldi r19,lo8(-60)
  882 015a 4DE7      		ldi r20,lo8(125)
- 883 015c 5FE3      		ldi r21,lo8(63)
+ 883 015c 5FEB      		ldi r21,lo8(-65)
  884 015e 6D81      		ldd r22,Y+5
  885 0160 7E81      		ldd r23,Y+6
  886 0162 8F81      		ldd r24,Y+7
  887 0164 9885      		ldd r25,Y+8
- 888 0166 0E94 0000 		call __addsf3
+ 888 0166 0E94 0000 		call __subsf3
  889               	.LVL88:
  890 016a 20E0      		ldi r18,0
  891 016c 30E0      		ldi r19,0
@@ -976,17 +975,17 @@
  911 0194 E62E      		mov r14,r22
  912 0196 F72E      		mov r15,r23
  913               	.LVL93:
-  69:main.cpp      **** 		int y3=map(yans,-0.991273,0.991273,-255,255);
- 914               		.loc 1 69 0
+  68:main.cpp      ****     int y3=map(yans,-0.991273,0.991273,-255,255);
+ 914               		.loc 1 68 0
  915 0198 21E1      		ldi r18,lo8(17)
  916 019a 34EC      		ldi r19,lo8(-60)
  917 019c 4DE7      		ldi r20,lo8(125)
- 918 019e 5FE3      		ldi r21,lo8(63)
+ 918 019e 5FEB      		ldi r21,lo8(-65)
  919 01a0 6981      		ldd r22,Y+1
  920 01a2 7A81      		ldd r23,Y+2
  921 01a4 8B81      		ldd r24,Y+3
  922 01a6 9C81      		ldd r25,Y+4
- 923 01a8 0E94 0000 		call __addsf3
+ 923 01a8 0E94 0000 		call __subsf3
  924               	.LVL94:
  925 01ac 20E0      		ldi r18,0
  926 01ae 30E0      		ldi r19,0
@@ -1010,82 +1009,82 @@
  944               	.LVL98:
  945 01d4 CB01      		movw r24,r22
  946               	.LVL99:
-  70:main.cpp      **** 
-  71:main.cpp      **** 		/*int x2=x-512;
-  72:main.cpp      **** 		int y2=512-y;
-  73:main.cpp      **** 		if(y2/x2>=12.8&&y2/x2<=-12.8)
-  74:main.cpp      **** 			x2=0;
-  75:main.cpp      **** 		if(y2/x2<=0.390625&&y2/x2>=-0.390625)
-  76:main.cpp      **** 		y2=0;
-  77:main.cpp      **** 		int x3 = x2;
-  78:main.cpp      **** 		int y3 = y2;
-  79:main.cpp      **** 		int x4= (x3*0.707)+(y3*0.707);
-  80:main.cpp      **** 		int y4=-(x3*0.707)+(y3*0.707);
-  81:main.cpp      **** 
-  82:main.cpp      **** 		int x5=map(x4,-723,723,-255,255);
-  83:main.cpp      **** 		int y5=map(y4,-723,723,-255,255);
-  84:main.cpp      **** 
-  85:main.cpp      **** 		if(x5<20&&x5>-20)
-  86:main.cpp      **** 		x5=0;
-  87:main.cpp      **** 
-  88:main.cpp      **** 		if(y5<20&&y5>-20)
-  89:main.cpp      **** 		y5=0;*/
-  90:main.cpp      **** 
-  91:main.cpp      **** 		if(x3>0)
- 947               		.loc 1 91 0
+  69:main.cpp      **** 
+  70:main.cpp      **** 		/*int x2=x-512;
+  71:main.cpp      **** 		int y2=512-y;
+  72:main.cpp      **** 		if(y2/x2>=12.8&&y2/x2<=-12.8)
+  73:main.cpp      **** 			x2=0;
+  74:main.cpp      **** 		if(y2/x2<=0.390625&&y2/x2>=-0.390625)
+  75:main.cpp      **** 		y2=0;
+  76:main.cpp      **** 		int x3 = x2;
+  77:main.cpp      **** 		int y3 = y2;
+  78:main.cpp      **** 		int x4= (x3*0.707)+(y3*0.707);
+  79:main.cpp      **** 		int y4=-(x3*0.707)+(y3*0.707);
+  80:main.cpp      **** 
+  81:main.cpp      **** 		int x5=map(x4,-723,723,-255,255);
+  82:main.cpp      **** 		int y5=map(y4,-723,723,-255,255);
+  83:main.cpp      **** 
+  84:main.cpp      **** 		if(x5<20&&x5>-20)
+  85:main.cpp      **** 		x5=0;
+  86:main.cpp      **** 
+  87:main.cpp      **** 		if(y5<20&&y5>-20)
+  88:main.cpp      **** 		y5=0;*/
+  89:main.cpp      **** 
+  90:main.cpp      **** 		if(x3>0)
+ 947               		.loc 1 90 0
  948 01d6 1E14      		cp __zero_reg__,r14
  949 01d8 1F04      		cpc __zero_reg__,r15
  950 01da 04F4      		brge .L7
-  92:main.cpp      **** 		{
-  93:main.cpp      **** 			OCR0=x3;
- 951               		.loc 1 93 0
+  91:main.cpp      **** 		{
+  92:main.cpp      **** 			OCR0=x3;
+ 951               		.loc 1 92 0
  952 01dc 1CBF      		out 0x3c,r17
-  94:main.cpp      **** 			PORTB|=1<<PB0;
- 953               		.loc 1 94 0
+  93:main.cpp      **** 			PORTB|=1<<PB0;
+ 953               		.loc 1 93 0
  954 01de C09A      		sbi 0x18,0
  955 01e0 00C0      		rjmp .L8
  956               	.L7:
-  95:main.cpp      **** 		}
-  96:main.cpp      **** 		else
-  97:main.cpp      **** 		{
-  98:main.cpp      **** 			OCR0=-x3;
- 957               		.loc 1 98 0
+  94:main.cpp      **** 		}
+  95:main.cpp      **** 		else
+  96:main.cpp      **** 		{
+  97:main.cpp      **** 			OCR0=-x3;
+ 957               		.loc 1 97 0
  958 01e2 1195      		neg r17
  959 01e4 1CBF      		out 0x3c,r17
-  99:main.cpp      **** 			PORTB&=~(1<<PB0);
- 960               		.loc 1 99 0
+  98:main.cpp      **** 			PORTB&=~(1<<PB0);
+ 960               		.loc 1 98 0
  961 01e6 C098      		cbi 0x18,0
  962               	.L8:
- 100:main.cpp      **** 		}
- 101:main.cpp      **** 		if(y3>0)
- 963               		.loc 1 101 0
+  99:main.cpp      **** 		}
+ 100:main.cpp      **** 		if(y3>0)
+ 963               		.loc 1 100 0
  964 01e8 1816      		cp __zero_reg__,r24
  965 01ea 1906      		cpc __zero_reg__,r25
  966 01ec 04F4      		brge .L9
- 102:main.cpp      **** 		{
- 103:main.cpp      **** 		OCR2=y3;
- 967               		.loc 1 103 0
+ 101:main.cpp      **** 		{
+ 102:main.cpp      **** 		OCR2=y3;
+ 967               		.loc 1 102 0
  968 01ee 63BD      		out 0x23,r22
- 104:main.cpp      **** 		PORTD|=1<<PD2;
- 969               		.loc 1 104 0
+ 103:main.cpp      **** 		PORTD|=1<<PD2;
+ 969               		.loc 1 103 0
  970 01f0 929A      		sbi 0x12,2
  971 01f2 00C0      		rjmp .L11
  972               	.L9:
- 105:main.cpp      **** 		}
- 106:main.cpp      **** 		else
- 107:main.cpp      **** 		{
- 108:main.cpp      **** 			OCR2=-y3;
- 973               		.loc 1 108 0
+ 104:main.cpp      **** 		}
+ 105:main.cpp      **** 		else
+ 106:main.cpp      **** 		{
+ 107:main.cpp      **** 			OCR2=-y3;
+ 973               		.loc 1 107 0
  974 01f4 6195      		neg r22
  975 01f6 63BD      		out 0x23,r22
- 109:main.cpp      **** 			PORTD&=~1<<PD2;
- 976               		.loc 1 109 0
+ 108:main.cpp      **** 			PORTD&=~1<<PD2;
+ 976               		.loc 1 108 0
  977 01f8 82B3      		in r24,0x12
  978 01fa 887F      		andi r24,lo8(-8)
  979 01fc 82BB      		out 0x12,r24
  980               	.LBE11:
-  42:main.cpp      ****     {
- 981               		.loc 1 42 0
+  41:main.cpp      ****     {
+ 981               		.loc 1 41 0
  982 01fe 00C0      		rjmp .L11
  983               		.cfi_endproc
  984               	.LFE5:
@@ -1095,15 +1094,15 @@
  989               		.file 3 "/usr/lib/avr/include/math.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.cpp
-     /tmp/ccY3VXh0.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccY3VXh0.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccY3VXh0.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccY3VXh0.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccY3VXh0.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccY3VXh0.s:16     .text:0000000000000000 _Z3mapeeeee
-     /tmp/ccY3VXh0.s:176    .text:00000000000000ba _Z22ellipticalSquareToDisceeReS_
-     /tmp/ccY3VXh0.s:326    .text:0000000000000170 _Z22ellipticalDiscToSquareeeReS_
-     /tmp/ccY3VXh0.s:656    .text.startup:0000000000000000 main
+     /tmp/ccPnjSvT.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccPnjSvT.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccPnjSvT.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccPnjSvT.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccPnjSvT.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccPnjSvT.s:16     .text:0000000000000000 _Z3mapeeeee
+     /tmp/ccPnjSvT.s:176    .text:00000000000000ba _Z22ellipticalSquareToDiscddRdS_
+     /tmp/ccPnjSvT.s:326    .text:0000000000000170 _Z22ellipticalDiscToSquareddRdS_
+     /tmp/ccPnjSvT.s:656    .text.startup:0000000000000000 main
 
 UNDEFINED SYMBOLS
 __subsf3
