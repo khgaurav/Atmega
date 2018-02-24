@@ -2,10 +2,28 @@
 #include <avr/io.h>
 #include<avr/interrupt.h>
 #include<math.h>
+#define FOSC 1000000// Clock Speed
+#define BAUD 9600
+#define ubbr_value FOSC/16/BAUD-1
+int Receive()
+{
+	while (! (UCSRA & (1 << RXC)) );
+	return UDR;
+}
 
-long double map(long double x, long double in_min, long double in_max, long double out_min, long double out_max)
+void Transmit(unsigned char data)
+{
+	while (! (UCSRA & (1 << UDRE)) );
+	UDR = data;
+
+}
+long map(long x, long in_min, long in_max, long out_min, long out_max)
 {
 	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+double map(double x, double in_min, double in_max, double out_min, double out_max)
+{
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 void ellipticalSquareToDisc(double x, double y, double& u, double& v)
 {
@@ -27,46 +45,42 @@ void ellipticalDiscToSquare(double u, double v, double& x, double& y)
     x = 0.5 * sqrt(termx1) - 0.5 * sqrt(termx2);
     y = 0.5 * sqrt(termy1) - 0.5 * sqrt(termy2);
 
-}int main (void)
+}
+int main (void)
 {
-    TCCR0 |= 1<<WGM00 | 1<< WGM01  | 1<< COM01 |1 <<CS00;
-	DDRB |= 1<< PB3 | 1<<PINB0 | 1<<PINB1;
-	TCCR2 |= 1<<WGM20 | 1<< WGM21 | 1<< COM21 |1 <<CS20;
-	DDRD |= 1<< PB7 | 1<< PB2;
-	PORTB &= ~(1<< PINB0);
-	PORTD &= ~(1<< PIND2);
-	ADMUX |= 1<< REFS0;
-	ADCSRA |= 1<< ADPS2;
-	ADCSRA |= 1<< ADEN;
+	TCCR0 |= 1<<WGM00 | 1<< WGM01  | 1<< COM01 |1 <<CS00;
+DDRB |= 1<< PB3 | 1<<PINB0 | 1<<PINB1;
+TCCR2 |= 1<<WGM20 | 1<< WGM21 | 1<< COM21 |1 <<CS20;
+DDRD |= 1<< PB7 | 1<< PB2;
+PORTB &= ~(1<< PINB0);
+PORTD &= ~(1<< PIND2);
+ UCSRA = (1 << U2X);
+	UBRRH = (unsigned char) (ubbr_value >> 8);
+	UBRRL = (unsigned char) ubbr_value;
+	UCSRB = (1 << RXEN);
+	UCSRC = (1 << URSEL) | (3 << UCSZ0);
 	while (1)
     {
-		ADCSRA |= 1<< ADSC;
-		while (ADCSRA & (1<< ADSC));
-		uint8_t c1 = ADCL;
-		uint16_t x2 = ADCH<<8 | c1;
-		ADMUX ^= (1<<MUX0);
-		ADCSRA |= 1<< ADSC;
-		while (ADCSRA & (1<< ADSC));
-		c1 = ADCL;
-		uint16_t y2=ADCH<<8 | c1;
-		ADMUX ^= (1<<MUX0);
-
-
+			if(Receive()!=0x11)
+			continue;
+			int c1= Receive();
+	    uint16_t x2 = (Receive())<<8 | c1;
+	    int c2=Receive();
+	    uint16_t y2=(Receive())<<8 | c2;
 		double x1 = x2 - 512;
-    double y1 = 512 - y2;
-    x1=map(x1,-512,512,-1,1);
-    y1=map(y1,-512,512,-1,1);
-    double xans,yans;
-    ellipticalSquareToDisc(x1, y1, xans, yans);
+		double y1 = 512 - y2;
+		x1=map(x1,-512,512,-1,1);
+		y1=map(y1,-512,512,-1,1);
+		double xans,yans;
+		ellipticalSquareToDisc(x1, y1, xans, yans);
 
 
 
-    double x = (xans * 0.707) + (yans * 0.707);
-    double y = (-xans * 0.707) + (yans * 0.707);
-    ellipticalDiscToSquare(x,y,xans,yans);
-    int x3=map(xans,-0.991273,0.991273,-255,255);
-    int y3=map(yans,-0.991273,0.991273,-255,255);
-
+		double x = (xans * 0.707) + (yans * 0.707);
+		double y = (-xans * 0.707) + (yans * 0.707);
+		ellipticalDiscToSquare(x,y,xans,yans);
+		int x3=(int)map(xans,-0.991273,0.991273,-255,255);
+		int y3=(int)map(yans,-0.991273,0.991273,-255,255);
 		/*int x2=x-512;
 		int y2=512-y;
 		if(y2/x2>=12.8&&y2/x2<=-12.8)
