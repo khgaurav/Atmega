@@ -273,27 +273,50 @@
  245               		.loc 1 35 0
  246 0036 86E8      		ldi r24,lo8(-122)
  247 0038 80BD      		out 0x20,r24
- 248               	.LBB7:
+ 248               	.LBB9:
   36:main.c        **** 
   37:main.c        **** 
   38:main.c        **** 	while (1)
   39:main.c        **** 	{
-  40:main.c        **** 		if(Receive()!=0x11)
-  41:main.c        **** 		continue;
-  42:main.c        **** 		int x1= Receive();
-  43:main.c        ****     uint16_t x = (Receive())<<8 | x1;
-  44:main.c        ****     int y1=Receive();
-  45:main.c        ****     uint16_t y=(Receive())<<8 | y1;
-  46:main.c        ****     int x2=x-512;
-  47:main.c        ****     int y2=512-y;
-  48:main.c        ****     int x3 = x2;
-  49:main.c        ****     int y3 = y2;
-  50:main.c        ****     int x4= (x3*0.707)+(y3*0.707);
- 249               		.loc 1 50 0
+  40:main.c        **** 
+  41:main.c        **** 		uint16_t x,y;
+  42:main.c        **** 		if(Receive()==0x11)
+  43:main.c        **** 		{
+  44:main.c        **** 				int x1= Receive();
+  45:main.c        ****     		x = (Receive())<<8 | x1;
+  46:main.c        **** 
+  47:main.c        **** 		}
+  48:main.c        **** 		else
+  49:main.c        **** 		{
+  50:main.c        **** 			OCR0=0;
+  51:main.c        **** 			OCR2=0;
+  52:main.c        **** 			PORTD&=~1<<PD2;
+  53:main.c        **** 			PORTB&=~(1<<PB0);
+  54:main.c        **** 			continue;
+  55:main.c        **** 		}
+  56:main.c        **** 		if(Receive()==0x21)
+  57:main.c        **** 		{
+  58:main.c        **** 				int y1=Receive();
+  59:main.c        ****     		y=(Receive())<<8 | y1;
+  60:main.c        **** 		}
+  61:main.c        **** 		else
+  62:main.c        **** 		{
+  63:main.c        **** 			OCR0=0;
+  64:main.c        **** 			OCR2=0;
+  65:main.c        **** 			PORTD&=~1<<PD2;
+  66:main.c        **** 			PORTB&=~(1<<PB0);
+  67:main.c        **** 			continue;
+  68:main.c        **** 		}
+  69:main.c        **** 		int x2=x-512;
+  70:main.c        ****     int y2=512-y;
+  71:main.c        ****     int x3 = x2;
+  72:main.c        ****     int y3 = y2;
+  73:main.c        ****     int x4= (x3*0.707)+(y3*0.707);
+ 249               		.loc 1 73 0
  250 003a 00E0      		ldi r16,0
  251 003c 12E0      		ldi r17,lo8(2)
- 252               	.LBB8:
- 253               	.LBB9:
+ 252               	.LBB10:
+ 253               	.LBB11:
   20:main.c        **** }
  254               		.loc 1 20 0
  255 003e 86EA      		ldi r24,lo8(-90)
@@ -303,286 +326,320 @@
  259 0046 A12C      		mov r10,__zero_reg__
  260 0048 B12C      		mov r11,__zero_reg__
  261               	.L11:
- 262               	.LBE9:
- 263               	.LBE8:
-  40:main.c        **** 		continue;
- 264               		.loc 1 40 0
+ 262               	.LBE11:
+ 263               	.LBE10:
+  42:main.c        **** 		{
+ 264               		.loc 1 42 0
  265 004a 0E94 0000 		call Receive
  266               	.LVL7:
  267 004e 4197      		sbiw r24,17
- 268 0050 01F4      		brne .L11
-  42:main.c        ****     uint16_t x = (Receive())<<8 | x1;
- 269               		.loc 1 42 0
- 270 0052 0E94 0000 		call Receive
- 271               	.LVL8:
- 272 0056 9C83      		std Y+4,r25
- 273 0058 8B83      		std Y+3,r24
- 274               	.LVL9:
-  43:main.c        ****     int y1=Receive();
- 275               		.loc 1 43 0
- 276 005a 0E94 0000 		call Receive
- 277               	.LVL10:
- 278 005e D82E      		mov r13,r24
- 279               	.LVL11:
-  44:main.c        ****     uint16_t y=(Receive())<<8 | y1;
- 280               		.loc 1 44 0
- 281 0060 0E94 0000 		call Receive
- 282               	.LVL12:
- 283 0064 7C01      		movw r14,r24
- 284               	.LVL13:
-  45:main.c        ****     int x2=x-512;
- 285               		.loc 1 45 0
- 286 0066 0E94 0000 		call Receive
- 287               	.LVL14:
-  46:main.c        ****     int y2=512-y;
- 288               		.loc 1 46 0
- 289 006a DA82      		std Y+2,r13
- 290 006c 1982      		std Y+1,__zero_reg__
- 291 006e 2B81      		ldd r18,Y+3
- 292 0070 3C81      		ldd r19,Y+4
- 293 0072 4981      		ldd r20,Y+1
- 294 0074 5A81      		ldd r21,Y+2
- 295 0076 242B      		or r18,r20
- 296 0078 352B      		or r19,r21
- 297 007a 3250      		subi r19,2
- 298 007c 3C83      		std Y+4,r19
- 299 007e 2B83      		std Y+3,r18
- 300               	.LVL15:
- 301               		.loc 1 50 0
- 302 0080 382E      		mov r3,r24
- 303 0082 212C      		mov r2,__zero_reg__
- 304 0084 E228      		or r14,r2
- 305 0086 F328      		or r15,r3
- 306               	.LVL16:
- 307 0088 B801      		movw r22,r16
- 308 008a 6E19      		sub r22,r14
- 309 008c 7F09      		sbc r23,r15
- 310 008e 072E      		mov __tmp_reg__,r23
- 311 0090 000C      		lsl r0
- 312 0092 880B      		sbc r24,r24
- 313 0094 990B      		sbc r25,r25
- 314 0096 0E94 0000 		call __floatsisf
- 315               	.LVL17:
- 316 009a 24EF      		ldi r18,lo8(-12)
- 317 009c 3DEF      		ldi r19,lo8(-3)
- 318 009e 44E3      		ldi r20,lo8(52)
- 319 00a0 5FE3      		ldi r21,lo8(63)
- 320 00a2 0E94 0000 		call __mulsf3
- 321               	.LVL18:
- 322 00a6 2B01      		movw r4,r22
- 323 00a8 3C01      		movw r6,r24
- 324               	.LVL19:
- 325               	.LBB11:
- 326               	.LBB10:
-  20:main.c        **** }
- 327               		.loc 1 20 0
- 328 00aa 2B81      		ldd r18,Y+3
- 329 00ac 3C81      		ldd r19,Y+4
- 330 00ae B901      		movw r22,r18
- 331 00b0 330F      		lsl r19
- 332 00b2 880B      		sbc r24,r24
- 333 00b4 990B      		sbc r25,r25
- 334 00b6 0E94 0000 		call __floatsisf
+ 268 0050 01F0      		breq .+2
+ 269 0052 00C0      		rjmp .L23
+ 270               	.LBB13:
+  44:main.c        ****     		x = (Receive())<<8 | x1;
+ 271               		.loc 1 44 0
+ 272 0054 0E94 0000 		call Receive
+ 273               	.LVL8:
+ 274 0058 9C83      		std Y+4,r25
+ 275 005a 8B83      		std Y+3,r24
+ 276               	.LVL9:
+  45:main.c        **** 
+ 277               		.loc 1 45 0
+ 278 005c 0E94 0000 		call Receive
+ 279               	.LVL10:
+ 280 0060 D82E      		mov r13,r24
+ 281               	.LVL11:
+ 282               	.LBE13:
+  56:main.c        **** 		{
+ 283               		.loc 1 56 0
+ 284 0062 0E94 0000 		call Receive
+ 285               	.LVL12:
+ 286 0066 8197      		sbiw r24,33
+ 287 0068 01F0      		breq .+2
+ 288 006a 00C0      		rjmp .L23
+ 289               	.LBB14:
+  58:main.c        ****     		y=(Receive())<<8 | y1;
+ 290               		.loc 1 58 0
+ 291 006c 0E94 0000 		call Receive
+ 292               	.LVL13:
+ 293 0070 7C01      		movw r14,r24
+ 294               	.LVL14:
+  59:main.c        **** 		}
+ 295               		.loc 1 59 0
+ 296 0072 0E94 0000 		call Receive
+ 297               	.LVL15:
+ 298               	.LBE14:
+  69:main.c        ****     int y2=512-y;
+ 299               		.loc 1 69 0
+ 300 0076 DA82      		std Y+2,r13
+ 301 0078 1982      		std Y+1,__zero_reg__
+ 302 007a 2B81      		ldd r18,Y+3
+ 303 007c 3C81      		ldd r19,Y+4
+ 304 007e 4981      		ldd r20,Y+1
+ 305 0080 5A81      		ldd r21,Y+2
+ 306 0082 242B      		or r18,r20
+ 307 0084 352B      		or r19,r21
+ 308 0086 3250      		subi r19,2
+ 309 0088 3C83      		std Y+4,r19
+ 310 008a 2B83      		std Y+3,r18
+ 311               	.LVL16:
+ 312               		.loc 1 73 0
+ 313 008c 382E      		mov r3,r24
+ 314 008e 212C      		mov r2,__zero_reg__
+ 315 0090 E228      		or r14,r2
+ 316 0092 F328      		or r15,r3
+ 317               	.LVL17:
+ 318 0094 B801      		movw r22,r16
+ 319 0096 6E19      		sub r22,r14
+ 320 0098 7F09      		sbc r23,r15
+ 321 009a 072E      		mov __tmp_reg__,r23
+ 322 009c 000C      		lsl r0
+ 323 009e 880B      		sbc r24,r24
+ 324 00a0 990B      		sbc r25,r25
+ 325 00a2 0E94 0000 		call __floatsisf
+ 326               	.LVL18:
+ 327 00a6 24EF      		ldi r18,lo8(-12)
+ 328 00a8 3DEF      		ldi r19,lo8(-3)
+ 329 00aa 44E3      		ldi r20,lo8(52)
+ 330 00ac 5FE3      		ldi r21,lo8(63)
+ 331 00ae 0E94 0000 		call __mulsf3
+ 332               	.LVL19:
+ 333 00b2 2B01      		movw r4,r22
+ 334 00b4 3C01      		movw r6,r24
  335               	.LVL20:
- 336 00ba 24EF      		ldi r18,lo8(-12)
- 337 00bc 3DEF      		ldi r19,lo8(-3)
- 338 00be 44E3      		ldi r20,lo8(52)
- 339 00c0 5FE3      		ldi r21,lo8(63)
- 340 00c2 0E94 0000 		call __mulsf3
- 341               	.LVL21:
- 342 00c6 A301      		movw r20,r6
- 343 00c8 9201      		movw r18,r4
- 344 00ca 0E94 0000 		call __addsf3
- 345               	.LVL22:
- 346 00ce 0E94 0000 		call __fixsfsi
- 347               	.LVL23:
- 348 00d2 CB01      		movw r24,r22
- 349 00d4 770F      		lsl r23
- 350 00d6 AA0B      		sbc r26,r26
- 351 00d8 BB0B      		sbc r27,r27
- 352 00da 9C01      		movw r18,r24
- 353 00dc AD01      		movw r20,r26
- 354 00de 2D52      		subi r18,45
- 355 00e0 3D4F      		sbci r19,-3
- 356 00e2 4F4F      		sbci r20,-1
- 357 00e4 5F4F      		sbci r21,-1
- 358 00e6 AEEF      		ldi r26,lo8(-2)
- 359 00e8 B1E0      		ldi r27,lo8(1)
- 360 00ea 0E94 0000 		call __muluhisi3
- 361 00ee A501      		movw r20,r10
- 362 00f0 9401      		movw r18,r8
- 363 00f2 0E94 0000 		call __divmodsi4
- 364 00f6 6901      		movw r12,r18
- 365 00f8 7A01      		movw r14,r20
- 366 00fa 8FEF      		ldi r24,-1
- 367 00fc C81A      		sub r12,r24
- 368 00fe D108      		sbc r13,__zero_reg__
- 369 0100 E108      		sbc r14,__zero_reg__
- 370 0102 F108      		sbc r15,__zero_reg__
- 371               	.LVL24:
- 372               	.LBE10:
- 373               	.LBE11:
-  51:main.c        ****     int y4=(-x3*0.707)+(y3*0.707);
-  52:main.c        **** 
-  53:main.c        ****     int x5=map(x4,-723,723,-255,255);
-  54:main.c        ****     int y5=map(y4,-723,723,-255,255)+40;
- 374               		.loc 1 54 0
- 375 0104 2B81      		ldd r18,Y+3
- 376 0106 3C81      		ldd r19,Y+4
- 377 0108 3195      		neg r19
- 378 010a 2195      		neg r18
- 379 010c 3109      		sbc r19,__zero_reg__
- 380               	.LVL25:
- 381 010e B901      		movw r22,r18
- 382 0110 330F      		lsl r19
- 383 0112 880B      		sbc r24,r24
- 384 0114 990B      		sbc r25,r25
- 385 0116 0E94 0000 		call __floatsisf
- 386               	.LVL26:
- 387 011a 24EF      		ldi r18,lo8(-12)
- 388 011c 3DEF      		ldi r19,lo8(-3)
- 389 011e 44E3      		ldi r20,lo8(52)
- 390 0120 5FE3      		ldi r21,lo8(63)
- 391 0122 0E94 0000 		call __mulsf3
- 392               	.LVL27:
- 393 0126 A301      		movw r20,r6
- 394 0128 9201      		movw r18,r4
- 395 012a 0E94 0000 		call __addsf3
- 396               	.LVL28:
- 397 012e 0E94 0000 		call __fixsfsi
- 398               	.LVL29:
- 399 0132 CB01      		movw r24,r22
- 400 0134 770F      		lsl r23
- 401 0136 AA0B      		sbc r26,r26
- 402 0138 BB0B      		sbc r27,r27
- 403 013a 9C01      		movw r18,r24
- 404 013c AD01      		movw r20,r26
- 405 013e 2D52      		subi r18,45
- 406 0140 3D4F      		sbci r19,-3
- 407 0142 4F4F      		sbci r20,-1
- 408 0144 5F4F      		sbci r21,-1
- 409 0146 AEEF      		ldi r26,lo8(-2)
- 410 0148 B1E0      		ldi r27,lo8(1)
- 411 014a 0E94 0000 		call __muluhisi3
- 412 014e A501      		movw r20,r10
- 413 0150 9401      		movw r18,r8
- 414 0152 0E94 0000 		call __divmodsi4
- 415 0156 BA01      		movw r22,r20
- 416 0158 A901      		movw r20,r18
- 417 015a 4F5F      		subi r20,-1
- 418 015c 5109      		sbc r21,__zero_reg__
- 419 015e 6109      		sbc r22,__zero_reg__
- 420 0160 7109      		sbc r23,__zero_reg__
- 421               	.LVL30:
-  55:main.c        **** 
-  56:main.c        **** 		if(x5<20&&x5>-20)
- 422               		.loc 1 56 0
- 423 0162 C601      		movw r24,r12
- 424 0164 4396      		adiw r24,19
- 425 0166 8797      		sbiw r24,39
- 426 0168 00F4      		brsh .L13
-  57:main.c        **** 		x5=0;
- 427               		.loc 1 57 0
- 428 016a C12C      		mov r12,__zero_reg__
- 429 016c D12C      		mov r13,__zero_reg__
- 430               	.LVL31:
- 431               	.L13:
-  58:main.c        **** 
-  59:main.c        **** 		if(y5<20&&y5>-20)
- 432               		.loc 1 59 0
- 433 016e CA01      		movw r24,r20
- 434 0170 CB96      		adiw r24,59
- 435 0172 8797      		sbiw r24,39
- 436 0174 00F0      		brlo .L19
-  54:main.c        **** 
- 437               		.loc 1 54 0
- 438 0176 9A01      		movw r18,r20
- 439 0178 285D      		subi r18,-40
- 440 017a 3F4F      		sbci r19,-1
- 441 017c 00C0      		rjmp .L14
- 442               	.L19:
-  60:main.c        **** 		y5=0;
- 443               		.loc 1 60 0
- 444 017e 20E0      		ldi r18,0
- 445 0180 30E0      		ldi r19,0
- 446               	.L14:
- 447               	.LVL32:
-  61:main.c        **** 
-  62:main.c        **** 		if(x5>0)
- 448               		.loc 1 62 0
- 449 0182 1C14      		cp __zero_reg__,r12
- 450 0184 1D04      		cpc __zero_reg__,r13
- 451 0186 04F4      		brge .L15
-  63:main.c        **** 		{
-  64:main.c        **** 			OCR0=x5;
- 452               		.loc 1 64 0
- 453 0188 CCBE      		out 0x3c,r12
- 454               	.LVL33:
-  65:main.c        **** 			PORTB|=1<<PB0;
- 455               		.loc 1 65 0
- 456 018a C09A      		sbi 0x18,0
- 457 018c 00C0      		rjmp .L16
- 458               	.LVL34:
- 459               	.L15:
-  66:main.c        **** 		}
-  67:main.c        **** 		else
-  68:main.c        **** 		{
-  69:main.c        **** 			OCR0=-x5;
- 460               		.loc 1 69 0
- 461 018e C194      		neg r12
- 462               	.LVL35:
- 463 0190 CCBE      		out 0x3c,r12
- 464               	.LVL36:
-  70:main.c        **** 			PORTB&=~(1<<PB0);
- 465               		.loc 1 70 0
- 466 0192 C098      		cbi 0x18,0
- 467               	.L16:
-  71:main.c        **** 		}
-  72:main.c        **** 		if(y5>0)
- 468               		.loc 1 72 0
- 469 0194 1216      		cp __zero_reg__,r18
- 470 0196 1306      		cpc __zero_reg__,r19
- 471 0198 04F4      		brge .L17
-  73:main.c        **** 		{
-  74:main.c        **** 		OCR2=y5;
- 472               		.loc 1 74 0
- 473 019a 23BD      		out 0x23,r18
-  75:main.c        **** 		PORTD|=1<<PD2;
- 474               		.loc 1 75 0
- 475 019c 929A      		sbi 0x12,2
- 476 019e 00C0      		rjmp .L11
- 477               	.L17:
-  76:main.c        **** 		}
-  77:main.c        **** 		else
-  78:main.c        **** 		{
-  79:main.c        **** 			OCR2=-y5;
- 478               		.loc 1 79 0
- 479 01a0 2195      		neg r18
- 480               	.LVL37:
- 481 01a2 23BD      		out 0x23,r18
-  80:main.c        **** 			PORTD&=~1<<PD2;
- 482               		.loc 1 80 0
- 483 01a4 82B3      		in r24,0x12
- 484 01a6 887F      		andi r24,lo8(-8)
- 485 01a8 82BB      		out 0x12,r24
- 486 01aa 00C0      		rjmp .L11
- 487               	.LBE7:
- 488               		.cfi_endproc
- 489               	.LFE9:
- 491               		.text
- 492               	.Letext0:
- 493               		.file 2 "/usr/lib/avr/include/stdint.h"
+ 336               	.LBB15:
+ 337               	.LBB12:
+  20:main.c        **** }
+ 338               		.loc 1 20 0
+ 339 00b6 2B81      		ldd r18,Y+3
+ 340 00b8 3C81      		ldd r19,Y+4
+ 341 00ba B901      		movw r22,r18
+ 342 00bc 330F      		lsl r19
+ 343 00be 880B      		sbc r24,r24
+ 344 00c0 990B      		sbc r25,r25
+ 345 00c2 0E94 0000 		call __floatsisf
+ 346               	.LVL21:
+ 347 00c6 24EF      		ldi r18,lo8(-12)
+ 348 00c8 3DEF      		ldi r19,lo8(-3)
+ 349 00ca 44E3      		ldi r20,lo8(52)
+ 350 00cc 5FE3      		ldi r21,lo8(63)
+ 351 00ce 0E94 0000 		call __mulsf3
+ 352               	.LVL22:
+ 353 00d2 A301      		movw r20,r6
+ 354 00d4 9201      		movw r18,r4
+ 355 00d6 0E94 0000 		call __addsf3
+ 356               	.LVL23:
+ 357 00da 0E94 0000 		call __fixsfsi
+ 358               	.LVL24:
+ 359 00de CB01      		movw r24,r22
+ 360 00e0 770F      		lsl r23
+ 361 00e2 AA0B      		sbc r26,r26
+ 362 00e4 BB0B      		sbc r27,r27
+ 363 00e6 9C01      		movw r18,r24
+ 364 00e8 AD01      		movw r20,r26
+ 365 00ea 2D52      		subi r18,45
+ 366 00ec 3D4F      		sbci r19,-3
+ 367 00ee 4F4F      		sbci r20,-1
+ 368 00f0 5F4F      		sbci r21,-1
+ 369 00f2 AEEF      		ldi r26,lo8(-2)
+ 370 00f4 B1E0      		ldi r27,lo8(1)
+ 371 00f6 0E94 0000 		call __muluhisi3
+ 372 00fa A501      		movw r20,r10
+ 373 00fc 9401      		movw r18,r8
+ 374 00fe 0E94 0000 		call __divmodsi4
+ 375 0102 6901      		movw r12,r18
+ 376 0104 7A01      		movw r14,r20
+ 377 0106 8FEF      		ldi r24,-1
+ 378 0108 C81A      		sub r12,r24
+ 379 010a D108      		sbc r13,__zero_reg__
+ 380 010c E108      		sbc r14,__zero_reg__
+ 381 010e F108      		sbc r15,__zero_reg__
+ 382               	.LVL25:
+ 383               	.LBE12:
+ 384               	.LBE15:
+  74:main.c        ****     int y4=(-x3*0.707)+(y3*0.707);
+  75:main.c        **** 
+  76:main.c        ****     int x5=map(x4,-723,723,-255,255);
+  77:main.c        ****     int y5=map(y4,-723,723,-255,255)+50;
+ 385               		.loc 1 77 0
+ 386 0110 2B81      		ldd r18,Y+3
+ 387 0112 3C81      		ldd r19,Y+4
+ 388 0114 3195      		neg r19
+ 389 0116 2195      		neg r18
+ 390 0118 3109      		sbc r19,__zero_reg__
+ 391               	.LVL26:
+ 392 011a B901      		movw r22,r18
+ 393 011c 330F      		lsl r19
+ 394 011e 880B      		sbc r24,r24
+ 395 0120 990B      		sbc r25,r25
+ 396 0122 0E94 0000 		call __floatsisf
+ 397               	.LVL27:
+ 398 0126 24EF      		ldi r18,lo8(-12)
+ 399 0128 3DEF      		ldi r19,lo8(-3)
+ 400 012a 44E3      		ldi r20,lo8(52)
+ 401 012c 5FE3      		ldi r21,lo8(63)
+ 402 012e 0E94 0000 		call __mulsf3
+ 403               	.LVL28:
+ 404 0132 A301      		movw r20,r6
+ 405 0134 9201      		movw r18,r4
+ 406 0136 0E94 0000 		call __addsf3
+ 407               	.LVL29:
+ 408 013a 0E94 0000 		call __fixsfsi
+ 409               	.LVL30:
+ 410 013e CB01      		movw r24,r22
+ 411 0140 770F      		lsl r23
+ 412 0142 AA0B      		sbc r26,r26
+ 413 0144 BB0B      		sbc r27,r27
+ 414 0146 9C01      		movw r18,r24
+ 415 0148 AD01      		movw r20,r26
+ 416 014a 2D52      		subi r18,45
+ 417 014c 3D4F      		sbci r19,-3
+ 418 014e 4F4F      		sbci r20,-1
+ 419 0150 5F4F      		sbci r21,-1
+ 420 0152 AEEF      		ldi r26,lo8(-2)
+ 421 0154 B1E0      		ldi r27,lo8(1)
+ 422 0156 0E94 0000 		call __muluhisi3
+ 423 015a A501      		movw r20,r10
+ 424 015c 9401      		movw r18,r8
+ 425 015e 0E94 0000 		call __divmodsi4
+ 426 0162 BA01      		movw r22,r20
+ 427 0164 A901      		movw r20,r18
+ 428 0166 4F5F      		subi r20,-1
+ 429 0168 5109      		sbc r21,__zero_reg__
+ 430 016a 6109      		sbc r22,__zero_reg__
+ 431 016c 7109      		sbc r23,__zero_reg__
+ 432               	.LVL31:
+  78:main.c        **** 
+  79:main.c        **** 		if(x5<20&&x5>-20)
+ 433               		.loc 1 79 0
+ 434 016e C601      		movw r24,r12
+ 435 0170 4396      		adiw r24,19
+ 436 0172 8797      		sbiw r24,39
+ 437 0174 00F4      		brsh .L16
+  80:main.c        **** 		x5=0;
+ 438               		.loc 1 80 0
+ 439 0176 C12C      		mov r12,__zero_reg__
+ 440 0178 D12C      		mov r13,__zero_reg__
+ 441               	.LVL32:
+ 442 017a 00C0      		rjmp .L16
+ 443               	.LVL33:
+ 444               	.L23:
+  63:main.c        **** 			OCR2=0;
+ 445               		.loc 1 63 0
+ 446 017c 1CBE      		out 0x3c,__zero_reg__
+  64:main.c        **** 			PORTD&=~1<<PD2;
+ 447               		.loc 1 64 0
+ 448 017e 13BC      		out 0x23,__zero_reg__
+  65:main.c        **** 			PORTB&=~(1<<PB0);
+ 449               		.loc 1 65 0
+ 450 0180 82B3      		in r24,0x12
+ 451 0182 887F      		andi r24,lo8(-8)
+ 452 0184 82BB      		out 0x12,r24
+  66:main.c        **** 			continue;
+ 453               		.loc 1 66 0
+ 454 0186 C098      		cbi 0x18,0
+  67:main.c        **** 		}
+ 455               		.loc 1 67 0
+ 456 0188 00C0      		rjmp .L11
+ 457               	.LVL34:
+ 458               	.L16:
+  81:main.c        **** 
+  82:main.c        **** 		if(y5<20&&y5>-20)
+ 459               		.loc 1 82 0
+ 460 018a CA01      		movw r24,r20
+ 461 018c 8B5B      		subi r24,-69
+ 462 018e 9F4F      		sbci r25,-1
+ 463 0190 8797      		sbiw r24,39
+ 464 0192 00F0      		brlo .L22
+  77:main.c        **** 
+ 465               		.loc 1 77 0
+ 466 0194 9A01      		movw r18,r20
+ 467 0196 2E5C      		subi r18,-50
+ 468 0198 3F4F      		sbci r19,-1
+ 469 019a 00C0      		rjmp .L17
+ 470               	.L22:
+  83:main.c        **** 		y5=0;
+ 471               		.loc 1 83 0
+ 472 019c 20E0      		ldi r18,0
+ 473 019e 30E0      		ldi r19,0
+ 474               	.L17:
+ 475               	.LVL35:
+  84:main.c        **** 
+  85:main.c        **** 		if(x5>0)
+ 476               		.loc 1 85 0
+ 477 01a0 1C14      		cp __zero_reg__,r12
+ 478 01a2 1D04      		cpc __zero_reg__,r13
+ 479 01a4 04F4      		brge .L18
+  86:main.c        **** 		{
+  87:main.c        **** 			OCR0=x5;
+ 480               		.loc 1 87 0
+ 481 01a6 CCBE      		out 0x3c,r12
+ 482               	.LVL36:
+  88:main.c        **** 			PORTB|=1<<PB0;
+ 483               		.loc 1 88 0
+ 484 01a8 C09A      		sbi 0x18,0
+ 485 01aa 00C0      		rjmp .L19
+ 486               	.LVL37:
+ 487               	.L18:
+  89:main.c        **** 		}
+  90:main.c        **** 		else
+  91:main.c        **** 		{
+  92:main.c        **** 			OCR0=-x5;
+ 488               		.loc 1 92 0
+ 489 01ac C194      		neg r12
+ 490               	.LVL38:
+ 491 01ae CCBE      		out 0x3c,r12
+ 492               	.LVL39:
+  93:main.c        **** 			PORTB&=~(1<<PB0);
+ 493               		.loc 1 93 0
+ 494 01b0 C098      		cbi 0x18,0
+ 495               	.L19:
+  94:main.c        **** 		}
+  95:main.c        **** 		if(y5>0)
+ 496               		.loc 1 95 0
+ 497 01b2 1216      		cp __zero_reg__,r18
+ 498 01b4 1306      		cpc __zero_reg__,r19
+ 499 01b6 04F4      		brge .L20
+  96:main.c        **** 		{
+  97:main.c        **** 		OCR2=y5;
+ 500               		.loc 1 97 0
+ 501 01b8 23BD      		out 0x23,r18
+  98:main.c        **** 		PORTD|=1<<PD2;
+ 502               		.loc 1 98 0
+ 503 01ba 929A      		sbi 0x12,2
+ 504 01bc 00C0      		rjmp .L11
+ 505               	.L20:
+  99:main.c        **** 		}
+ 100:main.c        **** 		else
+ 101:main.c        **** 		{
+ 102:main.c        **** 			OCR2=-y5;
+ 506               		.loc 1 102 0
+ 507 01be 2195      		neg r18
+ 508               	.LVL40:
+ 509 01c0 23BD      		out 0x23,r18
+ 103:main.c        **** 			PORTD&=~1<<PD2;
+ 510               		.loc 1 103 0
+ 511 01c2 82B3      		in r24,0x12
+ 512 01c4 887F      		andi r24,lo8(-8)
+ 513 01c6 82BB      		out 0x12,r24
+ 514 01c8 00C0      		rjmp .L11
+ 515               	.LBE9:
+ 516               		.cfi_endproc
+ 517               	.LFE9:
+ 519               		.text
+ 520               	.Letext0:
+ 521               		.file 2 "/usr/lib/avr/include/stdint.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/ccGTYB5R.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccGTYB5R.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccGTYB5R.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccGTYB5R.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccGTYB5R.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccGTYB5R.s:12     .text:0000000000000000 Receive
-     /tmp/ccGTYB5R.s:35     .text:000000000000000a Transmit
-     /tmp/ccGTYB5R.s:56     .text:0000000000000012 map
-     /tmp/ccGTYB5R.s:190    .text.startup:0000000000000000 main
+     /tmp/ccN9dRf4.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccN9dRf4.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccN9dRf4.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccN9dRf4.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccN9dRf4.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccN9dRf4.s:12     .text:0000000000000000 Receive
+     /tmp/ccN9dRf4.s:35     .text:000000000000000a Transmit
+     /tmp/ccN9dRf4.s:56     .text:0000000000000012 map
+     /tmp/ccN9dRf4.s:190    .text.startup:0000000000000000 main
 
 UNDEFINED SYMBOLS
 __mulsi3

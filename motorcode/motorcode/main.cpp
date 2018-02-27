@@ -17,31 +17,28 @@ void Transmit(unsigned char data)
 	UDR = data;
 
 }
-long map(long x, long in_min, long in_max, long out_min, long out_max)
-{
-	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
-double map(double x, double in_min, double in_max, double out_min, double out_max)
+
+long double map(long double x, long double in_min, long double in_max, long double out_min, long double out_max)
 {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
-void ellipticalSquareToDisc(double x, double y, double& u, double& v)
+void ellipticalSquareToDisc(long double x, long double y, long double& u, long double& v)
 {
     u = x * sqrt(1.0 - y*y/2.0);
     v = y * sqrt(1.0 - x*x/2.0);
 }
 
-void ellipticalDiscToSquare(double u, double v, double& x, double& y)
+void ellipticalDiscToSquare(long double u, long double v, long double& x, long double& y)
 {
-    double u2 = u * u;
-    double v2 = v * v;
-    double twosqrt2 = 2.0 * sqrt(2.0);
-    double subtermx = 2.0 + u2 - v2;
-    double subtermy = 2.0 - u2 + v2;
-    double termx1 = subtermx + u * twosqrt2;
-    double termx2 = subtermx - u * twosqrt2;
-    double termy1 = subtermy + v * twosqrt2;
-    double termy2 = subtermy - v * twosqrt2;
+    long double u2 = u * u;
+    long double v2 = v * v;
+    long double twosqrt2 = 2.0 * sqrt(2.0);
+    long double subtermx = 2.0 + u2 - v2;
+    long double subtermy = 2.0 - u2 + v2;
+    long double termx1 = subtermx + u * twosqrt2;
+    long double termx2 = subtermx - u * twosqrt2;
+    long double termy1 = subtermy + v * twosqrt2;
+    long double termy2 = subtermy - v * twosqrt2;
     x = 0.5 * sqrt(termx1) - 0.5 * sqrt(termx2);
     y = 0.5 * sqrt(termy1) - 0.5 * sqrt(termy2);
 
@@ -64,23 +61,23 @@ PORTD &= ~(1<< PIND2);
 			if(Receive()!=0x11)
 			continue;
 			int c1= Receive();
-	    uint16_t x2 = (Receive())<<8 | c1;
+	    int x2 = (Receive())<<8 | c1;
 	    int c2=Receive();
-	    uint16_t y2=(Receive())<<8 | c2;
-		double x1 = x2 - 512;
-		double y1 = 512 - y2;
+	    int y2=(Receive())<<8 | c2;
+		long double x1 = x2 - 512;
+		long double y1 = 512 - y2;
 		x1=map(x1,-512,512,-1,1);
 		y1=map(y1,-512,512,-1,1);
-		double xans,yans;
+		long double xans,yans;
 		ellipticalSquareToDisc(x1, y1, xans, yans);
 
 
 
-		double x = (xans * 0.707) + (yans * 0.707);
-		double y = (-xans * 0.707) + (yans * 0.707);
+		long double x = (xans * 0.707) + (yans * 0.707);
+		long double y = (-xans * 0.707) + (yans * 0.707);
 		ellipticalDiscToSquare(x,y,xans,yans);
-		int x3=(int)map(xans,-0.991273,0.991273,-255,255);
-		int y3=(int)map(yans,-0.991273,0.991273,-255,255);
+		long double x3=map(xans,-0.991273,0.991273,-255,255);
+		long double y3=map(yans,-0.991273,0.991273,-255,255)+100;
 		/*int x2=x-512;
 		int y2=512-y;
 		if(y2/x2>=12.8&&y2/x2<=-12.8)
@@ -103,22 +100,22 @@ PORTD &= ~(1<< PIND2);
 
 		if(x3>0)
 		{
-			OCR0=x3;
+			OCR0=(int)x3;
 			PORTB|=1<<PB0;
 		}
 		else
 		{
-			OCR0=-x3;
+			OCR0=-(int)x3;
 			PORTB&=~(1<<PB0);
 		}
 		if(y3>0)
 		{
-		OCR2=y3;
+		OCR2=(int)y3;
 		PORTD|=1<<PD2;
 		}
 		else
 		{
-			OCR2=-y3;
+			OCR2=-(int)y3;
 			PORTD&=~1<<PD2;
 			}
 		}
