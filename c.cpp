@@ -29,24 +29,10 @@ void ellipticalDiscToSquare(double u, double v, double& x, double& y)
 }
 int main()
 {
-  while(true)
-  {
-    double x2,y2;
-    cin>>x2>>y2;
-    double x1 = x2 - 512;
-    double y1 = 512 - y2;
-    x1=map(x1,-512,512,-1,1);
-    y1=map(y1,-512,512,-1,1);
-    double xans,yans;
-    ellipticalSquareToDisc(x1, y1, xans, yans);
-
-
-
-    double x = (xans * 0.707) + (yans * 0.707);
-    double y = (-xans * 0.707) + (yans * 0.707);
-    ellipticalDiscToSquare(x,y,xans,yans);
-    int x3=map(xans,-0.991273,0.991273,-255,255);
-    int y3=map(yans,-0.991273,0.991273,-255,255);
-    cout<<x3<<"\t"<<y3<<"\n";
+  int gear[1024];
+  for(int i=0;i<20;i++)
+		for(int j=i*51.2;j<i*51.2+51.2;j++)
+		gear[j]=i;
+    for(int i=0;i<1024;i++)
+    cout<<gear[i];
   }
-}
