@@ -33,12 +33,15 @@ PORTD &= ~(1<< PIND2);
   UBRRL = (unsigned char) ubbr_value;
   UCSRB = (1 << RXEN);
   UCSRC = (1 << URSEL) | (3 << UCSZ0);
-
+	int gear[1024];
+	for(int i=0;i<10;i++)
+		for(int j=i*102.4;j<i*102.4+102.4;j++)
+		gear[j]=i+1;
 
 	while (1)
 	{
 
-		uint16_t x,y;
+		int x,y,g;
 		if(Receive()==0x11)
 		{
 				int x1= Receive();
@@ -66,15 +69,32 @@ PORTD &= ~(1<< PIND2);
 			PORTB&=~(1<<PB0);
 			continue;
 		}
+		if(Receive()==0x31)
+		{
+				int r1=Receive();
+    		g=(Receive())<<8 | y1;
+		}
+		else
+		{
+			OCR0=0;
+			OCR2=0;
+			PORTD&=~1<<PD2;
+			PORTB&=~(1<<PB0);
+			continue;
+		}
+
 		int x2=x-512;
     int y2=512-y;
+		if(y2/x2>=12.8&&y2/x2<=-12.8)
+		x2=0;
+		if(y2/x2<=0.0390625&&y2/x2>=-0.0390625)
+		y2=0;
     int x3 = x2;
     int y3 = y2;
     int x4= (x3*0.707)+(y3*0.707);
     int y4=(-x3*0.707)+(y3*0.707);
-
-    int x5=map(x4,-723,723,-255,255);
-    int y5=map(y4,-723,723,-255,255)+40;
+    int x5=map(x4,-723,723,-255/gear[g],255/gear[g]);
+    int y5=map(y4,-723,723,-255/gear[g],255/gear[g])+40;
 
 		if(x5<20&&x5>-20)
 		x5=0;
