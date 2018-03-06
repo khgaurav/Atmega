@@ -71,7 +71,7 @@ PORTD &= ~(1<< PIND2);
 		}
 		if(Receive()==0x31)
 		{
-				int r1=Receive();
+				int y1=Receive();
     		g=(Receive())<<8 | y1;
 		}
 		else
