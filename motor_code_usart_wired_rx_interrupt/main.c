@@ -27,7 +27,7 @@ DDRB |= 1<< PB3 | 1<<PINB0 | 1<<PINB1;
 TCCR2 |= 1<<WGM20 | 1<< WGM21 | 1<< COM21 |1 <<CS20;
 DDRD |= 1<< PB7 | 1<< PB2;
 PORTB &= ~(1<< PINB0);
-PORTD &= ~(1<< PIND2);
+PORTD &= ~(1<< PIND6);
  UCSRA = (1 << U2X);
   UBRRH = (unsigned char) (ubbr_value >> 8);
   UBRRL = (unsigned char) ubbr_value;
@@ -49,7 +49,7 @@ PORTD &= ~(1<< PIND2);
 		{
 			OCR0=0;
 			OCR2=0;
-			PORTD&=~1<<PD2;
+			PORTD&=~1<<PD6;
 			PORTB&=~(1<<PB0);
 			continue;
 		}
@@ -62,7 +62,7 @@ PORTD &= ~(1<< PIND2);
 		{
 			OCR0=0;
 			OCR2=0;
-			PORTD&=~1<<PD2;
+			PORTD&=~1<<PD6;
 			PORTB&=~(1<<PB0);
 			continue;
 		}
@@ -74,7 +74,7 @@ PORTD &= ~(1<< PIND2);
     int y4=(-x3*0.707)+(y3*0.707);
 
     int x5=map(x4,-723,723,-255,255);
-    int y5=map(y4,-723,723,-255,255);
+    int y5=map(y4,-723,723,-255,255)+70;
 
 		if(x5<20&&x5>-20)
 		x5=0;
@@ -95,12 +95,12 @@ PORTD &= ~(1<< PIND2);
 		if(y5>0)
 		{
 		OCR2=y5;
-		PORTD|=1<<PD2;
+		PORTD|=1<<PD6;
 		}
 		else
 		{
 			OCR2=-y5;
-			PORTD&=~1<<PD2;
+			PORTD&=~1<<PD6;
 		}
   }
 }

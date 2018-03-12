@@ -13,19 +13,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   4 .debug_aranges 00000028  00000000  00000000  000003f4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   0000076b  00000000  00000000  0000041c  2**0
+  5 .debug_info   00000776  00000000  00000000  0000041c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 00000645  00000000  00000000  00000b87  2**0
+  6 .debug_abbrev 00000647  00000000  00000000  00000b92  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000193  00000000  00000000  000011cc  2**0
+  7 .debug_line   0000018d  00000000  00000000  000011d9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000134  00000000  00000000  00001360  2**2
+  8 .debug_frame  00000134  00000000  00000000  00001368  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    00000353  00000000  00000000  00001494  2**0
+  9 .debug_str    000003b0  00000000  00000000  0000149c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000032e  00000000  00000000  000017e7  2**0
+ 10 .debug_loc    0000032e  00000000  00000000  0000184c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000018  00000000  00000000  00001b15  2**0
+ 11 .debug_ranges 00000018  00000000  00000000  00001b7a  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -79,7 +79,7 @@ Disassembly of section .text:
 0000007e <__bad_interrupt>:
   7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
-00000082 <Receive>:
+00000082 <_Z7Receivev>:
 #define BAUD 9600
 #define ubbr_value FOSC/16/BAUD-1
 int ch=1;
@@ -87,24 +87,24 @@ unsigned char Receive(void)
 {
 	while (! (UCSRA & (1 << RXC)) );
   82:	5f 9b       	sbis	0x0b, 7	; 11
-  84:	fe cf       	rjmp	.-4      	; 0x82 <Receive>
+  84:	fe cf       	rjmp	.-4      	; 0x82 <_Z7Receivev>
 	return UDR;
   86:	8c b1       	in	r24, 0x0c	; 12
 }
   88:	08 95       	ret
 
-0000008a <Transmit>:
+0000008a <_Z8Transmith>:
 
 void Transmit(unsigned char data)
 {
 	while (! (UCSRA & (1 << UDRE)) );
   8a:	5d 9b       	sbis	0x0b, 5	; 11
-  8c:	fe cf       	rjmp	.-4      	; 0x8a <Transmit>
+  8c:	fe cf       	rjmp	.-4      	; 0x8a <_Z8Transmith>
 	UDR = data;
   8e:	8c b9       	out	0x0c, r24	; 12
   90:	08 95       	ret
 
-00000092 <map>:
+00000092 <_Z3maplllll>:
 
 }
 long map(long x, long in_min, long in_max, long out_min, long out_max)
@@ -221,13 +221,13 @@ ISR(ADC_vect)
 		{
 			Transmit(0x11);
  15a:	81 e1       	ldi	r24, 0x11	; 17
- 15c:	0e 94 45 00 	call	0x8a	; 0x8a <Transmit>
+ 15c:	0e 94 45 00 	call	0x8a	; 0x8a <_Z8Transmith>
 			Transmit(t1);
  160:	8e 2d       	mov	r24, r14
- 162:	0e 94 45 00 	call	0x8a	; 0x8a <Transmit>
+ 162:	0e 94 45 00 	call	0x8a	; 0x8a <_Z8Transmith>
 			Transmit(t);
  166:	8f 2d       	mov	r24, r15
- 168:	0e 94 45 00 	call	0x8a	; 0x8a <Transmit>
+ 168:	0e 94 45 00 	call	0x8a	; 0x8a <_Z8Transmith>
 			int x=t<<8|t1;
  16c:	bc 2f       	mov	r27, r28
  16e:	aa 27       	eor	r26, r26
@@ -252,7 +252,7 @@ ISR(ADC_vect)
 		{
 			Transmit(0x21);
  194:	81 e2       	ldi	r24, 0x21	; 33
- 196:	0e 94 45 00 	call	0x8a	; 0x8a <Transmit>
+ 196:	0e 94 45 00 	call	0x8a	; 0x8a <_Z8Transmith>
 			ch=1;
  19a:	81 e0       	ldi	r24, 0x01	; 1
  19c:	90 e0       	ldi	r25, 0x00	; 0
@@ -260,10 +260,10 @@ ISR(ADC_vect)
  1a2:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__data_start>
 			Transmit(t1);
  1a6:	8e 2d       	mov	r24, r14
- 1a8:	0e 94 45 00 	call	0x8a	; 0x8a <Transmit>
+ 1a8:	0e 94 45 00 	call	0x8a	; 0x8a <_Z8Transmith>
 			Transmit(t);
  1ac:	8f 2d       	mov	r24, r15
- 1ae:	0e 94 45 00 	call	0x8a	; 0x8a <Transmit>
+ 1ae:	0e 94 45 00 	call	0x8a	; 0x8a <_Z8Transmith>
 			int y=t<<8|t1;
  1b2:	dc 2f       	mov	r29, r28
  1b4:	cc 27       	eor	r28, r28

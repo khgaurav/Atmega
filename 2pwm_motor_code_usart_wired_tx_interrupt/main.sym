@@ -35,9 +35,9 @@
 0000007e W __vector_7
 0000007e W __vector_8
 0000007e W __vector_9
-00000082 T Receive
-0000008a T Transmit
-00000092 T map
+00000082 T _Z7Receivev
+0000008a T _Z8Transmith
+00000092 T _Z3maplllll
 00000114 T __vector_14
 0000020a T main
 00000246 T __mulsi3

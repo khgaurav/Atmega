@@ -218,9 +218,9 @@ END GROUP
                 0x000000000000007e                __vector_18
                 0x000000000000007e                __vector_20
  .text          0x0000000000000082      0x188 main.o
-                0x0000000000000082                Receive
-                0x000000000000008a                Transmit
-                0x0000000000000092                map
+                0x0000000000000082                _Z7Receivev
+                0x000000000000008a                _Z8Transmith
+                0x0000000000000092                _Z3maplllll
                 0x0000000000000114                __vector_14
  .text          0x000000000000020a        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_mulsi3.o)
  .text          0x000000000000020a        0x0 /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_divmodsi4.o)
@@ -507,30 +507,30 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000      0x76b
+.debug_info     0x0000000000000000      0x776
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x52e /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega16.o
- .debug_info    0x000000000000052e      0x23d main.o
+ .debug_info    0x000000000000052e      0x248 main.o
 
-.debug_abbrev   0x0000000000000000      0x645
+.debug_abbrev   0x0000000000000000      0x647
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x4e7 /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega16.o
- .debug_abbrev  0x00000000000004e7      0x15e main.o
+ .debug_abbrev  0x00000000000004e7      0x160 main.o
 
-.debug_line     0x0000000000000000      0x193
+.debug_line     0x0000000000000000      0x18d
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000       0x1a /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega16.o
- .debug_line    0x000000000000001a      0x179 main.o
+ .debug_line    0x000000000000001a      0x173 main.o
 
 .debug_frame    0x0000000000000000      0x134
  *(.debug_frame)
  .debug_frame   0x0000000000000000      0x134 main.o
 
-.debug_str      0x0000000000000000      0x353
+.debug_str      0x0000000000000000      0x3b0
  *(.debug_str)
  .debug_str     0x0000000000000000      0x1af /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega16.o
- .debug_str     0x00000000000001af      0x1a4 main.o
-                                        0x1d8 (size before relaxing)
+ .debug_str     0x00000000000001af      0x201 main.o
+                                        0x235 (size before relaxing)
 
 .debug_loc      0x0000000000000000      0x32e
  *(.debug_loc)
@@ -566,8 +566,9 @@ LOAD linker stubs
 Cross Reference Table
 
 Symbol                                            File
-Receive                                           main.o
-Transmit                                          main.o
+_Z3maplllll                                       main.o
+_Z7Receivev                                       main.o
+_Z8Transmith                                      main.o
 __FUSE_REGION_LENGTH__                            /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega16.o
 __bad_interrupt                                   /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega16.o
 __data_end                                        /usr/lib/gcc/avr/5.4.0/avr5/libgcc.a(_copy_data.o)
@@ -623,4 +624,3 @@ exit                                              /usr/lib/gcc/avr/5.4.0/avr5/li
                                                   /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega16.o
 main                                              main.o
                                                   /usr/lib/gcc/avr/5.4.0/../../../avr/lib/avr5/crtatmega16.o
-map                                               main.o

@@ -34,10 +34,8 @@ PORTD &= ~(1<< PIND2);
   UCSRB = (1 << RXEN);
   UCSRC = (1 << URSEL) | (3 << UCSZ0);
 	int gear[1024];
-	for(int i=0;i<10;i++)
-		for(int j=i*102.4;j<i*102.4+102.4;j++)
-		gear[j]=i;
-		static int x,y,g;
+
+		int x,y,g;
 	while (1)
 	{
 
@@ -74,7 +72,7 @@ PORTD &= ~(1<< PIND2);
 				int y1=Receive();
     		g=(Receive())<<8 | y1;
 		}
-
+		int gear=map(g,0,1023,0,9);
 
 		int x2=x-512;
     int y2=512-y;
@@ -86,8 +84,8 @@ PORTD &= ~(1<< PIND2);
     int y3 = y2;
     int x4= (x3*0.707)+(y3*0.707);
     int y4=(-x3*0.707)+(y3*0.707);
-    int x5=map(x4,-723,723,-255,255)*gear[g]/9;
-    int y5=map(y4,-723,723,-255,255)*gear[g]/9;
+    int x5=map(x4,-723,723,-255,255)*gear/9;
+    int y5=map(y4,-723,723,-255,255)*gear/9;
 
 		/*if(x5<20&&x5>-20)
 		x5=0;

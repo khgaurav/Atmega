@@ -50,7 +50,7 @@ int main (void)
 	TCCR2 |= 1<<WGM20 | 1<< WGM21 | 1<< COM21 |1 <<CS20;
 	DDRD |= 1<< PB7 | 1<< PB2;
 	PORTB &= ~(1<< PINB0);
-	PORTD &= ~(1<< PIND2);
+	PORTD &= ~(1<< PIND6);
 	UCSRA = (1 << U2X);
 	UBRRH = (unsigned char) (ubbr_value >> 8);
 	UBRRL = (unsigned char) ubbr_value;
@@ -70,7 +70,7 @@ int main (void)
 		{
 			OCR0=0;
 			OCR2=0;
-			PORTD&=~1<<PD2;
+			PORTD&=~1<<PD6;
 			PORTB&=~(1<<PB0);
 			continue;
 		}
@@ -83,7 +83,7 @@ int main (void)
 		{
 			OCR0=0;
 			OCR2=0;
-			PORTD&=~1<<PD2;
+			PORTD&=~1<<PD6;
 			PORTB&=~(1<<PB0);
 			continue;
 		}
@@ -101,7 +101,7 @@ int main (void)
 		long double y = (-xans * 0.707) + (yans * 0.707);
 		ellipticalDiscToSquare(x,y,xans,yans);
 		long double x3=map(xans,-0.991273,0.991273,-255,255);
-		long double y3=map(yans,-0.991273,0.991273,-255,255)+70;
+		long double y3=map(yans,-0.991273,0.991273,-255,255);
 		if(x3>255)
 		x3=255;
 		if(y3>255)
@@ -124,12 +124,12 @@ int main (void)
 		if(y3>0)
 		{
 			OCR2=(int)y3;
-			PORTD|=1<<PD2;
+			PORTD|=1<<PD6;
 		}
 		else
 		{
 			OCR2=-(int)y3;
-			PORTD&=~1<<PD2;
+			PORTD&=~1<<PD6;
 		}
 	}
 }
