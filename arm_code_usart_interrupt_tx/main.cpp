@@ -25,6 +25,8 @@ int main(void)
 		UCSRC = (1 << URSEL)| (3 << UCSZ0);
 
 		DDRA &= ~(1 << PINA1);
-		PORTA |= (1<<PINA0)|(1<<PINA1)|(1<<PINA2)|(1<<PINA3)|;
+		PORTA |= (1<<PINA0)|(1<<PINA1)|(1<<PINA2)|(1<<PINA3)|(1<<PINA4);
 		while (1);
 }
+ISR(ADC_vect)
+{
