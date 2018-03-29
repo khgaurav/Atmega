@@ -1,6 +1,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
-#define FOSC 1000000// Clock Speed
+#define FOSC 8000000// Clock Speed
 #define BAUD 9600
 #define ubbr_value FOSC/16/BAUD-1
 int Receive()
@@ -29,8 +29,8 @@ DDRD |= 1<< PB7 | 1<< PB2;
 PORTB &= ~(1<< PINB0);
 PORTD &= ~(1<< PIND6);
  UCSRA = (1 << U2X);
-  UBRRH = (unsigned char) (ubbr_value >> 8);
-  UBRRL = (unsigned char) ubbr_value;
+  UBRRH = 0x00;
+  UBRRL = 0x01;
   UCSRB = (1 << RXEN);
   UCSRC = (1 << URSEL) | (3 << UCSZ0);
 

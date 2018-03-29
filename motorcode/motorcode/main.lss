@@ -533,21 +533,21 @@ int main (void)
  3e6:	85 b5       	in	r24, 0x25	; 37
  3e8:	89 66       	ori	r24, 0x69	; 105
  3ea:	85 bd       	out	0x25, r24	; 37
-	DDRD |= 1<< PB7 | 1<< PD3;
+	DDRD |= 1<< PB7 | 1<< PD4;
  3ec:	81 b3       	in	r24, 0x11	; 17
- 3ee:	88 68       	ori	r24, 0x88	; 136
+ 3ee:	80 69       	ori	r24, 0x90	; 144
  3f0:	81 bb       	out	0x11, r24	; 17
 	PORTB &= ~(1<< PINB0);
  3f2:	c0 98       	cbi	0x18, 0	; 24
-	PORTD &= ~(1<< PIND3);
- 3f4:	93 98       	cbi	0x12, 3	; 18
+	PORTD &= ~(1<< PIND4);
+ 3f4:	94 98       	cbi	0x12, 4	; 18
 	UCSRA = (1 << U2X);
  3f6:	82 e0       	ldi	r24, 0x02	; 2
  3f8:	8b b9       	out	0x0b, r24	; 11
-	UBRRH = (unsigned char) (ubbr_value >> 8);
+		UBRRH = 0x00;
  3fa:	10 bc       	out	0x20, r1	; 32
-	UBRRL = (unsigned char) ubbr_value;
- 3fc:	8f ef       	ldi	r24, 0xFF	; 255
+	UBRRL = 0x01;
+ 3fc:	81 e0       	ldi	r24, 0x01	; 1
  3fe:	89 b9       	out	0x09, r24	; 9
 	UCSRB = (1 << RXEN);
  400:	80 e1       	ldi	r24, 0x10	; 16
@@ -572,7 +572,7 @@ int main (void)
  418:	0e 94 36 00 	call	0x6c	; 0x6c <_Z7Receivev>
  41c:	d8 2e       	mov	r13, r24
 			OCR2=0;
-			PORTD&=~1<<PD3;
+			PORTD&=~1<<PD4;
 			PORTB&=~(1<<PB0);
 			continue;
 		}
@@ -588,7 +588,7 @@ int main (void)
  42c:	0e 94 36 00 	call	0x6c	; 0x6c <_Z7Receivev>
  430:	58 2e       	mov	r5, r24
 			OCR2=0;
-			PORTD&=~1<<PD3;
+			PORTD&=~1<<PD4;
 			PORTB&=~(1<<PB0);
 			continue;
 		}
@@ -654,9 +654,9 @@ int main (void)
  4a2:	1c be       	out	0x3c, r1	; 60
 			OCR2=0;
  4a4:	13 bc       	out	0x23, r1	; 35
-			PORTD&=~1<<PD3;
+			PORTD&=~1<<PD4;
  4a6:	82 b3       	in	r24, 0x12	; 18
- 4a8:	80 7f       	andi	r24, 0xF0	; 240
+ 4a8:	80 7e       	andi	r24, 0xE0	; 224
  4aa:	82 bb       	out	0x12, r24	; 18
 			PORTB&=~(1<<PB0);
  4ac:	c0 98       	cbi	0x18, 0	; 24
@@ -1072,8 +1072,8 @@ long double map(long double x, long double in_min, long double in_max, long doub
  77c:	b6 01       	movw	r22, r12
  77e:	0e 94 dc 04 	call	0x9b8	; 0x9b8 <__fixsfsi>
  782:	63 bd       	out	0x23, r22	; 35
-			PORTD|=1<<PD3;
- 784:	93 9a       	sbi	0x12, 3	; 18
+			PORTD|=1<<PD4;
+ 784:	94 9a       	sbi	0x12, 4	; 18
  786:	40 ce       	rjmp	.-896    	; 0x408 <__LOCK_REGION_LENGTH__+0x8>
 		}
 		else
@@ -1084,9 +1084,9 @@ long double map(long double x, long double in_min, long double in_max, long doub
  78c:	0e 94 dc 04 	call	0x9b8	; 0x9b8 <__fixsfsi>
  790:	61 95       	neg	r22
  792:	63 bd       	out	0x23, r22	; 35
-			PORTD&=~1<<PD3;
+			PORTD&=~1<<PD4;
  794:	82 b3       	in	r24, 0x12	; 18
- 796:	80 7f       	andi	r24, 0xF0	; 240
+ 796:	80 7e       	andi	r24, 0xE0	; 224
  798:	82 bb       	out	0x12, r24	; 18
  79a:	36 ce       	rjmp	.-916    	; 0x408 <__LOCK_REGION_LENGTH__+0x8>
 		long double y3=map(yans,-0.991273,0.991273,-255,255)+70;

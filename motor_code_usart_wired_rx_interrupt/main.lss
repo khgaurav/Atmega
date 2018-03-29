@@ -67,7 +67,7 @@ Disassembly of section .text:
   68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 0000006c <Receive>:
-#define FOSC 1000000// Clock Speed
+#define FOSC 8000000// Clock Speed
 #define BAUD 9600
 #define ubbr_value FOSC/16/BAUD-1
 int Receive()
@@ -196,10 +196,10 @@ PORTD &= ~(1<< PIND6);
  UCSRA = (1 << U2X);
  128:	82 e0       	ldi	r24, 0x02	; 2
  12a:	8b b9       	out	0x0b, r24	; 11
-  UBRRH = (unsigned char) (ubbr_value >> 8);
+  UBRRH = 0x00;
  12c:	10 bc       	out	0x20, r1	; 32
-  UBRRL = (unsigned char) ubbr_value;
- 12e:	8f ef       	ldi	r24, 0xFF	; 255
+  UBRRL = 0x01;
+ 12e:	81 e0       	ldi	r24, 0x01	; 1
  130:	89 b9       	out	0x09, r24	; 9
   UCSRB = (1 << RXEN);
  132:	80 e1       	ldi	r24, 0x10	; 16

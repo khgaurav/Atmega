@@ -48,12 +48,12 @@ int main (void)
 	TCCR0 |= 1<<WGM00 | 1<< WGM01  | 1<< COM01 |1 <<CS00;
 	DDRB |= 1<< PB3 | 1<<PINB0 | 1<<PINB1;
 	TCCR2 |= 1<<WGM20 | 1<< WGM21 | 1<< COM21 |1 <<CS20;
-	DDRD |= 1<< PB7 | 1<< PD3;
+	DDRD |= 1<< PB7 | 1<< PD4;
 	PORTB &= ~(1<< PINB0);
-	PORTD &= ~(1<< PIND3);
+	PORTD &= ~(1<< PIND4);
 	UCSRA = (1 << U2X);
-	UBRRH = (unsigned char) (ubbr_value >> 8);
-	UBRRL = (unsigned char) ubbr_value;
+		UBRRH = 0x00;
+	UBRRL = 0x01;
 	UCSRB = (1 << RXEN);
 	UCSRC = (1 << URSEL) | (3 << UCSZ0);
 	while (1)
@@ -70,7 +70,7 @@ int main (void)
 		{
 			OCR0=0;
 			OCR2=0;
-			PORTD&=~1<<PD3;
+			PORTD&=~1<<PD4;
 			PORTB&=~(1<<PB0);
 			continue;
 		}
@@ -83,7 +83,7 @@ int main (void)
 		{
 			OCR0=0;
 			OCR2=0;
-			PORTD&=~1<<PD3;
+			PORTD&=~1<<PD4;
 			PORTB&=~(1<<PB0);
 			continue;
 		}
@@ -124,12 +124,12 @@ int main (void)
 		if(y3>0)
 		{
 			OCR2=(int)y3;
-			PORTD|=1<<PD3;
+			PORTD|=1<<PD4;
 		}
 		else
 		{
 			OCR2=-(int)y3;
-			PORTD&=~1<<PD3;
+			PORTD&=~1<<PD4;
 		}
 	}
 }

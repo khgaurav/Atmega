@@ -24,9 +24,28 @@ int main(void)
 		UCSRB = (1 << TXEN);
 		UCSRC = (1 << URSEL)| (3 << UCSZ0);
 
-		DDRA &= ~(1 << PINA1);
-		PORTA |= (1<<PINA0)|(1<<PINA1)|(1<<PINA2)|(1<<PINA3)|(1<<PINA4);
-		while (1);
-}
-ISR(ADC_vect)
-{
+
+		DDRC = 0x00;
+		PORTC = 0xFF;
+		while (1)
+		{
+			int i;
+			for(i=0;i<5;i++)
+			{
+			if(bit_is_clear(PINC,i))
+				Transmit(41+i);
+				break;
+			}
+			if(i==5)
+			{
+				Transmit(46);
+				continue;
+			}
+			if(bit_is_clear(PINC,5))
+				Transmit(0x50);
+			else if(bit_is_clear(PINC,6))
+				Transmit(0x51);
+			else Transmit(0x52);
+
+			}
+		}

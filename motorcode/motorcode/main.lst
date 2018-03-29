@@ -779,27 +779,27 @@
  740 0020 85B5      		in r24,0x25
  741 0022 8966      		ori r24,lo8(105)
  742 0024 85BD      		out 0x25,r24
-  51:main.cpp      **** 	DDRD |= 1<< PB7 | 1<< PD3;
+  51:main.cpp      **** 	DDRD |= 1<< PB7 | 1<< PD4;
  743               		.loc 1 51 0
  744 0026 81B3      		in r24,0x11
- 745 0028 8868      		ori r24,lo8(-120)
+ 745 0028 8069      		ori r24,lo8(-112)
  746 002a 81BB      		out 0x11,r24
   52:main.cpp      **** 	PORTB &= ~(1<< PINB0);
  747               		.loc 1 52 0
  748 002c C098      		cbi 0x18,0
-  53:main.cpp      **** 	PORTD &= ~(1<< PIND3);
+  53:main.cpp      **** 	PORTD &= ~(1<< PIND4);
  749               		.loc 1 53 0
- 750 002e 9398      		cbi 0x12,3
+ 750 002e 9498      		cbi 0x12,4
   54:main.cpp      **** 	UCSRA = (1 << U2X);
  751               		.loc 1 54 0
  752 0030 82E0      		ldi r24,lo8(2)
  753 0032 8BB9      		out 0xb,r24
-  55:main.cpp      **** 	UBRRH = (unsigned char) (ubbr_value >> 8);
+  55:main.cpp      **** 		UBRRH = 0x00;
  754               		.loc 1 55 0
  755 0034 10BC      		out 0x20,__zero_reg__
-  56:main.cpp      **** 	UBRRL = (unsigned char) ubbr_value;
+  56:main.cpp      **** 	UBRRL = 0x01;
  756               		.loc 1 56 0
- 757 0036 8FEF      		ldi r24,lo8(-1)
+ 757 0036 81E0      		ldi r24,lo8(1)
  758 0038 89B9      		out 0x9,r24
   57:main.cpp      **** 	UCSRB = (1 << RXEN);
  759               		.loc 1 57 0
@@ -846,7 +846,7 @@
   70:main.cpp      **** 		{
   71:main.cpp      **** 			OCR0=0;
   72:main.cpp      **** 			OCR2=0;
-  73:main.cpp      **** 			PORTD&=~1<<PD3;
+  73:main.cpp      **** 			PORTD&=~1<<PD4;
   74:main.cpp      **** 			PORTB&=~(1<<PB0);
   75:main.cpp      **** 			continue;
   76:main.cpp      **** 		}
@@ -877,7 +877,7 @@
   83:main.cpp      **** 		{
   84:main.cpp      **** 			OCR0=0;
   85:main.cpp      **** 			OCR2=0;
-  86:main.cpp      **** 			PORTD&=~1<<PD3;
+  86:main.cpp      **** 			PORTD&=~1<<PD4;
   87:main.cpp      **** 			PORTB&=~(1<<PB0);
   88:main.cpp      **** 			continue;
   89:main.cpp      **** 		}
@@ -951,13 +951,13 @@
   84:main.cpp      **** 			OCR2=0;
  870               		.loc 1 84 0
  871 00dc 1CBE      		out 0x3c,__zero_reg__
-  85:main.cpp      **** 			PORTD&=~1<<PD3;
+  85:main.cpp      **** 			PORTD&=~1<<PD4;
  872               		.loc 1 85 0
  873 00de 13BC      		out 0x23,__zero_reg__
   86:main.cpp      **** 			PORTB&=~(1<<PB0);
  874               		.loc 1 86 0
  875 00e0 82B3      		in r24,0x12
- 876 00e2 807F      		andi r24,lo8(-16)
+ 876 00e2 807E      		andi r24,lo8(-32)
  877 00e4 82BB      		out 0x12,r24
   87:main.cpp      **** 			continue;
  878               		.loc 1 87 0
@@ -1433,9 +1433,9 @@
  1304 03b8 0E94 0000 		call __fixsfsi
  1305               	.LVL140:
  1306 03bc 63BD      		out 0x23,r22
- 127:main.cpp      **** 			PORTD|=1<<PD3;
+ 127:main.cpp      **** 			PORTD|=1<<PD4;
  1307               		.loc 1 127 0
- 1308 03be 939A      		sbi 0x12,3
+ 1308 03be 949A      		sbi 0x12,4
  1309 03c0 00C0      		rjmp .L13
  1310               	.L54:
  128:main.cpp      **** 		}
@@ -1449,10 +1449,10 @@
  1315               	.LVL141:
  1316 03ca 6195      		neg r22
  1317 03cc 63BD      		out 0x23,r22
- 132:main.cpp      **** 			PORTD&=~1<<PD3;
+ 132:main.cpp      **** 			PORTD&=~1<<PD4;
  1318               		.loc 1 132 0
  1319 03ce 82B3      		in r24,0x12
- 1320 03d0 807F      		andi r24,lo8(-16)
+ 1320 03d0 807E      		andi r24,lo8(-32)
  1321 03d2 82BB      		out 0x12,r24
  1322 03d4 00C0      		rjmp .L13
  1323               	.LVL142:
@@ -1524,17 +1524,17 @@
  1384               		.file 2 "/usr/lib/avr/include/math.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.cpp
-     /tmp/ccWzc4m9.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccWzc4m9.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccWzc4m9.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccWzc4m9.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccWzc4m9.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccWzc4m9.s:12     .text:0000000000000000 _Z7Receivev
-     /tmp/ccWzc4m9.s:35     .text:000000000000000a _Z8Transmith
-     /tmp/ccWzc4m9.s:60     .text:0000000000000012 _Z3mapeeeee
-     /tmp/ccWzc4m9.s:219    .text:00000000000000cc _Z22ellipticalSquareToDisceeReS_
-     /tmp/ccWzc4m9.s:369    .text:0000000000000182 _Z22ellipticalDiscToSquareeeReS_
-     /tmp/ccWzc4m9.s:703    .text.startup:0000000000000000 main
+     /tmp/cciOyULK.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/cciOyULK.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/cciOyULK.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/cciOyULK.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/cciOyULK.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/cciOyULK.s:12     .text:0000000000000000 _Z7Receivev
+     /tmp/cciOyULK.s:35     .text:000000000000000a _Z8Transmith
+     /tmp/cciOyULK.s:60     .text:0000000000000012 _Z3mapeeeee
+     /tmp/cciOyULK.s:219    .text:00000000000000cc _Z22ellipticalSquareToDisceeReS_
+     /tmp/cciOyULK.s:369    .text:0000000000000182 _Z22ellipticalDiscToSquareeeReS_
+     /tmp/cciOyULK.s:703    .text.startup:0000000000000000 main
 
 UNDEFINED SYMBOLS
 __subsf3
