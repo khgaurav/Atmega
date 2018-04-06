@@ -30,7 +30,7 @@ PORTB &= ~(1<< PINB0);
 PORTD &= ~(1<< PIND6);
  UCSRA = (1 << U2X);
   UBRRH = 0x00;
-  UBRRL = 0x01;
+  UBRRL = 0x0C;
   UCSRB = (1 << RXEN);
   UCSRC = (1 << URSEL) | (3 << UCSZ0);
 

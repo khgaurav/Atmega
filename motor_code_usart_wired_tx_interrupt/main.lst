@@ -239,12 +239,12 @@
  213               		.loc 1 33 0
  214 001c 82E0      		ldi r24,lo8(2)
  215 001e 8BB9      		out 0xb,r24
-  34:main.c        ****    UBRRH = 0x00;
+  34:main.c        **** 	UBRRH = (unsigned char) (ubbr_value >> 8);
  216               		.loc 1 34 0
  217 0020 10BC      		out 0x20,__zero_reg__
-  35:main.c        ****    UBRRL = 0x01;
+  35:main.c        ****  UBRRL = (unsigned char) ubbr_value;
  218               		.loc 1 35 0
- 219 0022 81E0      		ldi r24,lo8(1)
+ 219 0022 8FEF      		ldi r24,lo8(-1)
  220 0024 89B9      		out 0x9,r24
   36:main.c        ****    UCSRB = (1 << TXEN);
  221               		.loc 1 36 0
@@ -545,17 +545,17 @@
  478               		.file 2 "/usr/lib/avr/include/stdint.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/ccbjRH9X.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccbjRH9X.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccbjRH9X.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccbjRH9X.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccbjRH9X.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccbjRH9X.s:12     .text:0000000000000000 Receive
-     /tmp/ccbjRH9X.s:34     .text:0000000000000008 Transmit
-     /tmp/ccbjRH9X.s:55     .text:0000000000000010 map
-     /tmp/ccbjRH9X.s:185    .text.startup:0000000000000000 main
-     /tmp/ccbjRH9X.s:251    .text:0000000000000092 __vector_14
-     /tmp/ccbjRH9X.s:474    .data:0000000000000000 ch
+     /tmp/ccOdIDt2.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccOdIDt2.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccOdIDt2.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccOdIDt2.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccOdIDt2.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccOdIDt2.s:12     .text:0000000000000000 Receive
+     /tmp/ccOdIDt2.s:34     .text:0000000000000008 Transmit
+     /tmp/ccOdIDt2.s:55     .text:0000000000000010 map
+     /tmp/ccOdIDt2.s:185    .text.startup:0000000000000000 main
+     /tmp/ccOdIDt2.s:251    .text:0000000000000092 __vector_14
+     /tmp/ccOdIDt2.s:474    .data:0000000000000000 ch
 
 UNDEFINED SYMBOLS
 __mulsi3

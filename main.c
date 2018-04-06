@@ -5,7 +5,7 @@
 #define ubbr_value (FOSC/(16*BAUD))-1
 int Receive()
 {
-	while (! (UCSRA & (1 << RXC)) );
+	while (! (UCSRA & (1 << RXC)));
 	return UDR;
 }
 

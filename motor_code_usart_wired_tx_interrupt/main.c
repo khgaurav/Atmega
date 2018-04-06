@@ -31,8 +31,8 @@ PORTB &= ~(1<< PINB0);
 PORTD &= ~(1<< PIND2);
 
   UCSRA = (1 << U2X);
-   UBRRH = 0x00;
-   UBRRL = 0x01;
+	UBRRH = (unsigned char) (ubbr_value >> 8);
+ UBRRL = (unsigned char) ubbr_value;
    UCSRB = (1 << TXEN);
    UCSRC = (1 << URSEL)| (3 << UCSZ0);
 

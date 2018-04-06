@@ -544,10 +544,10 @@ int main (void)
 	UCSRA = (1 << U2X);
  3f6:	82 e0       	ldi	r24, 0x02	; 2
  3f8:	8b b9       	out	0x0b, r24	; 11
-		UBRRH = 0x00;
+	UBRRH = (unsigned char) (ubbr_value >> 8);
  3fa:	10 bc       	out	0x20, r1	; 32
-	UBRRL = 0x01;
- 3fc:	81 e0       	ldi	r24, 0x01	; 1
+	UBRRL = (unsigned char) ubbr_value;
+ 3fc:	8f ef       	ldi	r24, 0xFF	; 255
  3fe:	89 b9       	out	0x09, r24	; 9
 	UCSRB = (1 << RXEN);
  400:	80 e1       	ldi	r24, 0x10	; 16
@@ -631,6 +631,11 @@ int main (void)
  47c:	0e 94 f8 03 	call	0x7f0	; 0x7f0 <__subsf3>
  480:	2b 01       	movw	r4, r22
  482:	3c 01       	movw	r6, r24
+		if(y1>-20&&y1<20&&x1<-490)
+		{
+			x1=-512;
+			y1=0;
+		}*/
 		if(y1/x1>=12.8&&y1/x1<=-12.8)
  484:	a7 01       	movw	r20, r14
  486:	96 01       	movw	r18, r12
@@ -662,9 +667,11 @@ int main (void)
  4ac:	c0 98       	cbi	0x18, 0	; 24
 			continue;
  4ae:	ac cf       	rjmp	.-168    	; 0x408 <__LOCK_REGION_LENGTH__+0x8>
-		}
-		long double x1 = x2 - 512;
-		long double y1 = 512 - y2;
+		if(y1>-20&&y1<20&&x1<-490)
+		{
+			x1=-512;
+			y1=0;
+		}*/
 		if(y1/x1>=12.8&&y1/x1<=-12.8)
  4b0:	2d ec       	ldi	r18, 0xCD	; 205
  4b2:	3c ec       	ldi	r19, 0xCC	; 204
@@ -880,30 +887,30 @@ long double map(long double x, long double in_min, long double in_max, long doub
  660:	0e 94 f9 03 	call	0x7f2	; 0x7f2 <__addsf3>
  664:	6b 01       	movw	r12, r22
  666:	7c 01       	movw	r14, r24
-		if(x3>255)
+		if(x3>220)
  668:	20 e0       	ldi	r18, 0x00	; 0
  66a:	30 e0       	ldi	r19, 0x00	; 0
- 66c:	4f e7       	ldi	r20, 0x7F	; 127
+ 66c:	4c e5       	ldi	r20, 0x5C	; 92
  66e:	53 e4       	ldi	r21, 0x43	; 67
  670:	c3 01       	movw	r24, r6
  672:	b2 01       	movw	r22, r4
  674:	0e 94 c4 05 	call	0xb88	; 0xb88 <__gesf2>
 		x3=255;
-		if(y3>255)
+		if(y3>220)
  678:	20 e0       	ldi	r18, 0x00	; 0
  67a:	30 e0       	ldi	r19, 0x00	; 0
- 67c:	4f e7       	ldi	r20, 0x7F	; 127
+ 67c:	4c e5       	ldi	r20, 0x5C	; 92
  67e:	53 e4       	ldi	r21, 0x43	; 67
 		long double x = (xans * 0.707) + (yans * 0.707);
 		long double y = (-xans * 0.707) + (yans * 0.707);
 		ellipticalDiscToSquare(x,y,xans,yans);
 		long double x3=map(xans,-0.991273,0.991273,-255,255);
 		long double y3=map(yans,-0.991273,0.991273,-255,255)+70;
-		if(x3>255)
+		if(x3>220)
  680:	18 16       	cp	r1, r24
  682:	9c f1       	brlt	.+102    	; 0x6ea <__stack+0x28b>
 		x3=255;
-		if(y3>255)
+		if(y3>220)
  684:	c7 01       	movw	r24, r14
  686:	b6 01       	movw	r22, r12
  688:	0e 94 c4 05 	call	0xb88	; 0xb88 <__gesf2>
@@ -959,9 +966,9 @@ long double map(long double x, long double in_min, long double in_max, long doub
 		ellipticalDiscToSquare(x,y,xans,yans);
 		long double x3=map(xans,-0.991273,0.991273,-255,255);
 		long double y3=map(yans,-0.991273,0.991273,-255,255)+70;
-		if(x3>255)
+		if(x3>220)
 		x3=255;
-		if(y3>255)
+		if(y3>220)
  6ea:	c7 01       	movw	r24, r14
  6ec:	b6 01       	movw	r22, r12
  6ee:	0e 94 c4 05 	call	0xb88	; 0xb88 <__gesf2>
@@ -969,7 +976,7 @@ long double map(long double x, long double in_min, long double in_max, long doub
 		ellipticalDiscToSquare(x,y,xans,yans);
 		long double x3=map(xans,-0.991273,0.991273,-255,255);
 		long double y3=map(yans,-0.991273,0.991273,-255,255)+70;
-		if(x3>255)
+		if(x3>220)
 		x3=255;
  6f2:	41 2c       	mov	r4, r1
  6f4:	51 2c       	mov	r5, r1
@@ -977,7 +984,7 @@ long double map(long double x, long double in_min, long double in_max, long doub
  6f8:	62 2e       	mov	r6, r18
  6fa:	23 e4       	ldi	r18, 0x43	; 67
  6fc:	72 2e       	mov	r7, r18
-		if(y3>255)
+		if(y3>220)
  6fe:	18 16       	cp	r1, r24
  700:	44 f6       	brge	.-112    	; 0x692 <__stack+0x233>
 		y3=255;
@@ -1006,7 +1013,7 @@ long double map(long double x, long double in_min, long double in_max, long doub
 			PORTB|=1<<PB0;
  722:	c0 9a       	sbi	0x18, 0	; 24
  724:	21 c0       	rjmp	.+66     	; 0x768 <__stack+0x309>
-		if(y3>255)
+		if(y3>220)
 		y3=255;
 		if(x3<20&&x3>-20)
 		x3=0;
@@ -1035,9 +1042,9 @@ long double map(long double x, long double in_min, long double in_max, long doub
  750:	c1 2c       	mov	r12, r1
  752:	d1 2c       	mov	r13, r1
  754:	76 01       	movw	r14, r12
-		if(x3>255)
+		if(x3>220)
 		x3=255;
-		if(y3>255)
+		if(y3>220)
 		y3=255;
 		if(x3<20&&x3>-20)
 		x3=0;
@@ -1090,9 +1097,9 @@ long double map(long double x, long double in_min, long double in_max, long doub
  798:	82 bb       	out	0x12, r24	; 18
  79a:	36 ce       	rjmp	.-916    	; 0x408 <__LOCK_REGION_LENGTH__+0x8>
 		long double y3=map(yans,-0.991273,0.991273,-255,255)+70;
-		if(x3>255)
+		if(x3>220)
 		x3=255;
-		if(y3>255)
+		if(y3>220)
 		y3=255;
 		if(x3<20&&x3>-20)
  79c:	20 e0       	ldi	r18, 0x00	; 0
@@ -1106,9 +1113,9 @@ long double map(long double x, long double in_min, long double in_max, long doub
  7ae:	07 c0       	rjmp	.+14     	; 0x7be <__stack+0x35f>
 		long double x3=map(xans,-0.991273,0.991273,-255,255);
 		long double y3=map(yans,-0.991273,0.991273,-255,255)+70;
-		if(x3>255)
+		if(x3>220)
 		x3=255;
-		if(y3>255)
+		if(y3>220)
 		y3=255;
  7b0:	c1 2c       	mov	r12, r1
  7b2:	d1 2c       	mov	r13, r1
@@ -1127,9 +1134,9 @@ long double map(long double x, long double in_min, long double in_max, long doub
  7ca:	0e 94 c4 05 	call	0xb88	; 0xb88 <__gesf2>
 		long double x3=map(xans,-0.991273,0.991273,-255,255);
 		long double y3=map(yans,-0.991273,0.991273,-255,255)+70;
-		if(x3>255)
+		if(x3>220)
 		x3=255;
-		if(y3>255)
+		if(y3>220)
 		y3=255;
  7ce:	c1 2c       	mov	r12, r1
  7d0:	d1 2c       	mov	r13, r1

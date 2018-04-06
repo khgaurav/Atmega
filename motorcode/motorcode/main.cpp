@@ -49,11 +49,12 @@ int main (void)
 	DDRB |= 1<< PB3 | 1<<PINB0 | 1<<PINB1;
 	TCCR2 |= 1<<WGM20 | 1<< WGM21 | 1<< COM21 |1 <<CS20;
 	DDRD |= 1<< PB7 | 1<< PD4;
+	DDRA|= (1<<PA0);
 	PORTB &= ~(1<< PINB0);
-	PORTD &= ~(1<< PIND4);
+	PORTA &= ~(1<< PINA0);
 	UCSRA = (1 << U2X);
-		UBRRH = 0x00;
-	UBRRL = 0x01;
+	UBRRH = (unsigned char) (ubbr_value >> 8);
+	UBRRL = (unsigned char) ubbr_value;
 	UCSRB = (1 << RXEN);
 	UCSRC = (1 << URSEL) | (3 << UCSZ0);
 	while (1)
@@ -70,7 +71,7 @@ int main (void)
 		{
 			OCR0=0;
 			OCR2=0;
-			PORTD&=~1<<PD4;
+			PORTA&=~1<<PA0;
 			PORTB&=~(1<<PB0);
 			continue;
 		}
@@ -83,12 +84,32 @@ int main (void)
 		{
 			OCR0=0;
 			OCR2=0;
-			PORTD&=~1<<PD4;
+			PORTA&=~1<<PA0;
 			PORTB&=~(1<<PB0);
 			continue;
 		}
 		long double x1 = x2 - 512;
 		long double y1 = 512 - y2;
+		/*if(x1>-20&&x1<20&&y1>490)
+		{
+			x1=512;
+			y1=0;
+		}
+		if(x1>-20&&x1<20&&y1<-490)
+		{
+			x1=-512;
+			y1=0;
+		}
+		if(y1>-20&&y1<20&&x1>490)
+		{
+			x1=512;
+			y1=0;
+		}
+		if(y1>-20&&y1<20&&x1<-490)
+		{
+			x1=-512;
+			y1=0;
+		}*/
 		if(y1/x1>=12.8&&y1/x1<=-12.8)
 		x1=0;
 		if(y1/x1<=0.390625&&y1/x1>=-0.390625)
@@ -101,10 +122,10 @@ int main (void)
 		long double y = (-xans * 0.707) + (yans * 0.707);
 		ellipticalDiscToSquare(x,y,xans,yans);
 		long double x3=map(xans,-0.991273,0.991273,-255,255);
-		long double y3=map(yans,-0.991273,0.991273,-255,255)+70;
-		if(x3>255)
+		long double y3=map(yans,-0.991273,0.991273,-255,255);
+		if(x3>220)
 		x3=255;
-		if(y3>255)
+		if(y3>220)
 		y3=255;
 		if(x3<20&&x3>-20)
 		x3=0;
@@ -124,12 +145,12 @@ int main (void)
 		if(y3>0)
 		{
 			OCR2=(int)y3;
-			PORTD|=1<<PD4;
+			PORTA|=1<<PA0;
 		}
 		else
 		{
 			OCR2=-(int)y3;
-			PORTD&=~1<<PD4;
+			PORTA&=~1<<PA0;
 		}
 	}
 }

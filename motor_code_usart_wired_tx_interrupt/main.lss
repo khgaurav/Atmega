@@ -346,10 +346,10 @@ PORTD &= ~(1<< PIND2);
   UCSRA = (1 << U2X);
  226:	82 e0       	ldi	r24, 0x02	; 2
  228:	8b b9       	out	0x0b, r24	; 11
-   UBRRH = 0x00;
+	UBRRH = (unsigned char) (ubbr_value >> 8);
  22a:	10 bc       	out	0x20, r1	; 32
-   UBRRL = 0x01;
- 22c:	81 e0       	ldi	r24, 0x01	; 1
+ UBRRL = (unsigned char) ubbr_value;
+ 22c:	8f ef       	ldi	r24, 0xFF	; 255
  22e:	89 b9       	out	0x09, r24	; 9
    UCSRB = (1 << TXEN);
  230:	88 e0       	ldi	r24, 0x08	; 8
