@@ -25,7 +25,7 @@
   19               	/* stack size = 0 */
   20               	.L__stack_usage = 0
   21               	.L2:
-   8:main.c        **** 	while (! (UCSRA & (1 << RXC)) );
+   8:main.c        **** 	while (! (UCSRA & (1 << RXC)));
   22               		.loc 1 8 0 discriminator 1
   23 0000 5F9B      		sbis 0xb,7
   24 0002 00C0      		rjmp .L2
@@ -229,270 +229,273 @@
  207 0012 81B3      		in r24,0x11
  208 0014 8069      		ori r24,lo8(-112)
  209 0016 81BB      		out 0x11,r24
-  30:main.c        **** PORTB &= ~(1<< PINB0);
+  30:main.c        **** DDRA|=1<<PINA0;
  210               		.loc 1 30 0
- 211 0018 C098      		cbi 0x18,0
-  31:main.c        **** PORTD &= ~(1<< PIND4);
+ 211 0018 D09A      		sbi 0x1a,0
+  31:main.c        **** PORTB &= ~(1<< PINB0);
  212               		.loc 1 31 0
- 213 001a 9498      		cbi 0x12,4
-  32:main.c        **** UCSRA = (1 << U2X);
- 214               		.loc 1 32 0
- 215 001c 82E0      		ldi r24,lo8(2)
- 216 001e 8BB9      		out 0xb,r24
-  33:main.c        **** 
-  34:main.c        ****   UBRRH = 0x03;
- 217               		.loc 1 34 0
- 218 0020 83E0      		ldi r24,lo8(3)
- 219 0022 80BD      		out 0x20,r24
-  35:main.c        ****   UBRRL = 0x40;
- 220               		.loc 1 35 0
- 221 0024 80E4      		ldi r24,lo8(64)
- 222 0026 89B9      		out 0x9,r24
-  36:main.c        ****   UCSRB = (1 << RXEN);
- 223               		.loc 1 36 0
- 224 0028 80E1      		ldi r24,lo8(16)
- 225 002a 8AB9      		out 0xa,r24
-  37:main.c        ****   UCSRC = (1 << URSEL) | (3 << UCSZ0);
- 226               		.loc 1 37 0
- 227 002c 86E8      		ldi r24,lo8(-122)
- 228 002e 80BD      		out 0x20,r24
- 229               	.LBB2:
- 230               	.LBB3:
-  38:main.c        **** 
-  39:main.c        **** 
-  40:main.c        **** 	while (1)
-  41:main.c        **** 	{
-  42:main.c        **** 
-  43:main.c        **** 		if(Receive()==97)
-  44:main.c        **** 		{
-  45:main.c        **** 
-  46:main.c        **** 			int x=0;
-  47:main.c        **** 			int ch=Receive()-'0';
-  48:main.c        **** 			for(int i=100;i>=1;i/=10)
- 231               		.loc 1 48 0
- 232 0030 2AE0      		ldi r18,lo8(10)
- 233 0032 C22E      		mov r12,r18
- 234 0034 D12C      		mov r13,__zero_reg__
- 235               	.L11:
- 236               	.LBE3:
- 237               	.LBE2:
-  43:main.c        **** 		{
- 238               		.loc 1 43 0
- 239 0036 0E94 0000 		call Receive
- 240               	.LVL7:
- 241 003a 8136      		cpi r24,97
- 242 003c 9105      		cpc r25,__zero_reg__
- 243 003e 01F4      		brne .L12
- 244               	.LVL8:
- 245               	.LBB6:
-  47:main.c        **** 			for(int i=100;i>=1;i/=10)
- 246               		.loc 1 47 0
- 247 0040 0E94 0000 		call Receive
- 248               	.LVL9:
- 249 0044 C097      		sbiw r24,48
- 250 0046 5C01      		movw r10,r24
- 251               	.LVL10:
- 252 0048 03E0      		ldi r16,lo8(3)
- 253 004a 10E0      		ldi r17,0
- 254               	.LBB4:
- 255               		.loc 1 48 0
- 256 004c 94E6      		ldi r25,lo8(100)
- 257 004e E92E      		mov r14,r25
- 258 0050 F12C      		mov r15,__zero_reg__
- 259               	.LBE4:
-  46:main.c        **** 			int ch=Receive()-'0';
- 260               		.loc 1 46 0
- 261 0052 C0E0      		ldi r28,0
- 262 0054 D0E0      		ldi r29,0
- 263               	.LVL11:
- 264               	.L13:
- 265               	.LBB5:
-  49:main.c        **** 			x+=(Receive()-'0')*i;
- 266               		.loc 1 49 0 discriminator 3
- 267 0056 0E94 0000 		call Receive
- 268               	.LVL12:
- 269 005a C097      		sbiw r24,48
- 270 005c 8E9D      		mul r24,r14
- 271 005e 9001      		movw r18,r0
- 272 0060 8F9D      		mul r24,r15
- 273 0062 300D      		add r19,r0
- 274 0064 9E9D      		mul r25,r14
- 275 0066 300D      		add r19,r0
- 276 0068 1124      		clr r1
- 277 006a C20F      		add r28,r18
- 278 006c D31F      		adc r29,r19
- 279               	.LVL13:
-  48:main.c        **** 			x+=(Receive()-'0')*i;
- 280               		.loc 1 48 0 discriminator 3
- 281 006e C701      		movw r24,r14
- 282 0070 B601      		movw r22,r12
- 283 0072 0E94 0000 		call __divmodhi4
- 284 0076 7B01      		movw r14,r22
- 285               	.LVL14:
- 286 0078 0150      		subi r16,1
- 287 007a 1109      		sbc r17,__zero_reg__
- 288 007c 01F4      		brne .L13
- 289               	.LBE5:
-  50:main.c        **** 			OCR0=x;
- 290               		.loc 1 50 0
- 291 007e CCBF      		out 0x3c,r28
-  51:main.c        **** 			if(ch==0)
- 292               		.loc 1 51 0
- 293 0080 A114      		cp r10,__zero_reg__
- 294 0082 B104      		cpc r11,__zero_reg__
- 295 0084 01F4      		brne .L14
-  52:main.c        **** 				PORTB|=(1<<PINB0);
- 296               		.loc 1 52 0
- 297 0086 C09A      		sbi 0x18,0
- 298 0088 00C0      		rjmp .L15
- 299               	.L14:
-  53:main.c        **** 			else if(ch==1)
- 300               		.loc 1 53 0
- 301 008a AA94      		dec r10
- 302 008c AB28      		or r10,r11
- 303 008e 01F4      		brne .L15
-  54:main.c        **** 				PORTB &= ~(1<< PINB0);
- 304               		.loc 1 54 0
- 305 0090 C098      		cbi 0x18,0
- 306 0092 00C0      		rjmp .L15
- 307               	.LVL15:
- 308               	.L12:
- 309               	.LBE6:
-  55:main.c        **** 		}
-  56:main.c        **** 		else
-  57:main.c        **** 		{
-  58:main.c        **** 			OCR0=0;
- 310               		.loc 1 58 0
- 311 0094 1CBE      		out 0x3c,__zero_reg__
-  59:main.c        **** 			OCR2=0;
- 312               		.loc 1 59 0
- 313 0096 13BC      		out 0x23,__zero_reg__
-  60:main.c        **** 			PORTB &= ~(1<< PINB0);
- 314               		.loc 1 60 0
- 315 0098 C098      		cbi 0x18,0
-  61:main.c        **** 			PORTD &= ~(1<< PIND4);
- 316               		.loc 1 61 0
- 317 009a 9498      		cbi 0x12,4
- 318               	.L15:
-  62:main.c        **** 		}
-  63:main.c        **** 		if(Receive()==98)
- 319               		.loc 1 63 0
- 320 009c 0E94 0000 		call Receive
- 321               	.LVL16:
- 322 00a0 8236      		cpi r24,98
- 323 00a2 9105      		cpc r25,__zero_reg__
- 324 00a4 01F4      		brne .L16
- 325               	.LVL17:
- 326               	.LBB7:
-  64:main.c        **** 		{
-  65:main.c        **** 
-  66:main.c        **** 			int y=0;
-  67:main.c        **** 			int ch=Receive()-'0';
- 327               		.loc 1 67 0
- 328 00a6 0E94 0000 		call Receive
- 329               	.LVL18:
- 330 00aa C097      		sbiw r24,48
- 331 00ac 5C01      		movw r10,r24
- 332               	.LVL19:
- 333 00ae 03E0      		ldi r16,lo8(3)
- 334 00b0 10E0      		ldi r17,0
- 335               	.LBB8:
-  68:main.c        **** 			for(int i=100;i>=1;i/=10)
- 336               		.loc 1 68 0
- 337 00b2 84E6      		ldi r24,lo8(100)
- 338 00b4 E82E      		mov r14,r24
- 339 00b6 F12C      		mov r15,__zero_reg__
- 340               	.LBE8:
-  66:main.c        **** 			int ch=Receive()-'0';
- 341               		.loc 1 66 0
- 342 00b8 C0E0      		ldi r28,0
- 343 00ba D0E0      		ldi r29,0
- 344               	.LVL20:
- 345               	.L17:
- 346               	.LBB9:
-  69:main.c        **** 			y+=(Receive()-'0')*i;
- 347               		.loc 1 69 0 discriminator 3
- 348 00bc 0E94 0000 		call Receive
- 349               	.LVL21:
- 350 00c0 C097      		sbiw r24,48
- 351 00c2 8E9D      		mul r24,r14
- 352 00c4 9001      		movw r18,r0
- 353 00c6 8F9D      		mul r24,r15
- 354 00c8 300D      		add r19,r0
- 355 00ca 9E9D      		mul r25,r14
- 356 00cc 300D      		add r19,r0
- 357 00ce 1124      		clr r1
- 358 00d0 C20F      		add r28,r18
- 359 00d2 D31F      		adc r29,r19
- 360               	.LVL22:
-  68:main.c        **** 			for(int i=100;i>=1;i/=10)
- 361               		.loc 1 68 0 discriminator 3
- 362 00d4 C701      		movw r24,r14
- 363 00d6 B601      		movw r22,r12
- 364 00d8 0E94 0000 		call __divmodhi4
- 365 00dc 7B01      		movw r14,r22
- 366               	.LVL23:
- 367 00de 0150      		subi r16,1
- 368 00e0 1109      		sbc r17,__zero_reg__
- 369 00e2 01F4      		brne .L17
- 370               	.LBE9:
-  70:main.c        **** 			OCR2=y;
- 371               		.loc 1 70 0
- 372 00e4 C3BD      		out 0x23,r28
-  71:main.c        **** 			if(ch==0)
- 373               		.loc 1 71 0
- 374 00e6 A114      		cp r10,__zero_reg__
- 375 00e8 B104      		cpc r11,__zero_reg__
- 376 00ea 01F4      		brne .L18
-  72:main.c        **** 				PORTD|=(1<<PIND4);
- 377               		.loc 1 72 0
- 378 00ec 949A      		sbi 0x12,4
- 379 00ee 00C0      		rjmp .L11
- 380               	.L18:
-  73:main.c        **** 			else if(ch==1)
- 381               		.loc 1 73 0
- 382 00f0 AA94      		dec r10
- 383 00f2 AB28      		or r10,r11
- 384 00f4 01F0      		breq .+2
- 385 00f6 00C0      		rjmp .L11
- 386 00f8 00C0      		rjmp .L22
- 387               	.LVL24:
- 388               	.L16:
- 389               	.LBE7:
-  74:main.c        **** 				PORTD &= ~(1<< PIND4);
-  75:main.c        **** 		}
-  76:main.c        **** 		else
-  77:main.c        **** 		{
-  78:main.c        **** 			OCR0=0;
- 390               		.loc 1 78 0
- 391 00fa 1CBE      		out 0x3c,__zero_reg__
-  79:main.c        **** 			OCR2=0;
- 392               		.loc 1 79 0
- 393 00fc 13BC      		out 0x23,__zero_reg__
-  80:main.c        **** 			PORTB &= ~(1<< PINB0);
- 394               		.loc 1 80 0
- 395 00fe C098      		cbi 0x18,0
- 396               	.L22:
-  81:main.c        **** 			PORTD &= ~(1<< PIND4);
- 397               		.loc 1 81 0
- 398 0100 9498      		cbi 0x12,4
- 399 0102 00C0      		rjmp .L11
- 400               		.cfi_endproc
- 401               	.LFE9:
- 403               		.text
- 404               	.Letext0:
- 405               		.file 2 "/usr/lib/avr/include/stdint.h"
+ 213 001a C098      		cbi 0x18,0
+  32:main.c        **** 
+  33:main.c        **** PORTA &= ~(1<<PINA0);
+ 214               		.loc 1 33 0
+ 215 001c D898      		cbi 0x1b,0
+  34:main.c        **** UCSRA = (1 << U2X);
+ 216               		.loc 1 34 0
+ 217 001e 82E0      		ldi r24,lo8(2)
+ 218 0020 8BB9      		out 0xb,r24
+  35:main.c        **** 
+  36:main.c        ****   UBRRH = 0x00;
+ 219               		.loc 1 36 0
+ 220 0022 10BC      		out 0x20,__zero_reg__
+  37:main.c        ****   UBRRL = 0x67;
+ 221               		.loc 1 37 0
+ 222 0024 87E6      		ldi r24,lo8(103)
+ 223 0026 89B9      		out 0x9,r24
+  38:main.c        ****   UCSRB = (1 << RXEN);
+ 224               		.loc 1 38 0
+ 225 0028 80E1      		ldi r24,lo8(16)
+ 226 002a 8AB9      		out 0xa,r24
+  39:main.c        ****   UCSRC = (1 << URSEL) | (3 << UCSZ0);
+ 227               		.loc 1 39 0
+ 228 002c 86E8      		ldi r24,lo8(-122)
+ 229 002e 80BD      		out 0x20,r24
+ 230               	.LBB2:
+ 231               	.LBB3:
+  40:main.c        **** 
+  41:main.c        **** 
+  42:main.c        **** 	while (1)
+  43:main.c        **** 	{
+  44:main.c        **** 
+  45:main.c        **** 		if(Receive()==97)
+  46:main.c        **** 		{
+  47:main.c        **** 
+  48:main.c        **** 			int x=0;
+  49:main.c        **** 			int ch=Receive()-'0';
+  50:main.c        **** 			for(int i=100;i>=1;i/=10)
+ 232               		.loc 1 50 0
+ 233 0030 2AE0      		ldi r18,lo8(10)
+ 234 0032 C22E      		mov r12,r18
+ 235 0034 D12C      		mov r13,__zero_reg__
+ 236               	.L11:
+ 237               	.LBE3:
+ 238               	.LBE2:
+  45:main.c        **** 		{
+ 239               		.loc 1 45 0
+ 240 0036 0E94 0000 		call Receive
+ 241               	.LVL7:
+ 242 003a 8136      		cpi r24,97
+ 243 003c 9105      		cpc r25,__zero_reg__
+ 244 003e 01F4      		brne .L12
+ 245               	.LVL8:
+ 246               	.LBB6:
+  49:main.c        **** 			for(int i=100;i>=1;i/=10)
+ 247               		.loc 1 49 0
+ 248 0040 0E94 0000 		call Receive
+ 249               	.LVL9:
+ 250 0044 C097      		sbiw r24,48
+ 251 0046 5C01      		movw r10,r24
+ 252               	.LVL10:
+ 253 0048 03E0      		ldi r16,lo8(3)
+ 254 004a 10E0      		ldi r17,0
+ 255               	.LBB4:
+ 256               		.loc 1 50 0
+ 257 004c 94E6      		ldi r25,lo8(100)
+ 258 004e E92E      		mov r14,r25
+ 259 0050 F12C      		mov r15,__zero_reg__
+ 260               	.LBE4:
+  48:main.c        **** 			int ch=Receive()-'0';
+ 261               		.loc 1 48 0
+ 262 0052 C0E0      		ldi r28,0
+ 263 0054 D0E0      		ldi r29,0
+ 264               	.LVL11:
+ 265               	.L13:
+ 266               	.LBB5:
+  51:main.c        **** 			x+=(Receive()-'0')*i;
+ 267               		.loc 1 51 0 discriminator 3
+ 268 0056 0E94 0000 		call Receive
+ 269               	.LVL12:
+ 270 005a C097      		sbiw r24,48
+ 271 005c 8E9D      		mul r24,r14
+ 272 005e 9001      		movw r18,r0
+ 273 0060 8F9D      		mul r24,r15
+ 274 0062 300D      		add r19,r0
+ 275 0064 9E9D      		mul r25,r14
+ 276 0066 300D      		add r19,r0
+ 277 0068 1124      		clr r1
+ 278 006a C20F      		add r28,r18
+ 279 006c D31F      		adc r29,r19
+ 280               	.LVL13:
+  50:main.c        **** 			x+=(Receive()-'0')*i;
+ 281               		.loc 1 50 0 discriminator 3
+ 282 006e C701      		movw r24,r14
+ 283 0070 B601      		movw r22,r12
+ 284 0072 0E94 0000 		call __divmodhi4
+ 285 0076 7B01      		movw r14,r22
+ 286               	.LVL14:
+ 287 0078 0150      		subi r16,1
+ 288 007a 1109      		sbc r17,__zero_reg__
+ 289 007c 01F4      		brne .L13
+ 290               	.LBE5:
+  52:main.c        **** 			OCR0=x;
+ 291               		.loc 1 52 0
+ 292 007e CCBF      		out 0x3c,r28
+  53:main.c        **** 			if(ch==0)
+ 293               		.loc 1 53 0
+ 294 0080 A114      		cp r10,__zero_reg__
+ 295 0082 B104      		cpc r11,__zero_reg__
+ 296 0084 01F4      		brne .L14
+  54:main.c        **** 				PORTB|=(1<<PINB0);
+ 297               		.loc 1 54 0
+ 298 0086 C09A      		sbi 0x18,0
+ 299 0088 00C0      		rjmp .L15
+ 300               	.L14:
+  55:main.c        **** 			else if(ch==1)
+ 301               		.loc 1 55 0
+ 302 008a AA94      		dec r10
+ 303 008c AB28      		or r10,r11
+ 304 008e 01F4      		brne .L15
+  56:main.c        **** 				PORTB &= ~(1<< PINB0);
+ 305               		.loc 1 56 0
+ 306 0090 C098      		cbi 0x18,0
+ 307 0092 00C0      		rjmp .L15
+ 308               	.LVL15:
+ 309               	.L12:
+ 310               	.LBE6:
+  57:main.c        **** 		}
+  58:main.c        **** 		else
+  59:main.c        **** 		{
+  60:main.c        **** 			OCR0=0;
+ 311               		.loc 1 60 0
+ 312 0094 1CBE      		out 0x3c,__zero_reg__
+  61:main.c        **** 			OCR2=0;
+ 313               		.loc 1 61 0
+ 314 0096 13BC      		out 0x23,__zero_reg__
+  62:main.c        **** 			PORTB &= ~(1<< PINB0);
+ 315               		.loc 1 62 0
+ 316 0098 C098      		cbi 0x18,0
+  63:main.c        **** 			PORTA &= ~(1<< PINA0);
+ 317               		.loc 1 63 0
+ 318 009a D898      		cbi 0x1b,0
+ 319               	.L15:
+  64:main.c        **** 		}
+  65:main.c        **** 		if(Receive()==98)
+ 320               		.loc 1 65 0
+ 321 009c 0E94 0000 		call Receive
+ 322               	.LVL16:
+ 323 00a0 8236      		cpi r24,98
+ 324 00a2 9105      		cpc r25,__zero_reg__
+ 325 00a4 01F4      		brne .L16
+ 326               	.LVL17:
+ 327               	.LBB7:
+  66:main.c        **** 		{
+  67:main.c        **** 
+  68:main.c        **** 			int y=0;
+  69:main.c        **** 			int ch=Receive()-'0';
+ 328               		.loc 1 69 0
+ 329 00a6 0E94 0000 		call Receive
+ 330               	.LVL18:
+ 331 00aa C097      		sbiw r24,48
+ 332 00ac 5C01      		movw r10,r24
+ 333               	.LVL19:
+ 334 00ae 03E0      		ldi r16,lo8(3)
+ 335 00b0 10E0      		ldi r17,0
+ 336               	.LBB8:
+  70:main.c        **** 			for(int i=100;i>=1;i/=10)
+ 337               		.loc 1 70 0
+ 338 00b2 84E6      		ldi r24,lo8(100)
+ 339 00b4 E82E      		mov r14,r24
+ 340 00b6 F12C      		mov r15,__zero_reg__
+ 341               	.LBE8:
+  68:main.c        **** 			int ch=Receive()-'0';
+ 342               		.loc 1 68 0
+ 343 00b8 C0E0      		ldi r28,0
+ 344 00ba D0E0      		ldi r29,0
+ 345               	.LVL20:
+ 346               	.L17:
+ 347               	.LBB9:
+  71:main.c        **** 			y+=(Receive()-'0')*i;
+ 348               		.loc 1 71 0 discriminator 3
+ 349 00bc 0E94 0000 		call Receive
+ 350               	.LVL21:
+ 351 00c0 C097      		sbiw r24,48
+ 352 00c2 8E9D      		mul r24,r14
+ 353 00c4 9001      		movw r18,r0
+ 354 00c6 8F9D      		mul r24,r15
+ 355 00c8 300D      		add r19,r0
+ 356 00ca 9E9D      		mul r25,r14
+ 357 00cc 300D      		add r19,r0
+ 358 00ce 1124      		clr r1
+ 359 00d0 C20F      		add r28,r18
+ 360 00d2 D31F      		adc r29,r19
+ 361               	.LVL22:
+  70:main.c        **** 			for(int i=100;i>=1;i/=10)
+ 362               		.loc 1 70 0 discriminator 3
+ 363 00d4 C701      		movw r24,r14
+ 364 00d6 B601      		movw r22,r12
+ 365 00d8 0E94 0000 		call __divmodhi4
+ 366 00dc 7B01      		movw r14,r22
+ 367               	.LVL23:
+ 368 00de 0150      		subi r16,1
+ 369 00e0 1109      		sbc r17,__zero_reg__
+ 370 00e2 01F4      		brne .L17
+ 371               	.LBE9:
+  72:main.c        **** 			OCR2=y;
+ 372               		.loc 1 72 0
+ 373 00e4 C3BD      		out 0x23,r28
+  73:main.c        **** 			if(ch==0)
+ 374               		.loc 1 73 0
+ 375 00e6 A114      		cp r10,__zero_reg__
+ 376 00e8 B104      		cpc r11,__zero_reg__
+ 377 00ea 01F4      		brne .L18
+  74:main.c        **** 				PORTA|=(1<<PINA0);
+ 378               		.loc 1 74 0
+ 379 00ec D89A      		sbi 0x1b,0
+ 380 00ee 00C0      		rjmp .L11
+ 381               	.L18:
+  75:main.c        **** 			else if(ch==1)
+ 382               		.loc 1 75 0
+ 383 00f0 AA94      		dec r10
+ 384 00f2 AB28      		or r10,r11
+ 385 00f4 01F0      		breq .+2
+ 386 00f6 00C0      		rjmp .L11
+ 387 00f8 00C0      		rjmp .L22
+ 388               	.LVL24:
+ 389               	.L16:
+ 390               	.LBE7:
+  76:main.c        **** 				PORTA &= ~(1<< PINA0);
+  77:main.c        **** 		}
+  78:main.c        **** 		else
+  79:main.c        **** 		{
+  80:main.c        **** 			OCR0=0;
+ 391               		.loc 1 80 0
+ 392 00fa 1CBE      		out 0x3c,__zero_reg__
+  81:main.c        **** 			OCR2=0;
+ 393               		.loc 1 81 0
+ 394 00fc 13BC      		out 0x23,__zero_reg__
+  82:main.c        **** 			PORTB &= ~(1<< PINB0);
+ 395               		.loc 1 82 0
+ 396 00fe C098      		cbi 0x18,0
+ 397               	.L22:
+  83:main.c        **** 			PORTA &= ~(1<< PINA0);
+ 398               		.loc 1 83 0
+ 399 0100 D898      		cbi 0x1b,0
+ 400 0102 00C0      		rjmp .L11
+ 401               		.cfi_endproc
+ 402               	.LFE9:
+ 404               		.text
+ 405               	.Letext0:
+ 406               		.file 2 "/usr/lib/avr/include/stdint.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-     /tmp/ccXk8nOQ.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccXk8nOQ.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccXk8nOQ.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccXk8nOQ.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccXk8nOQ.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccXk8nOQ.s:12     .text:0000000000000000 Receive
-     /tmp/ccXk8nOQ.s:35     .text:000000000000000a Transmit
-     /tmp/ccXk8nOQ.s:56     .text:0000000000000012 map
-     /tmp/ccXk8nOQ.s:186    .text.startup:0000000000000000 main
+     /tmp/ccmvdPCK.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/ccmvdPCK.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/ccmvdPCK.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/ccmvdPCK.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/ccmvdPCK.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/ccmvdPCK.s:12     .text:0000000000000000 Receive
+     /tmp/ccmvdPCK.s:35     .text:000000000000000a Transmit
+     /tmp/ccmvdPCK.s:56     .text:0000000000000012 map
+     /tmp/ccmvdPCK.s:186    .text.startup:0000000000000000 main
 
 UNDEFINED SYMBOLS
 __mulsi3

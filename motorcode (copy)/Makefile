@@ -41,7 +41,7 @@
 
 
 # MCU name
-MCU = atmega16a
+MCU = atmega16
 
 
 # Processor frequency.

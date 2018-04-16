@@ -727,830 +727,929 @@
  691               		.cfi_endproc
  692               	.LFE6:
  694               	.global	__floatsisf
- 695               	.global	__gesf2
- 696               	.global	__lesf2
- 697               	.global	__gtsf2
+ 695               	.global	__eqsf2
+ 696               	.global	__gesf2
+ 697               	.global	__lesf2
  698               	.global	__ltsf2
- 699               	.global	__fixsfsi
- 700               		.section	.text.startup,"ax",@progbits
- 701               	.global	main
- 703               	main:
- 704               	.LFB7:
+ 699               	.global	__gtsf2
+ 700               	.global	__fixsfsi
+ 701               		.section	.text.startup,"ax",@progbits
+ 702               	.global	main
+ 704               	main:
+ 705               	.LFB7:
   46:main.cpp      **** int main (void)
   47:main.cpp      **** {
- 705               		.loc 1 47 0
- 706               		.cfi_startproc
- 707 0000 CF93      		push r28
- 708               	.LCFI46:
- 709               		.cfi_def_cfa_offset 3
- 710               		.cfi_offset 28, -2
- 711 0002 DF93      		push r29
- 712               	.LCFI47:
- 713               		.cfi_def_cfa_offset 4
- 714               		.cfi_offset 29, -3
- 715 0004 CDB7      		in r28,__SP_L__
- 716 0006 DEB7      		in r29,__SP_H__
- 717               	.LCFI48:
- 718               		.cfi_def_cfa_register 28
- 719 0008 2A97      		sbiw r28,10
- 720               	.LCFI49:
- 721               		.cfi_def_cfa_offset 14
- 722 000a 0FB6      		in __tmp_reg__,__SREG__
- 723 000c F894      		cli
- 724 000e DEBF      		out __SP_H__,r29
- 725 0010 0FBE      		out __SREG__,__tmp_reg__
- 726 0012 CDBF      		out __SP_L__,r28
- 727               	/* prologue: function */
- 728               	/* frame size = 10 */
- 729               	/* stack size = 12 */
- 730               	.L__stack_usage = 12
+ 706               		.loc 1 47 0
+ 707               		.cfi_startproc
+ 708 0000 CF93      		push r28
+ 709               	.LCFI46:
+ 710               		.cfi_def_cfa_offset 3
+ 711               		.cfi_offset 28, -2
+ 712 0002 DF93      		push r29
+ 713               	.LCFI47:
+ 714               		.cfi_def_cfa_offset 4
+ 715               		.cfi_offset 29, -3
+ 716 0004 CDB7      		in r28,__SP_L__
+ 717 0006 DEB7      		in r29,__SP_H__
+ 718               	.LCFI48:
+ 719               		.cfi_def_cfa_register 28
+ 720 0008 6097      		sbiw r28,16
+ 721               	.LCFI49:
+ 722               		.cfi_def_cfa_offset 20
+ 723 000a 0FB6      		in __tmp_reg__,__SREG__
+ 724 000c F894      		cli
+ 725 000e DEBF      		out __SP_H__,r29
+ 726 0010 0FBE      		out __SREG__,__tmp_reg__
+ 727 0012 CDBF      		out __SP_L__,r28
+ 728               	/* prologue: function */
+ 729               	/* frame size = 16 */
+ 730               	/* stack size = 18 */
+ 731               	.L__stack_usage = 18
   48:main.cpp      **** 	TCCR0 |= 1<<WGM00 | 1<< WGM01  | 1<< COM01 |1 <<CS00;
- 731               		.loc 1 48 0
- 732 0014 83B7      		in r24,0x33
- 733 0016 8966      		ori r24,lo8(105)
- 734 0018 83BF      		out 0x33,r24
+ 732               		.loc 1 48 0
+ 733 0014 83B7      		in r24,0x33
+ 734 0016 8966      		ori r24,lo8(105)
+ 735 0018 83BF      		out 0x33,r24
   49:main.cpp      **** 	DDRB |= 1<< PB3 | 1<<PINB0 | 1<<PINB1;
- 735               		.loc 1 49 0
- 736 001a 87B3      		in r24,0x17
- 737 001c 8B60      		ori r24,lo8(11)
- 738 001e 87BB      		out 0x17,r24
+ 736               		.loc 1 49 0
+ 737 001a 87B3      		in r24,0x17
+ 738 001c 8B60      		ori r24,lo8(11)
+ 739 001e 87BB      		out 0x17,r24
   50:main.cpp      **** 	TCCR2 |= 1<<WGM20 | 1<< WGM21 | 1<< COM21 |1 <<CS20;
- 739               		.loc 1 50 0
- 740 0020 85B5      		in r24,0x25
- 741 0022 8966      		ori r24,lo8(105)
- 742 0024 85BD      		out 0x25,r24
+ 740               		.loc 1 50 0
+ 741 0020 85B5      		in r24,0x25
+ 742 0022 8966      		ori r24,lo8(105)
+ 743 0024 85BD      		out 0x25,r24
   51:main.cpp      **** 	DDRD |= 1<< PB7 | 1<< PD4;
- 743               		.loc 1 51 0
- 744 0026 81B3      		in r24,0x11
- 745 0028 8069      		ori r24,lo8(-112)
- 746 002a 81BB      		out 0x11,r24
+ 744               		.loc 1 51 0
+ 745 0026 81B3      		in r24,0x11
+ 746 0028 8069      		ori r24,lo8(-112)
+ 747 002a 81BB      		out 0x11,r24
   52:main.cpp      **** 	DDRA|= (1<<PA0);
- 747               		.loc 1 52 0
- 748 002c D09A      		sbi 0x1a,0
+ 748               		.loc 1 52 0
+ 749 002c D09A      		sbi 0x1a,0
   53:main.cpp      **** 	PORTB &= ~(1<< PINB0);
- 749               		.loc 1 53 0
- 750 002e C098      		cbi 0x18,0
+ 750               		.loc 1 53 0
+ 751 002e C098      		cbi 0x18,0
   54:main.cpp      **** 	PORTA &= ~(1<< PINA0);
- 751               		.loc 1 54 0
- 752 0030 D898      		cbi 0x1b,0
+ 752               		.loc 1 54 0
+ 753 0030 D898      		cbi 0x1b,0
   55:main.cpp      **** 	UCSRA = (1 << U2X);
- 753               		.loc 1 55 0
- 754 0032 82E0      		ldi r24,lo8(2)
- 755 0034 8BB9      		out 0xb,r24
+ 754               		.loc 1 55 0
+ 755 0032 82E0      		ldi r24,lo8(2)
+ 756 0034 8BB9      		out 0xb,r24
   56:main.cpp      **** 	UBRRH = (unsigned char) (ubbr_value >> 8);
- 756               		.loc 1 56 0
- 757 0036 10BC      		out 0x20,__zero_reg__
+ 757               		.loc 1 56 0
+ 758 0036 10BC      		out 0x20,__zero_reg__
   57:main.cpp      **** 	UBRRL = (unsigned char) ubbr_value;
- 758               		.loc 1 57 0
- 759 0038 8FEF      		ldi r24,lo8(-1)
- 760 003a 89B9      		out 0x9,r24
+ 759               		.loc 1 57 0
+ 760 0038 8FEF      		ldi r24,lo8(-1)
+ 761 003a 89B9      		out 0x9,r24
   58:main.cpp      **** 	UCSRB = (1 << RXEN);
- 761               		.loc 1 58 0
- 762 003c 80E1      		ldi r24,lo8(16)
- 763 003e 8AB9      		out 0xa,r24
+ 762               		.loc 1 58 0
+ 763 003c 80E1      		ldi r24,lo8(16)
+ 764 003e 8AB9      		out 0xa,r24
   59:main.cpp      **** 	UCSRC = (1 << URSEL) | (3 << UCSZ0);
- 764               		.loc 1 59 0
- 765 0040 86E8      		ldi r24,lo8(-122)
- 766 0042 80BD      		out 0x20,r24
- 767               	.L13:
- 768               	.LBB15:
- 769               	.LBB16:
-  60:main.cpp      **** 	while (1)
-  61:main.cpp      **** 	{
-  62:main.cpp      **** 
-  63:main.cpp      **** 		double x2,y2;
-  64:main.cpp      **** 		if(Receive()==0x11)
- 770               		.loc 1 64 0
- 771 0044 0E94 0000 		call _Z7Receivev
- 772               	.LVL65:
- 773 0048 4197      		sbiw r24,17
- 774 004a 01F0      		breq .+2
- 775 004c 00C0      		rjmp .L53
- 776               	.LBB17:
-  65:main.cpp      **** 		{
-  66:main.cpp      **** 			int x1= Receive();
- 777               		.loc 1 66 0
- 778 004e 0E94 0000 		call _Z7Receivev
- 779               	.LVL66:
- 780 0052 7C01      		movw r14,r24
- 781               	.LVL67:
-  67:main.cpp      **** 			x2 = (Receive())<<8 | x1;
- 782               		.loc 1 67 0
- 783 0054 0E94 0000 		call _Z7Receivev
- 784               	.LVL68:
- 785 0058 D82E      		mov r13,r24
- 786               	.LVL69:
- 787               	.LBE17:
- 788               	.LBE16:
- 789               	.LBB18:
-  68:main.cpp      **** 
-  69:main.cpp      **** 		}
-  70:main.cpp      **** 		else
-  71:main.cpp      **** 		{
-  72:main.cpp      **** 			OCR0=0;
-  73:main.cpp      **** 			OCR2=0;
-  74:main.cpp      **** 			PORTA&=~1<<PA0;
-  75:main.cpp      **** 			PORTB&=~(1<<PB0);
-  76:main.cpp      **** 			continue;
-  77:main.cpp      **** 		}
-  78:main.cpp      **** 		if(Receive()==0x21)
- 790               		.loc 1 78 0
- 791 005a 0E94 0000 		call _Z7Receivev
+ 765               		.loc 1 59 0
+ 766 0040 86E8      		ldi r24,lo8(-122)
+ 767 0042 80BD      		out 0x20,r24
+ 768               	.LVL65:
+  60:main.cpp      **** 	int xo=0,yo=0,cnt=0;
+ 769               		.loc 1 60 0
+ 770 0044 C12C      		mov r12,__zero_reg__
+ 771 0046 D12C      		mov r13,__zero_reg__
+ 772 0048 E12C      		mov r14,__zero_reg__
+ 773 004a F12C      		mov r15,__zero_reg__
+ 774               	.LVL66:
+ 775               	.L13:
+ 776               	.LBB15:
+ 777               	.LBB16:
+  61:main.cpp      **** 
+  62:main.cpp      **** 	while (1)
+  63:main.cpp      **** 	{
+  64:main.cpp      **** 
+  65:main.cpp      **** 		double x2,y2;
+  66:main.cpp      **** 		if(Receive()==0x11)
+ 778               		.loc 1 66 0
+ 779 004c 0E94 0000 		call _Z7Receivev
+ 780               	.LVL67:
+ 781 0050 4197      		sbiw r24,17
+ 782 0052 01F0      		breq .+2
+ 783 0054 00C0      		rjmp .L63
+ 784               	.LBB17:
+  67:main.cpp      **** 		{
+  68:main.cpp      **** 			int x1= Receive();
+ 785               		.loc 1 68 0
+ 786 0056 0E94 0000 		call _Z7Receivev
+ 787               	.LVL68:
+ 788 005a 1C01      		movw r2,r24
+ 789               	.LVL69:
+  69:main.cpp      **** 			x2 = (Receive())<<8 | x1;
+ 790               		.loc 1 69 0
+ 791 005c 0E94 0000 		call _Z7Receivev
  792               	.LVL70:
- 793 005e 8197      		sbiw r24,33
- 794 0060 01F4      		brne .L53
- 795               	.LBB19:
-  79:main.cpp      **** 		{
-  80:main.cpp      **** 			int y1=Receive();
- 796               		.loc 1 80 0
- 797 0062 0E94 0000 		call _Z7Receivev
- 798               	.LVL71:
- 799 0066 3C01      		movw r6,r24
+ 793 0060 182F      		mov r17,r24
+ 794               	.LVL71:
+ 795               	.LBE17:
+ 796               	.LBE16:
+ 797               	.LBB19:
+  70:main.cpp      **** 
+  71:main.cpp      **** 		}
+  72:main.cpp      **** 		else
+  73:main.cpp      **** 		{
+  74:main.cpp      **** 			OCR0=0;
+  75:main.cpp      **** 			OCR2=0;
+  76:main.cpp      **** 			PORTA&=~1<<PA0;
+  77:main.cpp      **** 			PORTB&=~(1<<PB0);
+  78:main.cpp      **** 			continue;
+  79:main.cpp      **** 		}
+  80:main.cpp      **** 		if(Receive()==0x21)
+ 798               		.loc 1 80 0
+ 799 0062 0E94 0000 		call _Z7Receivev
  800               	.LVL72:
-  81:main.cpp      **** 			y2=(Receive())<<8 | y1;
- 801               		.loc 1 81 0
- 802 0068 0E94 0000 		call _Z7Receivev
- 803               	.LVL73:
- 804 006c 582E      		mov r5,r24
- 805               	.LVL74:
- 806               	.LBE19:
- 807               	.LBE18:
-  82:main.cpp      **** 		}
-  83:main.cpp      **** 		else
-  84:main.cpp      **** 		{
-  85:main.cpp      **** 			OCR0=0;
-  86:main.cpp      **** 			OCR2=0;
-  87:main.cpp      **** 			PORTA&=~1<<PA0;
-  88:main.cpp      **** 			PORTB&=~(1<<PB0);
-  89:main.cpp      **** 			continue;
-  90:main.cpp      **** 		}
-  91:main.cpp      **** 		long double x1 = x2 - 512;
- 808               		.loc 1 91 0
- 809 006e 3D2C      		mov r3,r13
- 810 0070 212C      		mov r2,__zero_reg__
- 811 0072 B101      		movw r22,r2
- 812 0074 6E29      		or r22,r14
- 813 0076 7F29      		or r23,r15
- 814 0078 072E      		mov __tmp_reg__,r23
- 815 007a 000C      		lsl r0
- 816 007c 880B      		sbc r24,r24
- 817 007e 990B      		sbc r25,r25
- 818 0080 0E94 0000 		call __floatsisf
- 819               	.LVL75:
- 820 0084 20E0      		ldi r18,0
- 821 0086 30E0      		ldi r19,0
- 822 0088 40E0      		ldi r20,0
- 823 008a 54E4      		ldi r21,lo8(68)
- 824 008c 0E94 0000 		call __subsf3
- 825               	.LVL76:
- 826 0090 6B01      		movw r12,r22
- 827 0092 7C01      		movw r14,r24
- 828               	.LVL77:
-  92:main.cpp      **** 		long double y1 = 512 - y2;
- 829               		.loc 1 92 0
- 830 0094 5A86      		std Y+10,r5
- 831 0096 1986      		std Y+9,__zero_reg__
- 832 0098 6985      		ldd r22,Y+9
- 833 009a 7A85      		ldd r23,Y+10
- 834 009c 6629      		or r22,r6
- 835 009e 7729      		or r23,r7
- 836 00a0 072E      		mov __tmp_reg__,r23
- 837 00a2 000C      		lsl r0
- 838 00a4 880B      		sbc r24,r24
- 839 00a6 990B      		sbc r25,r25
- 840 00a8 0E94 0000 		call __floatsisf
- 841               	.LVL78:
- 842 00ac 9B01      		movw r18,r22
- 843 00ae AC01      		movw r20,r24
- 844 00b0 60E0      		ldi r22,0
- 845 00b2 70E0      		ldi r23,0
- 846 00b4 80E0      		ldi r24,0
- 847 00b6 94E4      		ldi r25,lo8(68)
- 848 00b8 0E94 0000 		call __subsf3
- 849               	.LVL79:
- 850 00bc 2B01      		movw r4,r22
- 851 00be 3C01      		movw r6,r24
- 852               	.LVL80:
-  93:main.cpp      **** 		/*if(x1>-20&&x1<20&&y1>490)
+ 801 0066 8197      		sbiw r24,33
+ 802 0068 01F0      		breq .+2
+ 803 006a 00C0      		rjmp .L63
+ 804               	.LBE19:
+ 805               	.LBB21:
+ 806               	.LBB18:
+  69:main.cpp      **** 			x2 = (Receive())<<8 | x1;
+ 807               		.loc 1 69 0
+ 808 006c 1E87      		std Y+14,r17
+ 809 006e 1D86      		std Y+13,__zero_reg__
+ 810 0070 2D85      		ldd r18,Y+13
+ 811 0072 3E85      		ldd r19,Y+14
+ 812 0074 222A      		or r2,r18
+ 813 0076 332A      		or r3,r19
+ 814               	.LVL73:
+ 815 0078 B101      		movw r22,r2
+ 816 007a 032C      		mov __tmp_reg__,r3
+ 817 007c 000C      		lsl r0
+ 818 007e 880B      		sbc r24,r24
+ 819 0080 990B      		sbc r25,r25
+ 820 0082 0E94 0000 		call __floatsisf
+ 821               	.LVL74:
+ 822 0086 2B01      		movw r4,r22
+ 823 0088 3C01      		movw r6,r24
+ 824               	.LBE18:
+ 825               	.LBE21:
+ 826               	.LBB22:
+ 827               	.LBB20:
+  81:main.cpp      **** 		{
+  82:main.cpp      **** 			int y1=Receive();
+ 828               		.loc 1 82 0
+ 829 008a 0E94 0000 		call _Z7Receivev
+ 830               	.LVL75:
+ 831 008e 8C01      		movw r16,r24
+ 832               	.LVL76:
+  83:main.cpp      **** 			y2=(Receive())<<8 | y1;
+ 833               		.loc 1 83 0
+ 834 0090 0E94 0000 		call _Z7Receivev
+ 835               	.LVL77:
+ 836 0094 888B      		std Y+16,r24
+ 837 0096 1F86      		std Y+15,__zero_reg__
+ 838 0098 6F85      		ldd r22,Y+15
+ 839 009a 7889      		ldd r23,Y+16
+ 840 009c 602B      		or r22,r16
+ 841 009e 712B      		or r23,r17
+ 842 00a0 072E      		mov __tmp_reg__,r23
+ 843 00a2 000C      		lsl r0
+ 844 00a4 880B      		sbc r24,r24
+ 845 00a6 990B      		sbc r25,r25
+ 846 00a8 0E94 0000 		call __floatsisf
+ 847               	.LVL78:
+ 848 00ac 4B01      		movw r8,r22
+ 849 00ae 5C01      		movw r10,r24
+ 850               	.LVL79:
+ 851               	.LBE20:
+ 852               	.LBE22:
+  84:main.cpp      **** 		}
+  85:main.cpp      **** 		else
+  86:main.cpp      **** 		{
+  87:main.cpp      **** 			OCR0=0;
+  88:main.cpp      **** 			OCR2=0;
+  89:main.cpp      **** 			PORTA&=~1<<PA0;
+  90:main.cpp      **** 			PORTB&=~(1<<PB0);
+  91:main.cpp      **** 			continue;
+  92:main.cpp      **** 		}
+  93:main.cpp      **** 		if(x2==xo&&y2==xo)
+ 853               		.loc 1 93 0
+ 854 00b0 B701      		movw r22,r14
+ 855 00b2 0F2C      		mov __tmp_reg__,r15
+ 856 00b4 000C      		lsl r0
+ 857 00b6 880B      		sbc r24,r24
+ 858 00b8 990B      		sbc r25,r25
+ 859 00ba 0E94 0000 		call __floatsisf
+ 860               	.LVL80:
+ 861 00be 6987      		std Y+9,r22
+ 862 00c0 7A87      		std Y+10,r23
+ 863 00c2 8B87      		std Y+11,r24
+ 864 00c4 9C87      		std Y+12,r25
+ 865 00c6 9B01      		movw r18,r22
+ 866 00c8 AC01      		movw r20,r24
+ 867 00ca C301      		movw r24,r6
+ 868 00cc B201      		movw r22,r4
+ 869 00ce 0E94 0000 		call __eqsf2
+ 870               	.LVL81:
+ 871 00d2 8111      		cpse r24,__zero_reg__
+ 872 00d4 00C0      		rjmp .L61
+ 873               		.loc 1 93 0 is_stmt 0 discriminator 1
+ 874 00d6 2985      		ldd r18,Y+9
+ 875 00d8 3A85      		ldd r19,Y+10
+ 876 00da 4B85      		ldd r20,Y+11
+ 877 00dc 5C85      		ldd r21,Y+12
+ 878 00de C501      		movw r24,r10
+ 879 00e0 B401      		movw r22,r8
+ 880 00e2 0E94 0000 		call __eqsf2
+ 881               	.LVL82:
+ 882 00e6 8111      		cpse r24,__zero_reg__
+ 883 00e8 00C0      		rjmp .L61
   94:main.cpp      **** 		{
-  95:main.cpp      **** 			x1=512;
-  96:main.cpp      **** 			y1=0;
-  97:main.cpp      **** 		}
-  98:main.cpp      **** 		if(x1>-20&&x1<20&&y1<-490)
-  99:main.cpp      **** 		{
- 100:main.cpp      **** 			x1=-512;
- 101:main.cpp      **** 			y1=0;
+  95:main.cpp      **** 			cnt++;
+ 884               		.loc 1 95 0 is_stmt 1
+ 885 00ea 3FEF      		ldi r19,-1
+ 886 00ec C31A      		sub r12,r19
+ 887 00ee D30A      		sbc r13,r19
+ 888               	.LVL83:
+  96:main.cpp      **** 		}
+  97:main.cpp      **** 		else
+  98:main.cpp      **** 		{
+  99:main.cpp      **** 			xo=x2;
+ 100:main.cpp      **** 			yo=y2;
+ 101:main.cpp      **** 			cnt=0;
  102:main.cpp      **** 		}
- 103:main.cpp      **** 		if(y1>-20&&y1<20&&x1>490)
+ 103:main.cpp      **** 		if(cnt>=5)
+ 889               		.loc 1 103 0
+ 890 00f0 85E0      		ldi r24,5
+ 891 00f2 C816      		cp r12,r24
+ 892 00f4 D104      		cpc r13,__zero_reg__
+ 893 00f6 04F0      		brlt .L46
+ 894               	.LVL84:
+ 895               	.L63:
  104:main.cpp      **** 		{
- 105:main.cpp      **** 			x1=512;
- 106:main.cpp      **** 			y1=0;
- 107:main.cpp      **** 		}
- 108:main.cpp      **** 		if(y1>-20&&y1<20&&x1<-490)
- 109:main.cpp      **** 		{
- 110:main.cpp      **** 			x1=-512;
- 111:main.cpp      **** 			y1=0;
- 112:main.cpp      **** 		}*/
- 113:main.cpp      **** 		if(y1/x1>=12.8&&y1/x1<=-12.8)
- 853               		.loc 1 113 0
- 854 00c0 A701      		movw r20,r14
- 855 00c2 9601      		movw r18,r12
- 856 00c4 0E94 0000 		call __divsf3
- 857               	.LVL81:
- 858 00c8 4B01      		movw r8,r22
- 859 00ca 5C01      		movw r10,r24
- 860 00cc 2DEC      		ldi r18,lo8(-51)
- 861 00ce 3CEC      		ldi r19,lo8(-52)
- 862 00d0 4CE4      		ldi r20,lo8(76)
- 863 00d2 51E4      		ldi r21,lo8(65)
- 864 00d4 0E94 0000 		call __gesf2
- 865               	.LVL82:
- 866 00d8 87FF      		sbrs r24,7
- 867 00da 00C0      		rjmp .L18
- 868 00dc 00C0      		rjmp .L19
- 869               	.LVL83:
- 870               	.L53:
- 871               	.LBB20:
-  85:main.cpp      **** 			OCR2=0;
- 872               		.loc 1 85 0
- 873 00de 1CBE      		out 0x3c,__zero_reg__
-  86:main.cpp      **** 			PORTA&=~1<<PA0;
- 874               		.loc 1 86 0
- 875 00e0 13BC      		out 0x23,__zero_reg__
-  87:main.cpp      **** 			PORTB&=~(1<<PB0);
- 876               		.loc 1 87 0
- 877 00e2 D898      		cbi 0x1b,0
-  88:main.cpp      **** 			continue;
- 878               		.loc 1 88 0
- 879 00e4 C098      		cbi 0x18,0
-  89:main.cpp      **** 		}
- 880               		.loc 1 89 0
- 881 00e6 00C0      		rjmp .L13
- 882               	.LVL84:
- 883               	.L18:
- 884               	.LBE20:
- 885               		.loc 1 113 0 discriminator 1
- 886 00e8 2DEC      		ldi r18,lo8(-51)
- 887 00ea 3CEC      		ldi r19,lo8(-52)
- 888 00ec 4CE4      		ldi r20,lo8(76)
- 889 00ee 51EC      		ldi r21,lo8(-63)
- 890 00f0 C501      		movw r24,r10
- 891 00f2 B401      		movw r22,r8
- 892 00f4 0E94 0000 		call __lesf2
- 893               	.LVL85:
- 894 00f8 1816      		cp __zero_reg__,r24
- 895 00fa 04F0      		brlt .L19
- 114:main.cpp      **** 		x1=0;
- 896               		.loc 1 114 0
- 897 00fc C12C      		mov r12,__zero_reg__
- 898 00fe D12C      		mov r13,__zero_reg__
- 899 0100 7601      		movw r14,r12
- 900               	.LVL86:
- 901               	.L19:
- 115:main.cpp      **** 		if(y1/x1<=0.390625&&y1/x1>=-0.390625)
- 902               		.loc 1 115 0
- 903 0102 A701      		movw r20,r14
- 904 0104 9601      		movw r18,r12
- 905 0106 C301      		movw r24,r6
- 906 0108 B201      		movw r22,r4
- 907 010a 0E94 0000 		call __divsf3
- 908               	.LVL87:
- 909 010e 4B01      		movw r8,r22
- 910 0110 5C01      		movw r10,r24
- 911 0112 20E0      		ldi r18,0
- 912 0114 30E0      		ldi r19,0
- 913 0116 48EC      		ldi r20,lo8(-56)
- 914 0118 5EE3      		ldi r21,lo8(62)
- 915 011a 0E94 0000 		call __lesf2
- 916               	.LVL88:
- 917 011e 1816      		cp __zero_reg__,r24
- 918 0120 04F0      		brlt .L21
- 919               		.loc 1 115 0 is_stmt 0 discriminator 1
- 920 0122 20E0      		ldi r18,0
- 921 0124 30E0      		ldi r19,0
- 922 0126 48EC      		ldi r20,lo8(-56)
- 923 0128 5EEB      		ldi r21,lo8(-66)
- 924 012a C501      		movw r24,r10
- 925 012c B401      		movw r22,r8
- 926 012e 0E94 0000 		call __gesf2
- 927               	.LVL89:
- 928 0132 87FD      		sbrc r24,7
- 929 0134 00C0      		rjmp .L21
- 116:main.cpp      **** 		y1=0;
- 930               		.loc 1 116 0 is_stmt 1
- 931 0136 412C      		mov r4,__zero_reg__
- 932 0138 512C      		mov r5,__zero_reg__
- 933 013a 3201      		movw r6,r4
- 934               	.LVL90:
- 935               	.L21:
- 117:main.cpp      **** 		x1=map(x1,-512,512,-1,1);
- 118:main.cpp      **** 		y1=map(y1,-512,512,-1,1);
- 119:main.cpp      **** 		long double xans,yans;
- 120:main.cpp      **** 		ellipticalSquareToDisc(x1, y1, xans, yans);
- 936               		.loc 1 120 0
- 937 013c 20E0      		ldi r18,0
- 938 013e 30E0      		ldi r19,0
- 939 0140 40E0      		ldi r20,0
- 940 0142 54E4      		ldi r21,lo8(68)
- 941 0144 C301      		movw r24,r6
- 942 0146 B201      		movw r22,r4
- 943 0148 0E94 0000 		call __addsf3
- 944               	.LVL91:
- 945 014c 9B01      		movw r18,r22
- 946 014e AC01      		movw r20,r24
- 947 0150 0E94 0000 		call __addsf3
- 948               	.LVL92:
- 949 0154 20E0      		ldi r18,0
- 950 0156 30E0      		ldi r19,0
- 951 0158 40E8      		ldi r20,lo8(-128)
- 952 015a 5AE3      		ldi r21,lo8(58)
- 953 015c 0E94 0000 		call __mulsf3
- 954               	.LVL93:
- 955 0160 20E0      		ldi r18,0
- 956 0162 30E0      		ldi r19,0
- 957 0164 40E8      		ldi r20,lo8(-128)
- 958 0166 5FE3      		ldi r21,lo8(63)
- 959 0168 0E94 0000 		call __subsf3
- 960               	.LVL94:
- 961 016c 2B01      		movw r4,r22
- 962 016e 3C01      		movw r6,r24
- 963 0170 20E0      		ldi r18,0
- 964 0172 30E0      		ldi r19,0
- 965 0174 40E0      		ldi r20,0
- 966 0176 54E4      		ldi r21,lo8(68)
- 967 0178 C701      		movw r24,r14
- 968 017a B601      		movw r22,r12
- 969 017c 0E94 0000 		call __addsf3
- 970               	.LVL95:
- 971 0180 9B01      		movw r18,r22
- 972 0182 AC01      		movw r20,r24
- 973 0184 0E94 0000 		call __addsf3
- 974               	.LVL96:
- 975 0188 20E0      		ldi r18,0
- 976 018a 30E0      		ldi r19,0
- 977 018c 40E8      		ldi r20,lo8(-128)
- 978 018e 5AE3      		ldi r21,lo8(58)
- 979 0190 0E94 0000 		call __mulsf3
- 980               	.LVL97:
- 981 0194 20E0      		ldi r18,0
- 982 0196 30E0      		ldi r19,0
- 983 0198 40E8      		ldi r20,lo8(-128)
- 984 019a 5FE3      		ldi r21,lo8(63)
- 985 019c 0E94 0000 		call __subsf3
- 986               	.LVL98:
- 987 01a0 9E01      		movw r18,r28
- 988 01a2 2F5F      		subi r18,-1
- 989 01a4 3F4F      		sbci r19,-1
- 990 01a6 7901      		movw r14,r18
- 991               	.LVL99:
- 992 01a8 8E01      		movw r16,r28
- 993 01aa 0B5F      		subi r16,-5
- 994 01ac 1F4F      		sbci r17,-1
- 995 01ae A301      		movw r20,r6
- 996 01b0 9201      		movw r18,r4
- 997 01b2 0E94 0000 		call _Z22ellipticalSquareToDisceeReS_
- 998               	.LVL100:
- 121:main.cpp      **** 		long double x = (xans * 0.707) + (yans * 0.707);
- 999               		.loc 1 121 0
- 1000 01b6 8D80      		ldd r8,Y+5
- 1001 01b8 9E80      		ldd r9,Y+6
- 1002 01ba AF80      		ldd r10,Y+7
- 1003 01bc B884      		ldd r11,Y+8
- 1004 01be 24EF      		ldi r18,lo8(-12)
- 1005 01c0 3DEF      		ldi r19,lo8(-3)
- 1006 01c2 44E3      		ldi r20,lo8(52)
- 1007 01c4 5FE3      		ldi r21,lo8(63)
- 1008 01c6 6981      		ldd r22,Y+1
- 1009 01c8 7A81      		ldd r23,Y+2
- 1010 01ca 8B81      		ldd r24,Y+3
- 1011 01cc 9C81      		ldd r25,Y+4
- 1012 01ce 0E94 0000 		call __mulsf3
- 1013               	.LVL101:
- 1014 01d2 6B01      		movw r12,r22
- 1015 01d4 7C01      		movw r14,r24
- 1016               	.LVL102:
- 122:main.cpp      **** 		long double y = (-xans * 0.707) + (yans * 0.707);
- 123:main.cpp      **** 		ellipticalDiscToSquare(x,y,xans,yans);
- 1017               		.loc 1 123 0
- 1018 01d6 C501      		movw r24,r10
- 1019 01d8 B401      		movw r22,r8
- 1020 01da 9058      		subi r25,0x80
- 1021 01dc 24EF      		ldi r18,lo8(-12)
- 1022 01de 3DEF      		ldi r19,lo8(-3)
- 1023 01e0 44E3      		ldi r20,lo8(52)
- 1024 01e2 5FE3      		ldi r21,lo8(63)
- 1025 01e4 0E94 0000 		call __mulsf3
- 1026               	.LVL103:
- 1027 01e8 A701      		movw r20,r14
- 1028 01ea 9601      		movw r18,r12
- 1029 01ec 0E94 0000 		call __addsf3
- 1030               	.LVL104:
- 1031 01f0 2B01      		movw r4,r22
- 1032 01f2 3C01      		movw r6,r24
- 1033 01f4 24EF      		ldi r18,lo8(-12)
- 1034 01f6 3DEF      		ldi r19,lo8(-3)
- 1035 01f8 44E3      		ldi r20,lo8(52)
- 1036 01fa 5FE3      		ldi r21,lo8(63)
- 1037 01fc C501      		movw r24,r10
- 1038 01fe B401      		movw r22,r8
- 1039 0200 0E94 0000 		call __mulsf3
- 1040               	.LVL105:
- 1041 0204 A701      		movw r20,r14
- 1042 0206 9601      		movw r18,r12
- 1043 0208 0E94 0000 		call __addsf3
- 1044               	.LVL106:
- 1045 020c 9E01      		movw r18,r28
- 1046 020e 2F5F      		subi r18,-1
- 1047 0210 3F4F      		sbci r19,-1
- 1048 0212 7901      		movw r14,r18
- 1049 0214 A301      		movw r20,r6
- 1050 0216 9201      		movw r18,r4
- 1051 0218 0E94 0000 		call _Z22ellipticalDiscToSquareeeReS_
- 1052               	.LVL107:
- 1053               	.LBB21:
- 1054               	.LBB22:
-  23:main.cpp      **** }
- 1055               		.loc 1 23 0
- 1056 021c 21E1      		ldi r18,lo8(17)
- 1057 021e 34EC      		ldi r19,lo8(-60)
- 1058 0220 4DE7      		ldi r20,lo8(125)
- 1059 0222 5FE3      		ldi r21,lo8(63)
- 1060 0224 6D81      		ldd r22,Y+5
- 1061 0226 7E81      		ldd r23,Y+6
- 1062 0228 8F81      		ldd r24,Y+7
- 1063 022a 9885      		ldd r25,Y+8
- 1064 022c 0E94 0000 		call __addsf3
+ 105:main.cpp      **** 			OCR0=0;
+ 896               		.loc 1 105 0
+ 897 00f8 1CBE      		out 0x3c,__zero_reg__
+ 106:main.cpp      **** 			OCR2=0;
+ 898               		.loc 1 106 0
+ 899 00fa 13BC      		out 0x23,__zero_reg__
+ 107:main.cpp      **** 			PORTA&=~1<<PA0;
+ 900               		.loc 1 107 0
+ 901 00fc D898      		cbi 0x1b,0
+ 108:main.cpp      **** 			PORTB&=~(1<<PB0);
+ 902               		.loc 1 108 0
+ 903 00fe C098      		cbi 0x18,0
+ 109:main.cpp      **** 			continue;
+ 904               		.loc 1 109 0
+ 905 0100 00C0      		rjmp .L13
+ 906               	.LVL85:
+ 907               	.L61:
+ 908 0102 C12C      		mov r12,__zero_reg__
+ 909 0104 D12C      		mov r13,__zero_reg__
+ 910               	.LVL86:
+ 911 0106 00C0      		rjmp .L19
+ 912               	.LVL87:
+ 913               	.L46:
+ 914 0108 1701      		movw r2,r14
+ 915               	.LVL88:
+ 916               	.L19:
+ 110:main.cpp      **** 		}
+ 111:main.cpp      **** 		long double x1 = x2 - 512;
+ 917               		.loc 1 111 0
+ 918 010a 20E0      		ldi r18,0
+ 919 010c 30E0      		ldi r19,0
+ 920 010e 40E0      		ldi r20,0
+ 921 0110 54E4      		ldi r21,lo8(68)
+ 922 0112 C301      		movw r24,r6
+ 923 0114 B201      		movw r22,r4
+ 924 0116 0E94 0000 		call __subsf3
+ 925               	.LVL89:
+ 926 011a 2B01      		movw r4,r22
+ 927 011c 3C01      		movw r6,r24
+ 928               	.LVL90:
+ 112:main.cpp      **** 		long double y1 = 512 - y2;
+ 929               		.loc 1 112 0
+ 930 011e A501      		movw r20,r10
+ 931 0120 9401      		movw r18,r8
+ 932 0122 60E0      		ldi r22,0
+ 933 0124 70E0      		ldi r23,0
+ 934 0126 80E0      		ldi r24,0
+ 935 0128 94E4      		ldi r25,lo8(68)
+ 936 012a 0E94 0000 		call __subsf3
+ 937               	.LVL91:
+ 938 012e 4B01      		movw r8,r22
+ 939 0130 5C01      		movw r10,r24
+ 940               	.LVL92:
+ 113:main.cpp      **** 		/*if(x1>-20&&x1<20&&y1>490)
+ 114:main.cpp      **** 		{
+ 115:main.cpp      **** 			x1=512;
+ 116:main.cpp      **** 			y1=0;
+ 117:main.cpp      **** 		}
+ 118:main.cpp      **** 		if(x1>-20&&x1<20&&y1<-490)
+ 119:main.cpp      **** 		{
+ 120:main.cpp      **** 			x1=-512;
+ 121:main.cpp      **** 			y1=0;
+ 122:main.cpp      **** 		}
+ 123:main.cpp      **** 		if(y1>-20&&y1<20&&x1>490)
+ 124:main.cpp      **** 		{
+ 125:main.cpp      **** 			x1=512;
+ 126:main.cpp      **** 			y1=0;
+ 127:main.cpp      **** 		}
+ 128:main.cpp      **** 		if(y1>-20&&y1<20&&x1<-490)
+ 129:main.cpp      **** 		{
+ 130:main.cpp      **** 			x1=-512;
+ 131:main.cpp      **** 			y1=0;
+ 132:main.cpp      **** 		}*/
+ 133:main.cpp      **** 		if(y1/x1>=12.8&&y1/x1<=-12.8)
+ 941               		.loc 1 133 0
+ 942 0132 A301      		movw r20,r6
+ 943 0134 9201      		movw r18,r4
+ 944 0136 0E94 0000 		call __divsf3
+ 945               	.LVL93:
+ 946 013a 6987      		std Y+9,r22
+ 947 013c 7A87      		std Y+10,r23
+ 948 013e 8B87      		std Y+11,r24
+ 949 0140 9C87      		std Y+12,r25
+ 950 0142 2DEC      		ldi r18,lo8(-51)
+ 951 0144 3CEC      		ldi r19,lo8(-52)
+ 952 0146 4CE4      		ldi r20,lo8(76)
+ 953 0148 51E4      		ldi r21,lo8(65)
+ 954 014a 0E94 0000 		call __gesf2
+ 955               	.LVL94:
+ 956 014e 87FD      		sbrc r24,7
+ 957 0150 00C0      		rjmp .L21
+ 958               		.loc 1 133 0 is_stmt 0 discriminator 1
+ 959 0152 2DEC      		ldi r18,lo8(-51)
+ 960 0154 3CEC      		ldi r19,lo8(-52)
+ 961 0156 4CE4      		ldi r20,lo8(76)
+ 962 0158 51EC      		ldi r21,lo8(-63)
+ 963 015a 6985      		ldd r22,Y+9
+ 964 015c 7A85      		ldd r23,Y+10
+ 965 015e 8B85      		ldd r24,Y+11
+ 966 0160 9C85      		ldd r25,Y+12
+ 967 0162 0E94 0000 		call __lesf2
+ 968               	.LVL95:
+ 969 0166 1816      		cp __zero_reg__,r24
+ 970 0168 04F0      		brlt .L21
+ 134:main.cpp      **** 		x1=0;
+ 971               		.loc 1 134 0 is_stmt 1
+ 972 016a 412C      		mov r4,__zero_reg__
+ 973 016c 512C      		mov r5,__zero_reg__
+ 974 016e 3201      		movw r6,r4
+ 975               	.LVL96:
+ 976               	.L21:
+ 135:main.cpp      **** 		if(y1/x1<=0.390625&&y1/x1>=-0.390625)
+ 977               		.loc 1 135 0
+ 978 0170 A301      		movw r20,r6
+ 979 0172 9201      		movw r18,r4
+ 980 0174 C501      		movw r24,r10
+ 981 0176 B401      		movw r22,r8
+ 982 0178 0E94 0000 		call __divsf3
+ 983               	.LVL97:
+ 984 017c 6987      		std Y+9,r22
+ 985 017e 7A87      		std Y+10,r23
+ 986 0180 8B87      		std Y+11,r24
+ 987 0182 9C87      		std Y+12,r25
+ 988 0184 20E0      		ldi r18,0
+ 989 0186 30E0      		ldi r19,0
+ 990 0188 48EC      		ldi r20,lo8(-56)
+ 991 018a 5EE3      		ldi r21,lo8(62)
+ 992 018c 0E94 0000 		call __lesf2
+ 993               	.LVL98:
+ 994 0190 1816      		cp __zero_reg__,r24
+ 995 0192 04F0      		brlt .L24
+ 996               		.loc 1 135 0 is_stmt 0 discriminator 1
+ 997 0194 20E0      		ldi r18,0
+ 998 0196 30E0      		ldi r19,0
+ 999 0198 48EC      		ldi r20,lo8(-56)
+ 1000 019a 5EEB      		ldi r21,lo8(-66)
+ 1001 019c 6985      		ldd r22,Y+9
+ 1002 019e 7A85      		ldd r23,Y+10
+ 1003 01a0 8B85      		ldd r24,Y+11
+ 1004 01a2 9C85      		ldd r25,Y+12
+ 1005 01a4 0E94 0000 		call __gesf2
+ 1006               	.LVL99:
+ 1007 01a8 87FD      		sbrc r24,7
+ 1008 01aa 00C0      		rjmp .L24
+ 136:main.cpp      **** 		y1=0;
+ 1009               		.loc 1 136 0 is_stmt 1
+ 1010 01ac 812C      		mov r8,__zero_reg__
+ 1011 01ae 912C      		mov r9,__zero_reg__
+ 1012 01b0 5401      		movw r10,r8
+ 1013               	.LVL100:
+ 1014               	.L24:
+ 137:main.cpp      **** 		x1=map(x1,-512,512,-1,1);
+ 138:main.cpp      **** 		y1=map(y1,-512,512,-1,1);
+ 139:main.cpp      **** 		long double xans,yans;
+ 140:main.cpp      **** 		ellipticalSquareToDisc(x1, y1, xans, yans);
+ 1015               		.loc 1 140 0
+ 1016 01b2 20E0      		ldi r18,0
+ 1017 01b4 30E0      		ldi r19,0
+ 1018 01b6 40E0      		ldi r20,0
+ 1019 01b8 54E4      		ldi r21,lo8(68)
+ 1020 01ba C501      		movw r24,r10
+ 1021 01bc B401      		movw r22,r8
+ 1022 01be 0E94 0000 		call __addsf3
+ 1023               	.LVL101:
+ 1024 01c2 9B01      		movw r18,r22
+ 1025 01c4 AC01      		movw r20,r24
+ 1026 01c6 0E94 0000 		call __addsf3
+ 1027               	.LVL102:
+ 1028 01ca 20E0      		ldi r18,0
+ 1029 01cc 30E0      		ldi r19,0
+ 1030 01ce 40E8      		ldi r20,lo8(-128)
+ 1031 01d0 5AE3      		ldi r21,lo8(58)
+ 1032 01d2 0E94 0000 		call __mulsf3
+ 1033               	.LVL103:
+ 1034 01d6 20E0      		ldi r18,0
+ 1035 01d8 30E0      		ldi r19,0
+ 1036 01da 40E8      		ldi r20,lo8(-128)
+ 1037 01dc 5FE3      		ldi r21,lo8(63)
+ 1038 01de 0E94 0000 		call __subsf3
+ 1039               	.LVL104:
+ 1040 01e2 4B01      		movw r8,r22
+ 1041 01e4 5C01      		movw r10,r24
+ 1042 01e6 20E0      		ldi r18,0
+ 1043 01e8 30E0      		ldi r19,0
+ 1044 01ea 40E0      		ldi r20,0
+ 1045 01ec 54E4      		ldi r21,lo8(68)
+ 1046 01ee C301      		movw r24,r6
+ 1047 01f0 B201      		movw r22,r4
+ 1048 01f2 0E94 0000 		call __addsf3
+ 1049               	.LVL105:
+ 1050 01f6 9B01      		movw r18,r22
+ 1051 01f8 AC01      		movw r20,r24
+ 1052 01fa 0E94 0000 		call __addsf3
+ 1053               	.LVL106:
+ 1054 01fe 20E0      		ldi r18,0
+ 1055 0200 30E0      		ldi r19,0
+ 1056 0202 40E8      		ldi r20,lo8(-128)
+ 1057 0204 5AE3      		ldi r21,lo8(58)
+ 1058 0206 0E94 0000 		call __mulsf3
+ 1059               	.LVL107:
+ 1060 020a 20E0      		ldi r18,0
+ 1061 020c 30E0      		ldi r19,0
+ 1062 020e 40E8      		ldi r20,lo8(-128)
+ 1063 0210 5FE3      		ldi r21,lo8(63)
+ 1064 0212 0E94 0000 		call __subsf3
  1065               	.LVL108:
- 1066 0230 20E0      		ldi r18,0
- 1067 0232 30E0      		ldi r19,0
- 1068 0234 4FEF      		ldi r20,lo8(-1)
- 1069 0236 53E4      		ldi r21,lo8(67)
- 1070 0238 0E94 0000 		call __mulsf3
+ 1066 0216 9E01      		movw r18,r28
+ 1067 0218 2F5F      		subi r18,-1
+ 1068 021a 3F4F      		sbci r19,-1
+ 1069 021c 7901      		movw r14,r18
+ 1070 021e 8E01      		movw r16,r28
  1071               	.LVL109:
- 1072 023c 21E1      		ldi r18,lo8(17)
- 1073 023e 34EC      		ldi r19,lo8(-60)
- 1074 0240 4DEF      		ldi r20,lo8(-3)
- 1075 0242 5FE3      		ldi r21,lo8(63)
- 1076 0244 0E94 0000 		call __divsf3
+ 1072 0220 0B5F      		subi r16,-5
+ 1073 0222 1F4F      		sbci r17,-1
+ 1074 0224 A501      		movw r20,r10
+ 1075 0226 9401      		movw r18,r8
+ 1076 0228 0E94 0000 		call _Z22ellipticalSquareToDisceeReS_
  1077               	.LVL110:
- 1078 0248 20E0      		ldi r18,0
- 1079 024a 30E0      		ldi r19,0
- 1080 024c 4FE7      		ldi r20,lo8(127)
- 1081 024e 53E4      		ldi r21,lo8(67)
- 1082 0250 0E94 0000 		call __subsf3
- 1083               	.LVL111:
- 1084 0254 2B01      		movw r4,r22
- 1085 0256 3C01      		movw r6,r24
- 1086               	.LVL112:
- 1087               	.LBE22:
- 1088               	.LBE21:
- 1089               	.LBB23:
- 1090               	.LBB24:
- 1091 0258 21E1      		ldi r18,lo8(17)
- 1092 025a 34EC      		ldi r19,lo8(-60)
- 1093 025c 4DE7      		ldi r20,lo8(125)
- 1094 025e 5FE3      		ldi r21,lo8(63)
- 1095 0260 6981      		ldd r22,Y+1
- 1096 0262 7A81      		ldd r23,Y+2
- 1097 0264 8B81      		ldd r24,Y+3
- 1098 0266 9C81      		ldd r25,Y+4
- 1099 0268 0E94 0000 		call __addsf3
- 1100               	.LVL113:
- 1101 026c 20E0      		ldi r18,0
- 1102 026e 30E0      		ldi r19,0
- 1103 0270 4FEF      		ldi r20,lo8(-1)
- 1104 0272 53E4      		ldi r21,lo8(67)
- 1105 0274 0E94 0000 		call __mulsf3
- 1106               	.LVL114:
- 1107 0278 21E1      		ldi r18,lo8(17)
- 1108 027a 34EC      		ldi r19,lo8(-60)
- 1109 027c 4DEF      		ldi r20,lo8(-3)
- 1110 027e 5FE3      		ldi r21,lo8(63)
- 1111 0280 0E94 0000 		call __divsf3
- 1112               	.LVL115:
- 1113 0284 20E0      		ldi r18,0
- 1114 0286 30E0      		ldi r19,0
- 1115 0288 4FE7      		ldi r20,lo8(127)
- 1116 028a 53E4      		ldi r21,lo8(67)
- 1117 028c 0E94 0000 		call __subsf3
- 1118               	.LVL116:
- 1119 0290 6B01      		movw r12,r22
- 1120 0292 7C01      		movw r14,r24
- 1121               	.LVL117:
- 1122               	.LBE24:
- 1123               	.LBE23:
- 124:main.cpp      **** 		long double x3=map(xans,-0.991273,0.991273,-255,255);
- 125:main.cpp      **** 		long double y3=map(yans,-0.991273,0.991273,-255,255);
- 126:main.cpp      **** 		if(x3>220)
- 1124               		.loc 1 126 0
- 1125 0294 20E0      		ldi r18,0
- 1126 0296 30E0      		ldi r19,0
- 1127 0298 4CE5      		ldi r20,lo8(92)
- 1128 029a 53E4      		ldi r21,lo8(67)
- 1129 029c C301      		movw r24,r6
- 1130 029e B201      		movw r22,r4
- 1131 02a0 0E94 0000 		call __gtsf2
- 1132               	.LVL118:
- 127:main.cpp      **** 		x3=255;
- 128:main.cpp      **** 		if(y3>220)
- 1133               		.loc 1 128 0
- 1134 02a4 20E0      		ldi r18,0
- 1135 02a6 30E0      		ldi r19,0
- 1136 02a8 4CE5      		ldi r20,lo8(92)
- 1137 02aa 53E4      		ldi r21,lo8(67)
- 126:main.cpp      **** 		x3=255;
- 1138               		.loc 1 126 0
- 1139 02ac 1816      		cp __zero_reg__,r24
- 1140 02ae 04F0      		brlt .L24
- 1141               	.LVL119:
- 1142               		.loc 1 128 0
- 1143 02b0 C701      		movw r24,r14
- 1144 02b2 B601      		movw r22,r12
- 1145 02b4 0E94 0000 		call __gtsf2
- 1146               	.LVL120:
- 1147 02b8 1816      		cp __zero_reg__,r24
- 1148 02ba 04F4      		brge .+2
- 1149 02bc 00C0      		rjmp .L25
- 1150               	.LVL121:
- 1151               	.L40:
- 129:main.cpp      **** 		y3=255;
- 130:main.cpp      **** 		if(x3<20&&x3>-20)
- 1152               		.loc 1 130 0
- 1153 02be 20E0      		ldi r18,0
- 1154 02c0 30E0      		ldi r19,0
- 1155 02c2 40EA      		ldi r20,lo8(-96)
- 1156 02c4 51E4      		ldi r21,lo8(65)
- 1157 02c6 C301      		movw r24,r6
- 1158 02c8 B201      		movw r22,r4
- 1159 02ca 0E94 0000 		call __ltsf2
- 1160               	.LVL122:
- 1161 02ce 87FF      		sbrs r24,7
- 1162 02d0 00C0      		rjmp .L26
- 1163               		.loc 1 130 0 is_stmt 0 discriminator 1
- 1164 02d2 20E0      		ldi r18,0
- 1165 02d4 30E0      		ldi r19,0
- 1166 02d6 40EA      		ldi r20,lo8(-96)
- 1167 02d8 51EC      		ldi r21,lo8(-63)
- 1168 02da C301      		movw r24,r6
- 1169 02dc B201      		movw r22,r4
- 1170 02de 0E94 0000 		call __gtsf2
- 1171               	.LVL123:
- 1172 02e2 1816      		cp __zero_reg__,r24
- 1173 02e4 04F0      		brlt .L28
- 1174               	.LVL124:
- 1175               	.L26:
- 131:main.cpp      **** 		x3=0;
- 132:main.cpp      **** 
- 133:main.cpp      **** 		if(y3<20&&y3>-20)
- 1176               		.loc 1 133 0 is_stmt 1
- 1177 02e6 20E0      		ldi r18,0
- 1178 02e8 30E0      		ldi r19,0
- 1179 02ea 40EA      		ldi r20,lo8(-96)
- 1180 02ec 51E4      		ldi r21,lo8(65)
- 1181 02ee C701      		movw r24,r14
- 1182 02f0 B601      		movw r22,r12
- 1183 02f2 0E94 0000 		call __ltsf2
- 1184               	.LVL125:
- 1185 02f6 87FF      		sbrs r24,7
- 1186 02f8 00C0      		rjmp .L29
- 1187               		.loc 1 133 0 is_stmt 0 discriminator 1
- 1188 02fa 20E0      		ldi r18,0
- 1189 02fc 30E0      		ldi r19,0
- 1190 02fe 40EA      		ldi r20,lo8(-96)
- 1191 0300 51EC      		ldi r21,lo8(-63)
- 1192 0302 C701      		movw r24,r14
- 1193 0304 B601      		movw r22,r12
- 1194 0306 0E94 0000 		call __gtsf2
- 1195               	.LVL126:
- 1196 030a 1816      		cp __zero_reg__,r24
- 1197 030c 04F4      		brge .L29
- 134:main.cpp      **** 		y3=0;
- 1198               		.loc 1 134 0 is_stmt 1
- 1199 030e C12C      		mov r12,__zero_reg__
- 1200 0310 D12C      		mov r13,__zero_reg__
- 1201 0312 7601      		movw r14,r12
- 1202 0314 00C0      		rjmp .L29
- 1203               	.LVL127:
- 1204               	.L24:
- 128:main.cpp      **** 		y3=255;
- 1205               		.loc 1 128 0
- 1206 0316 C701      		movw r24,r14
- 1207 0318 B601      		movw r22,r12
- 1208 031a 0E94 0000 		call __gtsf2
- 1209               	.LVL128:
- 127:main.cpp      **** 		if(y3>220)
- 1210               		.loc 1 127 0
- 1211 031e 412C      		mov r4,__zero_reg__
- 1212 0320 512C      		mov r5,__zero_reg__
- 1213 0322 2FE7      		ldi r18,lo8(127)
- 1214 0324 622E      		mov r6,r18
- 1215 0326 23E4      		ldi r18,lo8(67)
- 1216 0328 722E      		mov r7,r18
- 128:main.cpp      **** 		y3=255;
- 1217               		.loc 1 128 0
- 1218 032a 1816      		cp __zero_reg__,r24
- 1219 032c 04F4      		brge .L40
- 129:main.cpp      **** 		if(x3<20&&x3>-20)
- 1220               		.loc 1 129 0
- 1221 032e 7301      		movw r14,r6
- 1222 0330 6201      		movw r12,r4
- 1223               	.LVL129:
- 1224               	.L29:
- 135:main.cpp      **** 		if(x3>0)
- 1225               		.loc 1 135 0
- 1226 0332 20E0      		ldi r18,0
- 1227 0334 30E0      		ldi r19,0
- 1228 0336 A901      		movw r20,r18
- 1229 0338 C301      		movw r24,r6
- 1230 033a B201      		movw r22,r4
- 1231 033c 0E94 0000 		call __gtsf2
- 1232               	.LVL130:
- 1233 0340 1816      		cp __zero_reg__,r24
- 1234 0342 04F4      		brge .L31
- 136:main.cpp      **** 		{
- 137:main.cpp      **** 			OCR0=(int)x3;
- 1235               		.loc 1 137 0
- 1236 0344 C301      		movw r24,r6
- 1237 0346 B201      		movw r22,r4
- 1238 0348 0E94 0000 		call __fixsfsi
- 1239               	.LVL131:
- 1240 034c 6CBF      		out 0x3c,r22
- 138:main.cpp      **** 			PORTB|=1<<PB0;
- 1241               		.loc 1 138 0
- 1242 034e C09A      		sbi 0x18,0
- 1243 0350 00C0      		rjmp .L33
- 1244               	.L28:
- 1245               	.LVL132:
- 133:main.cpp      **** 		y3=0;
- 1246               		.loc 1 133 0
- 1247 0352 20E0      		ldi r18,0
- 1248 0354 30E0      		ldi r19,0
- 1249 0356 40EA      		ldi r20,lo8(-96)
- 1250 0358 51E4      		ldi r21,lo8(65)
- 1251 035a C701      		movw r24,r14
- 1252 035c B601      		movw r22,r12
- 1253 035e 0E94 0000 		call __ltsf2
- 1254               	.LVL133:
- 1255 0362 87FF      		sbrs r24,7
- 1256 0364 00C0      		rjmp .L55
- 1257 0366 20E0      		ldi r18,0
- 1258 0368 30E0      		ldi r19,0
- 1259 036a 40EA      		ldi r20,lo8(-96)
- 1260 036c 51EC      		ldi r21,lo8(-63)
- 1261 036e C701      		movw r24,r14
- 1262 0370 B601      		movw r22,r12
- 1263 0372 0E94 0000 		call __gtsf2
- 1264               	.LVL134:
- 1265 0376 1816      		cp __zero_reg__,r24
- 1266 0378 04F0      		brlt .+2
- 1267 037a 00C0      		rjmp .L56
- 134:main.cpp      **** 		if(x3>0)
- 1268               		.loc 1 134 0
- 1269 037c C12C      		mov r12,__zero_reg__
- 1270 037e D12C      		mov r13,__zero_reg__
- 1271 0380 7601      		movw r14,r12
- 1272               	.LVL135:
- 131:main.cpp      **** 
- 1273               		.loc 1 131 0
- 1274 0382 2601      		movw r4,r12
- 1275 0384 3701      		movw r6,r14
- 1276               	.LVL136:
- 1277               	.L31:
- 139:main.cpp      **** 		}
- 140:main.cpp      **** 		else
- 141:main.cpp      **** 		{
- 142:main.cpp      **** 			OCR0=-(int)x3;
- 1278               		.loc 1 142 0
- 1279 0386 C301      		movw r24,r6
- 1280 0388 B201      		movw r22,r4
- 1281 038a 0E94 0000 		call __fixsfsi
- 1282               	.LVL137:
- 1283 038e 6195      		neg r22
- 1284 0390 6CBF      		out 0x3c,r22
- 143:main.cpp      **** 			PORTB&=~(1<<PB0);
- 1285               		.loc 1 143 0
- 1286 0392 C098      		cbi 0x18,0
- 1287               	.L33:
- 144:main.cpp      **** 		}
- 145:main.cpp      **** 		if(y3>0)
- 1288               		.loc 1 145 0
- 1289 0394 20E0      		ldi r18,0
- 1290 0396 30E0      		ldi r19,0
- 1291 0398 A901      		movw r20,r18
- 1292 039a C701      		movw r24,r14
- 1293 039c B601      		movw r22,r12
- 1294 039e 0E94 0000 		call __gtsf2
- 1295               	.LVL138:
- 1296 03a2 1816      		cp __zero_reg__,r24
- 1297 03a4 04F4      		brge .L54
- 146:main.cpp      **** 		{
- 147:main.cpp      **** 			OCR2=(int)y3;
- 1298               		.loc 1 147 0
- 1299 03a6 C701      		movw r24,r14
- 1300 03a8 B601      		movw r22,r12
- 1301 03aa 0E94 0000 		call __fixsfsi
- 1302               	.LVL139:
- 1303 03ae 63BD      		out 0x23,r22
- 148:main.cpp      **** 			PORTA|=1<<PA0;
- 1304               		.loc 1 148 0
- 1305 03b0 D89A      		sbi 0x1b,0
- 1306 03b2 00C0      		rjmp .L13
- 1307               	.L54:
- 149:main.cpp      **** 		}
- 150:main.cpp      **** 		else
- 151:main.cpp      **** 		{
- 152:main.cpp      **** 			OCR2=-(int)y3;
- 1308               		.loc 1 152 0
- 1309 03b4 C701      		movw r24,r14
- 1310 03b6 B601      		movw r22,r12
- 1311 03b8 0E94 0000 		call __fixsfsi
- 1312               	.LVL140:
- 1313 03bc 6195      		neg r22
- 1314 03be 63BD      		out 0x23,r22
- 153:main.cpp      **** 			PORTA&=~1<<PA0;
- 1315               		.loc 1 153 0
- 1316 03c0 D898      		cbi 0x1b,0
- 1317 03c2 00C0      		rjmp .L13
- 1318               	.LVL141:
- 1319               	.L25:
- 130:main.cpp      **** 		x3=0;
- 1320               		.loc 1 130 0
- 1321 03c4 20E0      		ldi r18,0
- 1322 03c6 30E0      		ldi r19,0
- 1323 03c8 40EA      		ldi r20,lo8(-96)
- 1324 03ca 51E4      		ldi r21,lo8(65)
- 1325 03cc C301      		movw r24,r6
- 1326 03ce B201      		movw r22,r4
- 1327 03d0 0E94 0000 		call __ltsf2
- 1328               	.LVL142:
- 1329 03d4 87FD      		sbrc r24,7
- 1330 03d6 00C0      		rjmp .L38
- 129:main.cpp      **** 		if(x3<20&&x3>-20)
- 1331               		.loc 1 129 0
- 1332 03d8 C12C      		mov r12,__zero_reg__
- 1333 03da D12C      		mov r13,__zero_reg__
- 1334 03dc 3FE7      		ldi r19,lo8(127)
- 1335 03de E32E      		mov r14,r19
- 1336 03e0 33E4      		ldi r19,lo8(67)
- 1337 03e2 F32E      		mov r15,r19
- 1338 03e4 00C0      		rjmp .L29
- 1339               	.L38:
- 130:main.cpp      **** 		x3=0;
- 1340               		.loc 1 130 0
- 1341 03e6 20E0      		ldi r18,0
- 1342 03e8 30E0      		ldi r19,0
- 1343 03ea 40EA      		ldi r20,lo8(-96)
- 1344 03ec 51EC      		ldi r21,lo8(-63)
- 1345 03ee C301      		movw r24,r6
- 1346 03f0 B201      		movw r22,r4
- 1347 03f2 0E94 0000 		call __gtsf2
- 1348               	.LVL143:
- 129:main.cpp      **** 		if(x3<20&&x3>-20)
- 1349               		.loc 1 129 0
- 1350 03f6 C12C      		mov r12,__zero_reg__
- 1351 03f8 D12C      		mov r13,__zero_reg__
- 1352 03fa 9FE7      		ldi r25,lo8(127)
- 1353 03fc E92E      		mov r14,r25
- 1354 03fe 93E4      		ldi r25,lo8(67)
- 1355 0400 F92E      		mov r15,r25
- 130:main.cpp      **** 		x3=0;
- 1356               		.loc 1 130 0
- 1357 0402 1816      		cp __zero_reg__,r24
- 1358 0404 04F0      		brlt .+2
- 1359 0406 00C0      		rjmp .L26
- 1360               	.LVL144:
- 1361               	.L55:
- 131:main.cpp      **** 
- 1362               		.loc 1 131 0
- 1363 0408 412C      		mov r4,__zero_reg__
- 1364 040a 512C      		mov r5,__zero_reg__
- 1365 040c 3201      		movw r6,r4
- 1366 040e 00C0      		rjmp .L31
- 1367               	.LVL145:
- 1368               	.L56:
- 1369 0410 412C      		mov r4,__zero_reg__
- 1370 0412 512C      		mov r5,__zero_reg__
- 1371 0414 3201      		movw r6,r4
- 1372 0416 00C0      		rjmp .L29
- 1373               	.LBE15:
- 1374               		.cfi_endproc
- 1375               	.LFE7:
- 1377               		.text
- 1378               	.Letext0:
- 1379               		.file 2 "/usr/lib/avr/include/math.h"
+ 141:main.cpp      **** 		long double x = (xans * 0.707) + (yans * 0.707);
+ 1078               		.loc 1 141 0
+ 1079 022c 4D80      		ldd r4,Y+5
+ 1080 022e 5E80      		ldd r5,Y+6
+ 1081 0230 6F80      		ldd r6,Y+7
+ 1082 0232 7884      		ldd r7,Y+8
+ 1083 0234 24EF      		ldi r18,lo8(-12)
+ 1084 0236 3DEF      		ldi r19,lo8(-3)
+ 1085 0238 44E3      		ldi r20,lo8(52)
+ 1086 023a 5FE3      		ldi r21,lo8(63)
+ 1087 023c 6981      		ldd r22,Y+1
+ 1088 023e 7A81      		ldd r23,Y+2
+ 1089 0240 8B81      		ldd r24,Y+3
+ 1090 0242 9C81      		ldd r25,Y+4
+ 1091 0244 0E94 0000 		call __mulsf3
+ 1092               	.LVL111:
+ 1093 0248 4B01      		movw r8,r22
+ 1094 024a 5C01      		movw r10,r24
+ 1095               	.LVL112:
+ 142:main.cpp      **** 		long double y = (-xans * 0.707) + (yans * 0.707);
+ 143:main.cpp      **** 		ellipticalDiscToSquare(x,y,xans,yans);
+ 1096               		.loc 1 143 0
+ 1097 024c C301      		movw r24,r6
+ 1098 024e B201      		movw r22,r4
+ 1099 0250 9058      		subi r25,0x80
+ 1100 0252 24EF      		ldi r18,lo8(-12)
+ 1101 0254 3DEF      		ldi r19,lo8(-3)
+ 1102 0256 44E3      		ldi r20,lo8(52)
+ 1103 0258 5FE3      		ldi r21,lo8(63)
+ 1104 025a 0E94 0000 		call __mulsf3
+ 1105               	.LVL113:
+ 1106 025e A501      		movw r20,r10
+ 1107 0260 9401      		movw r18,r8
+ 1108 0262 0E94 0000 		call __addsf3
+ 1109               	.LVL114:
+ 1110 0266 6987      		std Y+9,r22
+ 1111 0268 7A87      		std Y+10,r23
+ 1112 026a 8B87      		std Y+11,r24
+ 1113 026c 9C87      		std Y+12,r25
+ 1114 026e 24EF      		ldi r18,lo8(-12)
+ 1115 0270 3DEF      		ldi r19,lo8(-3)
+ 1116 0272 44E3      		ldi r20,lo8(52)
+ 1117 0274 5FE3      		ldi r21,lo8(63)
+ 1118 0276 C301      		movw r24,r6
+ 1119 0278 B201      		movw r22,r4
+ 1120 027a 0E94 0000 		call __mulsf3
+ 1121               	.LVL115:
+ 1122 027e A501      		movw r20,r10
+ 1123 0280 9401      		movw r18,r8
+ 1124 0282 0E94 0000 		call __addsf3
+ 1125               	.LVL116:
+ 1126 0286 2985      		ldd r18,Y+9
+ 1127 0288 3A85      		ldd r19,Y+10
+ 1128 028a 4B85      		ldd r20,Y+11
+ 1129 028c 5C85      		ldd r21,Y+12
+ 1130 028e 0E94 0000 		call _Z22ellipticalDiscToSquareeeReS_
+ 1131               	.LVL117:
+ 1132               	.LBB23:
+ 1133               	.LBB24:
+  23:main.cpp      **** }
+ 1134               		.loc 1 23 0
+ 1135 0292 21E1      		ldi r18,lo8(17)
+ 1136 0294 34EC      		ldi r19,lo8(-60)
+ 1137 0296 4DE7      		ldi r20,lo8(125)
+ 1138 0298 5FE3      		ldi r21,lo8(63)
+ 1139 029a 6D81      		ldd r22,Y+5
+ 1140 029c 7E81      		ldd r23,Y+6
+ 1141 029e 8F81      		ldd r24,Y+7
+ 1142 02a0 9885      		ldd r25,Y+8
+ 1143 02a2 0E94 0000 		call __addsf3
+ 1144               	.LVL118:
+ 1145 02a6 20E0      		ldi r18,0
+ 1146 02a8 30E0      		ldi r19,0
+ 1147 02aa 4FEF      		ldi r20,lo8(-1)
+ 1148 02ac 53E4      		ldi r21,lo8(67)
+ 1149 02ae 0E94 0000 		call __mulsf3
+ 1150               	.LVL119:
+ 1151 02b2 21E1      		ldi r18,lo8(17)
+ 1152 02b4 34EC      		ldi r19,lo8(-60)
+ 1153 02b6 4DEF      		ldi r20,lo8(-3)
+ 1154 02b8 5FE3      		ldi r21,lo8(63)
+ 1155 02ba 0E94 0000 		call __divsf3
+ 1156               	.LVL120:
+ 1157 02be 20E0      		ldi r18,0
+ 1158 02c0 30E0      		ldi r19,0
+ 1159 02c2 4FE7      		ldi r20,lo8(127)
+ 1160 02c4 53E4      		ldi r21,lo8(67)
+ 1161 02c6 0E94 0000 		call __subsf3
+ 1162               	.LVL121:
+ 1163 02ca 2B01      		movw r4,r22
+ 1164 02cc 3C01      		movw r6,r24
+ 1165               	.LVL122:
+ 1166               	.LBE24:
+ 1167               	.LBE23:
+ 144:main.cpp      **** 		long double x3=map(xans,-0.991273,0.991273,-255,255);
+ 145:main.cpp      **** 		long double y3=map(yans,-0.991273,0.991273,-255,255)+50;
+ 1168               		.loc 1 145 0
+ 1169 02ce 21E1      		ldi r18,lo8(17)
+ 1170 02d0 34EC      		ldi r19,lo8(-60)
+ 1171 02d2 4DE7      		ldi r20,lo8(125)
+ 1172 02d4 5FE3      		ldi r21,lo8(63)
+ 1173 02d6 6981      		ldd r22,Y+1
+ 1174 02d8 7A81      		ldd r23,Y+2
+ 1175 02da 8B81      		ldd r24,Y+3
+ 1176 02dc 9C81      		ldd r25,Y+4
+ 1177 02de 0E94 0000 		call __addsf3
+ 1178               	.LVL123:
+ 1179 02e2 20E0      		ldi r18,0
+ 1180 02e4 30E0      		ldi r19,0
+ 1181 02e6 4FEF      		ldi r20,lo8(-1)
+ 1182 02e8 53E4      		ldi r21,lo8(67)
+ 1183 02ea 0E94 0000 		call __mulsf3
+ 1184               	.LVL124:
+ 1185 02ee 21E1      		ldi r18,lo8(17)
+ 1186 02f0 34EC      		ldi r19,lo8(-60)
+ 1187 02f2 4DEF      		ldi r20,lo8(-3)
+ 1188 02f4 5FE3      		ldi r21,lo8(63)
+ 1189 02f6 0E94 0000 		call __divsf3
+ 1190               	.LVL125:
+ 1191 02fa 20E0      		ldi r18,0
+ 1192 02fc 30E0      		ldi r19,0
+ 1193 02fe 4FE7      		ldi r20,lo8(127)
+ 1194 0300 53E4      		ldi r21,lo8(67)
+ 1195 0302 0E94 0000 		call __subsf3
+ 1196               	.LVL126:
+ 1197 0306 20E0      		ldi r18,0
+ 1198 0308 30E0      		ldi r19,0
+ 1199 030a 48E4      		ldi r20,lo8(72)
+ 1200 030c 52E4      		ldi r21,lo8(66)
+ 1201 030e 0E94 0000 		call __addsf3
+ 1202               	.LVL127:
+ 1203 0312 4B01      		movw r8,r22
+ 1204 0314 5C01      		movw r10,r24
+ 1205               	.LVL128:
+ 146:main.cpp      **** 		if(x3>=220)
+ 1206               		.loc 1 146 0
+ 1207 0316 20E0      		ldi r18,0
+ 1208 0318 30E0      		ldi r19,0
+ 1209 031a 4CE5      		ldi r20,lo8(92)
+ 1210 031c 53E4      		ldi r21,lo8(67)
+ 1211 031e C301      		movw r24,r6
+ 1212 0320 B201      		movw r22,r4
+ 1213 0322 0E94 0000 		call __gesf2
+ 1214               	.LVL129:
+ 147:main.cpp      **** 		x3=255;
+ 148:main.cpp      **** 		if(y3>=220)
+ 1215               		.loc 1 148 0
+ 1216 0326 20E0      		ldi r18,0
+ 1217 0328 30E0      		ldi r19,0
+ 1218 032a 4CE5      		ldi r20,lo8(92)
+ 1219 032c 53E4      		ldi r21,lo8(67)
+ 146:main.cpp      **** 		if(x3>=220)
+ 1220               		.loc 1 146 0
+ 1221 032e 87FF      		sbrs r24,7
+ 1222 0330 00C0      		rjmp .L27
+ 1223               	.LVL130:
+ 1224               		.loc 1 148 0
+ 1225 0332 C501      		movw r24,r10
+ 1226 0334 B401      		movw r22,r8
+ 1227 0336 0E94 0000 		call __gesf2
+ 1228               	.LVL131:
+ 1229 033a 87FF      		sbrs r24,7
+ 1230 033c 00C0      		rjmp .L28
+ 1231               	.LVL132:
+ 1232               	.L43:
+ 149:main.cpp      **** 		y3=255;
+ 150:main.cpp      **** 		if(x3<20&&x3>-20)
+ 1233               		.loc 1 150 0
+ 1234 033e 20E0      		ldi r18,0
+ 1235 0340 30E0      		ldi r19,0
+ 1236 0342 40EA      		ldi r20,lo8(-96)
+ 1237 0344 51E4      		ldi r21,lo8(65)
+ 1238 0346 C301      		movw r24,r6
+ 1239 0348 B201      		movw r22,r4
+ 1240 034a 0E94 0000 		call __ltsf2
+ 1241               	.LVL133:
+ 1242 034e 87FF      		sbrs r24,7
+ 1243 0350 00C0      		rjmp .L29
+ 1244               		.loc 1 150 0 is_stmt 0 discriminator 1
+ 1245 0352 20E0      		ldi r18,0
+ 1246 0354 30E0      		ldi r19,0
+ 1247 0356 40EA      		ldi r20,lo8(-96)
+ 1248 0358 51EC      		ldi r21,lo8(-63)
+ 1249 035a C301      		movw r24,r6
+ 1250 035c B201      		movw r22,r4
+ 1251 035e 0E94 0000 		call __gtsf2
+ 1252               	.LVL134:
+ 1253 0362 1816      		cp __zero_reg__,r24
+ 1254 0364 04F0      		brlt .L31
+ 1255               	.LVL135:
+ 1256               	.L29:
+ 151:main.cpp      **** 		x3=0;
+ 152:main.cpp      **** 
+ 153:main.cpp      **** 		if(y3<20&&y3>-20)
+ 1257               		.loc 1 153 0 is_stmt 1
+ 1258 0366 20E0      		ldi r18,0
+ 1259 0368 30E0      		ldi r19,0
+ 1260 036a 40EA      		ldi r20,lo8(-96)
+ 1261 036c 51E4      		ldi r21,lo8(65)
+ 1262 036e C501      		movw r24,r10
+ 1263 0370 B401      		movw r22,r8
+ 1264 0372 0E94 0000 		call __ltsf2
+ 1265               	.LVL136:
+ 1266 0376 87FF      		sbrs r24,7
+ 1267 0378 00C0      		rjmp .L32
+ 1268               		.loc 1 153 0 is_stmt 0 discriminator 1
+ 1269 037a 20E0      		ldi r18,0
+ 1270 037c 30E0      		ldi r19,0
+ 1271 037e 40EA      		ldi r20,lo8(-96)
+ 1272 0380 51EC      		ldi r21,lo8(-63)
+ 1273 0382 C501      		movw r24,r10
+ 1274 0384 B401      		movw r22,r8
+ 1275 0386 0E94 0000 		call __gtsf2
+ 1276               	.LVL137:
+ 1277 038a 1816      		cp __zero_reg__,r24
+ 1278 038c 04F4      		brge .L32
+ 154:main.cpp      **** 		y3=0;
+ 1279               		.loc 1 154 0 is_stmt 1
+ 1280 038e 812C      		mov r8,__zero_reg__
+ 1281 0390 912C      		mov r9,__zero_reg__
+ 1282 0392 5401      		movw r10,r8
+ 1283 0394 00C0      		rjmp .L32
+ 1284               	.LVL138:
+ 1285               	.L27:
+ 148:main.cpp      **** 		y3=255;
+ 1286               		.loc 1 148 0
+ 1287 0396 C501      		movw r24,r10
+ 1288 0398 B401      		movw r22,r8
+ 1289 039a 0E94 0000 		call __gesf2
+ 1290               	.LVL139:
+ 147:main.cpp      **** 		if(y3>=220)
+ 1291               		.loc 1 147 0
+ 1292 039e 412C      		mov r4,__zero_reg__
+ 1293 03a0 512C      		mov r5,__zero_reg__
+ 1294 03a2 2FE7      		ldi r18,lo8(127)
+ 1295 03a4 622E      		mov r6,r18
+ 1296 03a6 23E4      		ldi r18,lo8(67)
+ 1297 03a8 722E      		mov r7,r18
+ 148:main.cpp      **** 		y3=255;
+ 1298               		.loc 1 148 0
+ 1299 03aa 87FD      		sbrc r24,7
+ 1300 03ac 00C0      		rjmp .L43
+ 149:main.cpp      **** 		if(x3<20&&x3>-20)
+ 1301               		.loc 1 149 0
+ 1302 03ae 5301      		movw r10,r6
+ 1303 03b0 4201      		movw r8,r4
+ 1304               	.LVL140:
+ 1305               	.L32:
+ 155:main.cpp      **** 		if(x3>0)
+ 1306               		.loc 1 155 0
+ 1307 03b2 20E0      		ldi r18,0
+ 1308 03b4 30E0      		ldi r19,0
+ 1309 03b6 A901      		movw r20,r18
+ 1310 03b8 C301      		movw r24,r6
+ 1311 03ba B201      		movw r22,r4
+ 1312 03bc 0E94 0000 		call __gtsf2
+ 1313               	.LVL141:
+ 1314 03c0 1816      		cp __zero_reg__,r24
+ 1315 03c2 04F4      		brge .L34
+ 156:main.cpp      **** 		{
+ 157:main.cpp      **** 			OCR0=(int)x3;
+ 1316               		.loc 1 157 0
+ 1317 03c4 C301      		movw r24,r6
+ 1318 03c6 B201      		movw r22,r4
+ 1319 03c8 0E94 0000 		call __fixsfsi
+ 1320               	.LVL142:
+ 1321 03cc 6CBF      		out 0x3c,r22
+ 158:main.cpp      **** 			PORTB|=1<<PB0;
+ 1322               		.loc 1 158 0
+ 1323 03ce C09A      		sbi 0x18,0
+ 1324 03d0 00C0      		rjmp .L36
+ 1325               	.L31:
+ 1326               	.LVL143:
+ 153:main.cpp      **** 		y3=0;
+ 1327               		.loc 1 153 0
+ 1328 03d2 20E0      		ldi r18,0
+ 1329 03d4 30E0      		ldi r19,0
+ 1330 03d6 40EA      		ldi r20,lo8(-96)
+ 1331 03d8 51E4      		ldi r21,lo8(65)
+ 1332 03da C501      		movw r24,r10
+ 1333 03dc B401      		movw r22,r8
+ 1334 03de 0E94 0000 		call __ltsf2
+ 1335               	.LVL144:
+ 1336 03e2 87FF      		sbrs r24,7
+ 1337 03e4 00C0      		rjmp .L64
+ 1338 03e6 20E0      		ldi r18,0
+ 1339 03e8 30E0      		ldi r19,0
+ 1340 03ea 40EA      		ldi r20,lo8(-96)
+ 1341 03ec 51EC      		ldi r21,lo8(-63)
+ 1342 03ee C501      		movw r24,r10
+ 1343 03f0 B401      		movw r22,r8
+ 1344 03f2 0E94 0000 		call __gtsf2
+ 1345               	.LVL145:
+ 1346 03f6 1816      		cp __zero_reg__,r24
+ 1347 03f8 04F0      		brlt .+2
+ 1348 03fa 00C0      		rjmp .L65
+ 154:main.cpp      **** 		if(x3>0)
+ 1349               		.loc 1 154 0
+ 1350 03fc 812C      		mov r8,__zero_reg__
+ 1351 03fe 912C      		mov r9,__zero_reg__
+ 1352 0400 5401      		movw r10,r8
+ 1353               	.LVL146:
+ 151:main.cpp      **** 
+ 1354               		.loc 1 151 0
+ 1355 0402 2401      		movw r4,r8
+ 1356 0404 3501      		movw r6,r10
+ 1357               	.LVL147:
+ 1358               	.L34:
+ 159:main.cpp      **** 		}
+ 160:main.cpp      **** 		else
+ 161:main.cpp      **** 		{
+ 162:main.cpp      **** 			OCR0=-(int)x3;
+ 1359               		.loc 1 162 0
+ 1360 0406 C301      		movw r24,r6
+ 1361 0408 B201      		movw r22,r4
+ 1362 040a 0E94 0000 		call __fixsfsi
+ 1363               	.LVL148:
+ 1364 040e 6195      		neg r22
+ 1365 0410 6CBF      		out 0x3c,r22
+ 163:main.cpp      **** 			PORTB&=~(1<<PB0);
+ 1366               		.loc 1 163 0
+ 1367 0412 C098      		cbi 0x18,0
+ 1368               	.L36:
+ 164:main.cpp      **** 		}
+ 165:main.cpp      **** 		if(y3>0)
+ 1369               		.loc 1 165 0
+ 1370 0414 20E0      		ldi r18,0
+ 1371 0416 30E0      		ldi r19,0
+ 1372 0418 A901      		movw r20,r18
+ 1373 041a C501      		movw r24,r10
+ 1374 041c B401      		movw r22,r8
+ 1375 041e 0E94 0000 		call __gtsf2
+ 1376               	.LVL149:
+ 1377 0422 1816      		cp __zero_reg__,r24
+ 1378 0424 04F4      		brge .L62
+ 166:main.cpp      **** 		{
+ 167:main.cpp      **** 			OCR2=(int)y3;
+ 1379               		.loc 1 167 0
+ 1380 0426 C501      		movw r24,r10
+ 1381 0428 B401      		movw r22,r8
+ 1382 042a 0E94 0000 		call __fixsfsi
+ 1383               	.LVL150:
+ 1384 042e 63BD      		out 0x23,r22
+ 168:main.cpp      **** 			PORTA|=1<<PA0;
+ 1385               		.loc 1 168 0
+ 1386 0430 D89A      		sbi 0x1b,0
+ 1387 0432 00C0      		rjmp .L39
+ 1388               	.L62:
+ 169:main.cpp      **** 		}
+ 170:main.cpp      **** 		else
+ 171:main.cpp      **** 		{
+ 172:main.cpp      **** 			OCR2=-(int)y3;
+ 1389               		.loc 1 172 0
+ 1390 0434 C501      		movw r24,r10
+ 1391 0436 B401      		movw r22,r8
+ 1392 0438 0E94 0000 		call __fixsfsi
+ 1393               	.LVL151:
+ 1394 043c 6195      		neg r22
+ 1395 043e 63BD      		out 0x23,r22
+ 173:main.cpp      **** 			PORTA&=~1<<PA0;
+ 1396               		.loc 1 173 0
+ 1397 0440 D898      		cbi 0x1b,0
+ 1398               	.L39:
+ 1399 0442 7101      		movw r14,r2
+ 1400 0444 00C0      		rjmp .L13
+ 1401               	.LVL152:
+ 1402               	.L28:
+ 150:main.cpp      **** 		x3=0;
+ 1403               		.loc 1 150 0
+ 1404 0446 20E0      		ldi r18,0
+ 1405 0448 30E0      		ldi r19,0
+ 1406 044a 40EA      		ldi r20,lo8(-96)
+ 1407 044c 51E4      		ldi r21,lo8(65)
+ 1408 044e C301      		movw r24,r6
+ 1409 0450 B201      		movw r22,r4
+ 1410 0452 0E94 0000 		call __ltsf2
+ 1411               	.LVL153:
+ 1412 0456 87FD      		sbrc r24,7
+ 1413 0458 00C0      		rjmp .L41
+ 149:main.cpp      **** 		if(x3<20&&x3>-20)
+ 1414               		.loc 1 149 0
+ 1415 045a 812C      		mov r8,__zero_reg__
+ 1416 045c 912C      		mov r9,__zero_reg__
+ 1417 045e 3FE7      		ldi r19,lo8(127)
+ 1418 0460 A32E      		mov r10,r19
+ 1419 0462 33E4      		ldi r19,lo8(67)
+ 1420 0464 B32E      		mov r11,r19
+ 1421 0466 00C0      		rjmp .L32
+ 1422               	.L41:
+ 150:main.cpp      **** 		x3=0;
+ 1423               		.loc 1 150 0
+ 1424 0468 20E0      		ldi r18,0
+ 1425 046a 30E0      		ldi r19,0
+ 1426 046c 40EA      		ldi r20,lo8(-96)
+ 1427 046e 51EC      		ldi r21,lo8(-63)
+ 1428 0470 C301      		movw r24,r6
+ 1429 0472 B201      		movw r22,r4
+ 1430 0474 0E94 0000 		call __gtsf2
+ 1431               	.LVL154:
+ 149:main.cpp      **** 		if(x3<20&&x3>-20)
+ 1432               		.loc 1 149 0
+ 1433 0478 812C      		mov r8,__zero_reg__
+ 1434 047a 912C      		mov r9,__zero_reg__
+ 1435 047c 9FE7      		ldi r25,lo8(127)
+ 1436 047e A92E      		mov r10,r25
+ 1437 0480 93E4      		ldi r25,lo8(67)
+ 1438 0482 B92E      		mov r11,r25
+ 150:main.cpp      **** 		x3=0;
+ 1439               		.loc 1 150 0
+ 1440 0484 1816      		cp __zero_reg__,r24
+ 1441 0486 04F0      		brlt .+2
+ 1442 0488 00C0      		rjmp .L29
+ 1443               	.LVL155:
+ 1444               	.L64:
+ 151:main.cpp      **** 
+ 1445               		.loc 1 151 0
+ 1446 048a 412C      		mov r4,__zero_reg__
+ 1447 048c 512C      		mov r5,__zero_reg__
+ 1448 048e 3201      		movw r6,r4
+ 1449 0490 00C0      		rjmp .L34
+ 1450               	.LVL156:
+ 1451               	.L65:
+ 1452 0492 412C      		mov r4,__zero_reg__
+ 1453 0494 512C      		mov r5,__zero_reg__
+ 1454 0496 3201      		movw r6,r4
+ 1455 0498 00C0      		rjmp .L32
+ 1456               	.LBE15:
+ 1457               		.cfi_endproc
+ 1458               	.LFE7:
+ 1460               		.text
+ 1461               	.Letext0:
+ 1462               		.file 2 "/usr/lib/avr/include/math.h"
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.cpp
-     /tmp/ccdT9bX0.s:2      *ABS*:000000000000003e __SP_H__
-     /tmp/ccdT9bX0.s:3      *ABS*:000000000000003d __SP_L__
-     /tmp/ccdT9bX0.s:4      *ABS*:000000000000003f __SREG__
-     /tmp/ccdT9bX0.s:5      *ABS*:0000000000000000 __tmp_reg__
-     /tmp/ccdT9bX0.s:6      *ABS*:0000000000000001 __zero_reg__
-     /tmp/ccdT9bX0.s:12     .text:0000000000000000 _Z7Receivev
-     /tmp/ccdT9bX0.s:35     .text:000000000000000a _Z8Transmith
-     /tmp/ccdT9bX0.s:60     .text:0000000000000012 _Z3mapeeeee
-     /tmp/ccdT9bX0.s:219    .text:00000000000000cc _Z22ellipticalSquareToDisceeReS_
-     /tmp/ccdT9bX0.s:369    .text:0000000000000182 _Z22ellipticalDiscToSquareeeReS_
-     /tmp/ccdT9bX0.s:703    .text.startup:0000000000000000 main
+     /tmp/cc2G9Ny3.s:2      *ABS*:000000000000003e __SP_H__
+     /tmp/cc2G9Ny3.s:3      *ABS*:000000000000003d __SP_L__
+     /tmp/cc2G9Ny3.s:4      *ABS*:000000000000003f __SREG__
+     /tmp/cc2G9Ny3.s:5      *ABS*:0000000000000000 __tmp_reg__
+     /tmp/cc2G9Ny3.s:6      *ABS*:0000000000000001 __zero_reg__
+     /tmp/cc2G9Ny3.s:12     .text:0000000000000000 _Z7Receivev
+     /tmp/cc2G9Ny3.s:35     .text:000000000000000a _Z8Transmith
+     /tmp/cc2G9Ny3.s:60     .text:0000000000000012 _Z3mapeeeee
+     /tmp/cc2G9Ny3.s:219    .text:00000000000000cc _Z22ellipticalSquareToDisceeReS_
+     /tmp/cc2G9Ny3.s:369    .text:0000000000000182 _Z22ellipticalDiscToSquareeeReS_
+     /tmp/cc2G9Ny3.s:704    .text.startup:0000000000000000 main
 
 UNDEFINED SYMBOLS
 __subsf3
@@ -1559,8 +1658,9 @@ __divsf3
 __addsf3
 sqrt
 __floatsisf
+__eqsf2
 __gesf2
 __lesf2
-__gtsf2
 __ltsf2
+__gtsf2
 __fixsfsi

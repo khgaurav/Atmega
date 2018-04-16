@@ -27,12 +27,14 @@ int main(void)
 DDRB |= 1<< PB3 | 1<<PINB0 | 1<<PINB1;
 TCCR2 |= 1<<WGM20 | 1<< WGM21 | 1<< COM21 |1 <<CS20;
 DDRD |= 1<< PB7 | 1<< PD4;
+DDRA|=1<<PINA0;
 PORTB &= ~(1<< PINB0);
-PORTD &= ~(1<< PIND4);
+
+PORTA &= ~(1<<PINA0);
 UCSRA = (1 << U2X);
 
-  UBRRH = 0x03;
-  UBRRL = 0x40;
+  UBRRH = 0x00;
+  UBRRL = 0x67;
   UCSRB = (1 << RXEN);
   UCSRC = (1 << URSEL) | (3 << UCSZ0);
 
@@ -58,7 +60,7 @@ UCSRA = (1 << U2X);
 			OCR0=0;
 			OCR2=0;
 			PORTB &= ~(1<< PINB0);
-			PORTD &= ~(1<< PIND4);
+			PORTA &= ~(1<< PINA0);
 		}
 		if(Receive()==98)
 		{
@@ -69,16 +71,16 @@ UCSRA = (1 << U2X);
 			y+=(Receive()-'0')*i;
 			OCR2=y;
 			if(ch==0)
-				PORTD|=(1<<PIND4);
+				PORTA|=(1<<PINA0);
 			else if(ch==1)
-				PORTD &= ~(1<< PIND4);
+				PORTA &= ~(1<< PINA0);
 		}
 		else
 		{
 			OCR0=0;
 			OCR2=0;
 			PORTB &= ~(1<< PINB0);
-			PORTD &= ~(1<< PIND4);
+			PORTA &= ~(1<< PINA0);
 		}
 	}
 }

@@ -57,6 +57,8 @@ int main (void)
 	UBRRL = (unsigned char) ubbr_value;
 	UCSRB = (1 << RXEN);
 	UCSRC = (1 << URSEL) | (3 << UCSZ0);
+	int xo=0,yo=0,cnt=0;
+
 	while (1)
 	{
 
@@ -81,6 +83,24 @@ int main (void)
 			y2=(Receive())<<8 | y1;
 		}
 		else
+		{
+			OCR0=0;
+			OCR2=0;
+			PORTA&=~1<<PA0;
+			PORTB&=~(1<<PB0);
+			continue;
+		}
+		if(x2==xo&&y2==xo)
+		{
+			cnt++;
+		}
+		else
+		{
+			xo=x2;
+			yo=y2;
+			cnt=0;
+		}
+		if(cnt>=5)
 		{
 			OCR0=0;
 			OCR2=0;
@@ -122,10 +142,10 @@ int main (void)
 		long double y = (-xans * 0.707) + (yans * 0.707);
 		ellipticalDiscToSquare(x,y,xans,yans);
 		long double x3=map(xans,-0.991273,0.991273,-255,255);
-		long double y3=map(yans,-0.991273,0.991273,-255,255);
-		if(x3>220)
+		long double y3=map(yans,-0.991273,0.991273,-255,255)+50;
+		if(x3>=220)
 		x3=255;
-		if(y3>220)
+		if(y3>=220)
 		y3=255;
 		if(x3<20&&x3>-20)
 		x3=0;
